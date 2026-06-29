@@ -1,0 +1,16 @@
+# Keep the public backpack clean.
+.DS_Store
+.secrets/
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+*.env
+.env*
+id_rsa*
+id_ed25519*
+node_modules/
+__pycache__/
+*.pyc
+
