@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "audit_id": "T4_independent_replication",
+  "audit_date": "2026-07-18",
+  "repository": "/Users/denbell/OMPU_shared/petrovich_repos/public",
+  "experiment": "experiments/m-osm-v0",
+  "network_accessed": false,
+  "live_state_accessed": false,
+  "promotion_verdict": "HOLD_GENERAL_MOSM_MECHANISM",
+  "bounded_verdict": "C10_SUBJECT_ID_FIX_REPLICATED_ON_ONE_SYNTHETIC_FIXTURE_ONLY",
+  "snapshot_drift": {
+    "observed": true,
+    "initial_scoreboard_sha256": "45284e19bf8e787729252fde78c15b751d32ec2616d220fffbba78067b307f24",
+    "final_scoreboard_sha256": "a8bfad10c018149a4864a33b03808fdb28de7a6fe0161d78f9dfbaed3bd29bc3",
+    "events": [
+      "C10/v0.2 and repeated C2/C4/C7/C10 reports landed during the audit",
+      "T5 and scorer/test fixes landed during the audit",
+      "scoreboard expanded from ten primary C0-C9 runs to sixteen reports",
+      "T6 appeared during the final hash census and was not read or replicated after the stop instruction"
+    ],
+    "unread_late_file": {
+      "path": "agent-results/T6_final_consistency_audit.md",
+      "sha256": "3354c83fff104ae3593c04fab3df8dc5029b5e3980a9d7db631026cb07ab4aa3"
+    }
+  },
+  "source_fingerprint": {
+    "bytes": 21368,
+    "downloads_sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
+    "frozen_copy_sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
+    "match": true
+  },
+  "tests": {
+    "unit_tests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest prototype/test_mosm_tube.py tools/test_score_results.py",
+      "exit_code": 0,
+      "tests_run": 17,
+      "failures": 0
+    },
+    "scorer": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 tools/score_results.py --results /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results --json-output /tmp/mosm-t4-audit.X1gB9b/score-final.json --markdown-output /tmp/mosm-t4-audit.X1gB9b/score-final.md",
+      "exit_code": 0,
+      "reports_scored": 16,
+      "markdown_exact_match": true,
+      "json_exact_match": true,
+      "total_correct": 121,
+      "total_fields": 192,
+      "primary_c0_c9_correct": 83,
+      "primary_c0_c9_total": 120,
+      "primary_c0_c10_correct": 95,
+      "primary_c0_c10_total": 132,
+      "independent_row_mismatches": 0,
+      "condition_counts": {
+        "C0": 1,
+        "C1": 1,
+        "C2": 3,
+        "C3": 1,
+        "C4": 2,
+        "C5": 1,
+        "C6": 1,
+        "C7": 2,
+        "C8": 1,
+        "C9": 1,
+        "C10": 2
+      }
+    },
+    "prototype": {
+      "validate_v01_exit": 0,
+      "validate_v02_exit": 0,
+      "rehydrate_v01_compact_exit": 0,
+      "rehydrate_v02_compact_exit": 0,
+      "rehydrate_v02_audit_exit": 0,
+      "missing_output_argument_exit": 2,
+      "v02_compact_matches_c10": true,
+      "v01_compact_matches_historical_c7": false,
+      "guard_matrix_passes": 11,
+      "guard_matrix_total": 11,
+      "verified_bytes_consistency_pass": true,
+      "replacement_rendered": false
+    },
+    "t1": {
+      "compile_exit": 0,
+      "simulation_exit": 0,
+      "analysis_exit": 0,
+      "temp_executable_sha256": "72a2e7fd0caab89b105a49687815b4fb219a52e70e9c991f745efbbd3da34718",
+      "row_counts": {
+        "T1_k_sweep.csv": 43,
+        "T1_c06_policies.csv": 10,
+        "T1_convergence.csv": 64,
+        "T1_c07_agent_outcomes.csv": 1025
+      },
+      "output_hashes_match": 9,
+      "output_hashes_total": 9,
+      "frozen_scoreboard_input_present": false,
+      "reconstruction": "temporary primary-only C0-C9 scoreboard with identical condition order and exact-recall sequence",
+      "arithmetic": {
+        "Kc": 0.74,
+        "draft_r": 1.6462077633154328,
+        "draft_r_exceeds_one": true,
+        "simulated_r_at_K_3_45": 0.9030402070214578,
+        "steepest_interval": [0.74, 0.76],
+        "pure_slowdown_seed_pairs_exact": true
+      }
+    },
+    "t2": {
+      "isolated_harness_exit": 0,
+      "generated_artifacts_compared": 24,
+      "byte_exact_artifacts": 20,
+      "path_only_differences": 4,
+      "strict_unchanged_jq_exit": 5,
+      "strict_repaired_jq_exit": 0,
+      "markdown_unescape_deletions": 195,
+      "fresh_tube_only_exit": 2,
+      "fresh_tube_only_status": "insufficient_information",
+      "fresh_hash_only_exit": 2,
+      "fresh_hash_only_status": "hash_not_recovered",
+      "manifest_artifacts_checked": 15,
+      "manifest_artifact_mismatches": 0
+    },
+    "json_validation": {
+      "pre_t4_json_files": 37,
+      "python_failures": 0,
+      "jq_failures_after_corrected_command": 0,
+      "initial_jq_empty_exit_4_was_no_output_semantics": true,
+      "external_jsonschema_available": false
+    },
+    "markdown_validation": {
+      "files_before_t6": 47,
+      "rdoc_parse_exit": 0
+    },
+    "t3_local_checks": {
+      "softmax_numeric_max_delta": 0.0,
+      "hopfield_numeric_max_delta": 0.0,
+      "c08_runnable_consumer_search_exit": 1,
+      "c08_runnable_consumers": 0,
+      "c08_leaf_counts": {
+        "supported_scoped": 1,
+        "transformed": 6,
+        "unsupported": 2,
+        "not_found": 6
+      },
+      "primary_sources_refetched": false
+    }
+  },
+  "t1_output_sha256": {
+    "T1_k_sweep.csv": "d8a3d43156f3f48e82e610a08f8e023165d794a5894777e91281c61c1697d43e",
+    "T1_c06_policies.csv": "45db734c5a3501d80c4788d20c47ca503ac2c510bf8625373a14920d57bc3321",
+    "T1_convergence.csv": "5836c5943db6195530b3db4a649d37a9c3d8a1b9a101a177c45ba56e7b5fb6dc",
+    "T1_c07_agent_outcomes.csv": "12ac6cf0645ccb8a581127453edaef41c1c7aeb9b44f2ce0dc03055eabc390b9",
+    "T1_c07_label_assignments.csv": "667a6e05ba21cdf698ba34f787484b9a5b4602123ad589cf204717e1ad31b9c6",
+    "T1_c07_fixed_labels.csv": "83c2050ebdf9e278dc60d0bd4a0d7e84b8bda39edf2814d173b2e4590319b04b",
+    "T1_c07_benchmark_label_assignments.csv": "f4159c4f23cc47905cd196074fb7afcc3546d3f4d82e3e2b3b7647e8ccb73995",
+    "T1_c07_benchmark_fixed_labels.csv": "f453abe1c9fa6bc7d334ec18d243b253139010135740908ab9fc4a1e8d42ee3a",
+    "T1_summary.json": "8348ffcc4227cd34d23832475dde8179fdd967f0d825a2dbb10db6ce5e8af44a"
+  },
+  "verified_file_sha256": {
+    "README.md": "6d111c5b3e9ef18836c33696fd0909687d2d83a09cff7ad291bbad265f100471",
+    "CLAIMS.md": "2e1c9865466455e2453986778eb133859a0d5f88c5cdccf0fdd067b5ee8ac69b",
+    "TASK.md": "96735c51f9769967623676bb62a1f4af65ce9502f0f4b1d757e04707256d4858",
+    "SCOREBOARD.md": "032eda65311be39cf4cc5fe3329f2b392c8e24e4f784e8591e6c25047eb5d2ad",
+    "SCARS.md": "9417afd6a1650564e9d2163c0dca7c439a61d1eed4d8721de28f7aff78c65c36",
+    "SOURCE_FINGERPRINT.md": "c90ecb8a19cd47987a6fcd1e8bc1c54dffebee4cccd47a76c702e0a1103ac5ed",
+    "source/Swarm_Oscillatory_Memory_M-OSM_received_v4.md": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
+    "prototype/mosm_tube.py": "0dc21013681d29825335451f42f715cd893a1dea7cee9378a81c5f3644eb8b95",
+    "prototype/test_mosm_tube.py": "03a360a8734e295205ba13e449f621408a2a6580fe88aff9e6cdac3914677489",
+    "prototype/case_alpha_tube_v0_1.json": "50fbd5765cb379d6b80c5579780021aa095f1b0b0f51969c03183bff334cf3c5",
+    "prototype/case_alpha_tube_v0_2.json": "4f8f4df076441068b9b338e7bdeacf6c4e3e32d2757b893cef220dc11ab08736",
+    "prototype/mosm_tube_v0_1.schema.json": "6df30d832b00ff4940d03340e4bebaed49663d90f794bc38e6b018c6c1ab96a5",
+    "prototype/mosm_tube_v0_2.schema.json": "dcf741e49c6dc1e767a3748ba526a22a23b8f4a8c1a3db122e5ccb2db9b63c52",
+    "tools/score_results.py": "003299cce418f6f61ed2fdbeee4674080e463a9948b9fa2cd972b296b11ae3da",
+    "tools/test_score_results.py": "04196b80af697ea87b773e40e94fd54500f0742622ad22320165c93248df6413",
+    "tools/T1_noisy_kuramoto.c": "6c0dd847ec80787ee128ed75325963db5611de316e95b23754441dd3a9dd939e",
+    "tools/T1_analyze.py": "9049b9759a55e961cbd922d82ac774b84cc1d9011d7858614a30ea3795bd8d09",
+    "tools/T2_schema_operational.py": "8801da17c93d28cccdbacb9e2e5dad7468510be080c44159b16148f2decb5be6",
+    "tools/T2_fresh_process_probe.py": "edaeea5002a515c0e008ff68520f5dd2d497553b61846be0acdb3d614a3c18e4",
+    "tools/T2_fresh_rehydrate.py": "3ba72cad5ead8a82fbce7977b758c7ddf6d4aa7c855c16a76c98038a65b5e398",
+    "raw/T2_run_manifest.json": "12786692045aee87ffb09a7a513670e429731897d38ac4d539d53c8d939a9de8",
+    "raw/T2_unescape_manifest.json": "8f1040e256261b5d2afb3a4ceb7e9ebedffdcfefd811e10075b51f91c66d61ae",
+    "raw/T3_source_manifest.json": "1456d00b002dc6446568d102768f6714fddb005a4ece53f83ba3f73e24560f9a",
+    "raw/scoreboard.json": "a8bfad10c018149a4864a33b03808fdb28de7a6fe0161d78f9dfbaed3bd29bc3",
+    "raw/T1_summary.json": "8348ffcc4227cd34d23832475dde8179fdd967f0d825a2dbb10db6ce5e8af44a",
+    "agent-results/T1_math_kuramoto.md": "3f4f9e84330ce376e395afbfc74cb2d639e0481a8f71b42bf4d860c49891f20e",
+    "agent-results/T2_schema_operational.md": "6a8def904486f79ee39ca3b64866927a5fe9ab21566df7fde0c0d55ec1c10225",
+    "agent-results/T3_primary_source_audit.md": "36d4860681bf8dd0637d7eaa60d88b635dad51961d36893a1998cd466325cf7c",
+    "agent-results/T4_runtime_reliability.md": "85c679229730bb1ad0ae37b6ed0b12d106fb814cf7d028902bde66ce1a0f0a3a",
+    "agent-results/T5_postfix_consistency_verification.md": "e47ab838a21b97aab3a532aa11d8ce330c3c3c39bed46f4c1ecd24d56378cc60"
+  },
+  "limitations": [
+    "T6 was not read or replicated after the stop instruction",
+    "T3 primary papers were not refetched because network access was prohibited",
+    "the deleted historical T4 harness was reconstructed rather than rerun byte-for-byte",
+    "jsonschema was unavailable; schema files received syntax and local-validator checks",
+    "one synthetic fixture cannot establish generality"
+  ]
+}

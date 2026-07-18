@@ -1,8 +1,8 @@
 {
   "bytes": 21368,
-  "claims_bytes": 2757,
+  "claims_bytes": 4156,
   "claims_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/CLAIMS.md",
-  "claims_sha256": "2e1c9865466455e2453986778eb133859a0d5f88c5cdccf0fdd067b5ee8ac69b",
+  "claims_sha256": "d33da7e53e4f9e3ea5253366c60f3dbb137729329c17bed2ce86a831f220db9a",
   "expected_sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
   "fingerprint_matches": true,
   "path": "/Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md",

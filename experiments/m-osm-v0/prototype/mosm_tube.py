@@ -162,6 +162,19 @@ def inside_any(path: Path, roots: list[Path]) -> bool:
     return False
 
 
+def resolve_source(path: Path, allowed_roots: list[Path]) -> Path | None:
+    candidates = [path] if path.is_absolute() else [root / path for root in allowed_roots]
+    for candidate in candidates:
+        try:
+            resolved = candidate.resolve(strict=True)
+        except FileNotFoundError:
+            continue
+        if not resolved.is_file() or not inside_any(resolved, allowed_roots):
+            raise TubeError(f"source is outside allowed roots or not a file: {path}")
+        return resolved
+    return None
+
+
 def verify_sources(tube: dict, allowed_roots: list[Path]) -> list[dict]:
     if not allowed_roots:
         raise TubeError("at least one --allow-root is required for rehydration")
@@ -169,13 +182,11 @@ def verify_sources(tube: dict, allowed_roots: list[Path]) -> list[dict]:
     total = 0
     for ref in tube["source_refs"]:
         path = Path(ref["path"])
-        if not path.exists():
+        resolved = resolve_source(path, allowed_roots)
+        if resolved is None:
             if ref["required"]:
                 raise TubeError(f"required source missing: {path}")
             continue
-        resolved = path.resolve(strict=True)
-        if not resolved.is_file() or not inside_any(resolved, allowed_roots):
-            raise TubeError(f"source is outside allowed roots or not a file: {path}")
         with resolved.open("rb") as handle:
             content = handle.read(MAX_SOURCE_BYTES + 1)
         size = len(content)
@@ -196,7 +207,8 @@ def verify_sources(tube: dict, allowed_roots: list[Path]) -> list[dict]:
         verified.append(
             {
                 "id": ref["id"],
-                "path": resolved,
+                "path": ref["path"],
+                "resolved_path": resolved,
                 "bytes": size,
                 "sha256": actual,
                 "text": text,
@@ -236,9 +248,9 @@ def render_packet(tube: dict, verified: list[dict], packet_mode: str = "compact"
                 "",
                 f"### {ref['id']}",
                 "",
-                f"Path: `{ref['path']}`  ",
-                f"SHA-256: `{ref['sha256']}`  ",
-                f"Bytes: `{ref['bytes']}`",
+                f"- Path: `{ref['path']}`",
+                f"- SHA-256: `{ref['sha256']}`",
+                f"- Bytes: `{ref['bytes']}`",
                 "",
                 ref["text"],
             ]

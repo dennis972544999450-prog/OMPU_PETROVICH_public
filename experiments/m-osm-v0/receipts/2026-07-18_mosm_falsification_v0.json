@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "mosm-falsification-v0",
+  "date": "2026-07-18",
+  "source": {
+    "path": "source/Swarm_Oscillatory_Memory_M-OSM_received_v4.md",
+    "bytes": 21368,
+    "sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668"
+  },
+  "blind_recall_runs": 16,
+  "blind_recall_fields_correct": 121,
+  "blind_recall_fields_total": 192,
+  "semantically_supported_fields": 135,
+  "attributable_markdown_reports": 26,
+  "direct_replicates": {
+    "C2": 3,
+    "C4": 2,
+    "C7": 2,
+    "C10": 2
+  },
+  "bounded_mechanism": "typed delta plus hash-verified external references",
+  "rejected_mechanisms": [
+    "phase-vector-only context reconstruction",
+    "cryptographic-hash context reconstruction",
+    "self-reported coherence as correctness",
+    "unactuated motivational hertz labels"
+  ],
+  "verified_repairs": [
+    "type-strict and multiset scoring",
+    "required subject_id in mosm-tube/0.2",
+    "render from the exact bytes accepted by verification",
+    "relative source paths under explicit allowed roots"
+  ],
+  "local_unit_tests": {
+    "count": 18,
+    "status": "pass"
+  },
+  "live_mutation": false,
+  "public_or_deploy_action_in_experiment": false,
+  "known_limits": [
+    "one synthetic case",
+    "unequal byte budgets outside C1 versus C2",
+    "participant-declared read accounting",
+    "no model hidden-state write",
+    "no physical frequency actuator",
+    "the omnibus replication wrote a late snapshot but returned no normal final status"
+  ]
+}

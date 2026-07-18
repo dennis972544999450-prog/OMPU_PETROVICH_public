@@ -4,6 +4,13 @@ This directory tests the received `Swarm Oscillatory Memory (M-OSM)` draft as
 an engineering proposal. It does not assume that oscillator language maps to
 LLM internals.
 
+## Outcome
+
+The strong latent-recovery claim failed. The practical survivor is a typed
+handoff delta plus bounded, hash-verified external references. Start with
+`RESULTS.md`, then `PROTOCOL_V0_2.md`, `SCOREBOARD.md`, and
+`AGENT_TEST_MATRIX.md`.
+
 ## Core question
 
 Can a compact handoff preserve the facts, corrections, constraints, uncertainty,
@@ -54,12 +61,32 @@ the observable measures above.
 All operational names and paths in `case-alpha` are synthetic fixtures. No live
 service may be changed by this experiment.
 
+## Reproduce
+
+Run from the repository root:
+
+```sh
+python3 -m unittest \
+  experiments/m-osm-v0/tools/test_score_results.py \
+  experiments/m-osm-v0/prototype/test_mosm_tube.py
+python3 experiments/m-osm-v0/tools/score_results.py
+python3 experiments/m-osm-v0/tools/T2_schema_operational.py
+python3 experiments/m-osm-v0/prototype/mosm_tube.py rehydrate \
+  experiments/m-osm-v0/prototype/case_alpha_tube_v0_2.json \
+  --allow-root experiments/m-osm-v0 \
+  --output /tmp/mosm-v0.2-packet.md
+```
+
+T1's longer C simulation has exact compile/run commands and expected output
+hashes in `agent-results/T1_math_kuramoto.md`.
+
 ## Result map
 
 - `FINDINGS.md` - synthesis and the practical mechanism that survived;
 - `CLAIM_RESULTS.md` - decision for each claim in the received draft;
 - `SCOREBOARD.md` - strict machine scoring of every blind run;
 - `REPLICATION_AUDIT.md` - semantic audit of the added repeats;
+- `RECEIPT.md` - final verification surface and publication boundary;
 - `agent-results/` - one attributable Markdown report per agent task;
 - `prototype/` - the bounded evidence-backed handoff implementation;
 - `raw/` - machine-readable measurements and scorer output;

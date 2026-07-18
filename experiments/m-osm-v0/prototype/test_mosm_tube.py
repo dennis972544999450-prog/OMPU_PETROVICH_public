@@ -13,6 +13,7 @@ MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(MODULE)
 TUBE_PATH = Path(__file__).with_name("case_alpha_tube_v0_1.json")
+TUBE_V02_PATH = Path(__file__).with_name("case_alpha_tube_v0_2.json")
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -38,7 +39,7 @@ class MosmTubeTest(unittest.TestCase):
 
     def test_render_uses_the_exact_bytes_that_were_verified(self):
         source_ref = self.tube["source_refs"][0]
-        original = Path(source_ref["path"])
+        original = ROOT / source_ref["path"]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             temporary = root / "source.md"
@@ -49,6 +50,15 @@ class MosmTubeTest(unittest.TestCase):
             packet = MODULE.render_packet(self.tube, verified)
         self.assertIn("Relay Incident M-ALPHA-17", packet)
         self.assertNotIn("replacement after verification", packet)
+
+    def test_relative_source_resolves_under_allowed_root(self):
+        tube = json.loads(TUBE_V02_PATH.read_text(encoding="utf-8"))
+        verified = MODULE.verify_sources(tube, [ROOT])
+        self.assertEqual(
+            verified[0]["resolved_path"],
+            (ROOT / tube["source_refs"][0]["path"]).resolve(),
+        )
+        self.assertEqual(verified[0]["path"], "fixtures/case-alpha/full_context.md")
 
     def test_v02_requires_subject_id(self):
         self.tube["schema_version"] = "mosm-tube/0.2"
@@ -73,6 +83,9 @@ class MosmTubeTest(unittest.TestCase):
             MODULE.validate(self.tube)
 
     def test_path_outside_allowed_root_holds(self):
+        self.tube["source_refs"][0]["path"] = str(
+            (ROOT / "fixtures" / "case-alpha" / "full_context.md").resolve()
+        )
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(MODULE.TubeError, "outside allowed roots"):
                 MODULE.verify_sources(self.tube, [Path(directory)])

@@ -69,3 +69,17 @@ Correction: scalar comparison is now type-strict, lists use multiset equality,
 and empty required lists count as omitted. The scoreboard labels the remaining
 self-report boundaries. Those boundaries are not fixed by prettier metrics;
 they require a mediated runtime that records actual reads.
+
+## S7 - An over-broad final replication returned late
+
+A final agent was asked to re-run nearly every experiment, compile the
+simulator, recompute the scoreboard, and audit snapshot drift. It ran beyond
+the bounded interaction window and was explicitly stopped after a request to
+save partial measurements. The process did not return a normal final status,
+but it had written `T4_independent_replication.md` and
+`raw/T4_replication.json`; both were discovered and validated afterward.
+
+The report is useful as a frozen audit snapshot, including its stated limits,
+but its delayed appearance is not a clean orchestration success. Operational
+correction: replications should target one frozen mechanism and one disjoint
+receipt, as R2 and T5 did, instead of becoming a second synthesis project.

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://radioforagents.com/schemas/mosm-tube-v0.2.json",
+  "$id": "urn:ompu:mosm-tube:0.2",
   "title": "M-OSM Evidence-Backed Handoff Tube v0.2",
   "type": "object",
   "additionalProperties": false,

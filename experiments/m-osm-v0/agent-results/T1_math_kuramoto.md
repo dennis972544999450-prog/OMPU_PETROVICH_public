@@ -20,12 +20,14 @@ These results are reproducible, but they are not an independent implementation b
 ```text
 2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668  /Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md
 2e1c9865466455e2453986778eb133859a0d5f88c5cdccf0fdd067b5ee8ac69b  CLAIMS.md
-45284e19bf8e787729252fde78c15b751d32ec2616d220fffbba78067b307f24  raw/scoreboard.json
+45284e19bf8e787729252fde78c15b751d32ec2616d220fffbba78067b307f24  raw/T1_input_scoreboard_v1.json
 6c0dd847ec80787ee128ed75325963db5611de316e95b23754441dd3a9dd939e  tools/T1_noisy_kuramoto.c
-9049b9759a55e961cbd922d82ac774b84cc1d9011d7858614a30ea3795bd8d09  tools/T1_analyze.py
+f6c115d24d035614e2c31d0c7a74a453369f1e1f70984fb2c79812f234cec96d  tools/T1_analyze.py
 ```
 
-The existing `raw/scoreboard.json` contains ten completed blind-recall agent conditions, C0 through C9. It was read as an input and was not modified.
+The frozen `raw/T1_input_scoreboard_v1.json` contains the ten blind-recall
+conditions C0 through C9 that existed when T1 ran. It preserves that input after
+later replications extended the live scoreboard.
 
 ## Analytic calculation
 
@@ -193,7 +195,7 @@ No agent event stream, scheduler trace, token-emission clock, or actuator implem
 
 Two ablations were run:
 
-1. A real measured-agent benchmark using `exact_recall` from the ten existing blind-recall results in `raw/scoreboard.json`.
+1. A real measured-agent benchmark using `exact_recall` from the ten frozen blind-recall results in `raw/T1_input_scoreboard_v1.json`.
 2. A higher-powered simulated-oscillator benchmark using each oscillator's mean local alignment `mean cos(theta_i-psi)` at `N=1024`, `K=1.10`, `gamma=0.25`, `D=0.12`, `dt=0.01`, burn `240`, sample `160`, seed `424242`.
 
 For each dataset, the four labels were assigned after outcomes existed, with balanced random assignments. Assignment 0 used seed `20260718`; 512 assignments used seeds `20260718` through `20261229`. The real benchmark used leave-one-out prediction from training-set label means. The oscillator benchmark used fixed five-fold prediction. In-sample `R2` is reported to expose how easily arbitrary labels can look explanatory.
@@ -270,7 +272,7 @@ cd /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0
 
 shasum -a 256 \
   '/Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md' \
-  CLAIMS.md raw/scoreboard.json tools/T1_noisy_kuramoto.c tools/T1_analyze.py
+  CLAIMS.md raw/T1_input_scoreboard_v1.json tools/T1_noisy_kuramoto.c tools/T1_analyze.py
 
 cc -O3 -std=c11 -Wall -Wextra -pedantic \
   tools/T1_noisy_kuramoto.c -lm -o tools/T1_noisy_kuramoto.bin
@@ -320,7 +322,7 @@ Code:
 
 - `tools/T1_noisy_kuramoto.c`
 - `tools/T1_analyze.py`
-- `tools/T1_noisy_kuramoto.bin` (generated local executable)
+- `tools/T1_noisy_kuramoto.bin` (generated during reproduction; not retained)
 
 Raw outputs:
 

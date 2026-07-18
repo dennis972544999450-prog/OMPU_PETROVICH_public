@@ -379,7 +379,7 @@ def main() -> int:
         writer.writerows(fixed_assignments)
 
     benchmark_ablation = benchmark_label_ablation(
-        raw_dir / "scoreboard.json",
+        raw_dir / "T1_input_scoreboard_v1.json",
         raw_dir / "T1_c07_benchmark_label_assignments.csv",
         raw_dir / "T1_c07_benchmark_fixed_labels.csv",
     )

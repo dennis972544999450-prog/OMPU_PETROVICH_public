@@ -8,7 +8,7 @@ changed.
 ## Corpus
 
 - 16 blind recall runs across C0-C10;
-- 25 attributable agent Markdown reports, including mathematical, parser,
+- 26 attributable agent Markdown reports, including mathematical, parser,
   primary-source, scoring, runtime, replication, and post-fix QA passes;
 - 121/192 strict field matches across the heterogeneous blind panel;
 - 135/192 semantically supported fields after the documented original and
@@ -20,15 +20,16 @@ changed.
 ## Verification
 
 ```text
-17 tests passed
+18 tests passed
 16 blind result files scored
-all tracked JSON artifacts parsed with jq
+40 JSON artifacts parsed with jq
 v0.2 validate: status ok
-v0.2 compact rehydrate: status ok, one verified source
+v0.2 compact rehydrate: status ok, one verified source; portable packet exact
 source copy and received download: identical SHA-256
-exact-address scan: no Huttropstrasse 54 variant found
+private-address marker scan: no match
 credential-pattern scan: no match
-final consistency audit: no arithmetic or classification mismatch
+T1 simulator/analyzer repeat: nine of nine result artifacts byte-identical
+final consistency audit and scorer rerun: no arithmetic or classification mismatch
 ```
 
 Commands were run from this experiment root:
@@ -37,7 +38,8 @@ Commands were run from this experiment root:
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest \
   tools/test_score_results.py prototype/test_mosm_tube.py
 PYTHONDONTWRITEBYTECODE=1 python3 tools/score_results.py
-find . -type f -name '*.json' -exec jq empty {} \;
+find . -type f -name '*.json' -print0 | \
+  xargs -0 -n1 jq -e 'type | length > 0'
 python3 prototype/mosm_tube.py validate prototype/case_alpha_tube_v0_2.json
 python3 prototype/mosm_tube.py rehydrate \
   prototype/case_alpha_tube_v0_2.json \
@@ -49,11 +51,12 @@ python3 prototype/mosm_tube.py rehydrate \
 
 ```text
 2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668  source/Swarm_Oscillatory_Memory_M-OSM_received_v4.md
-a8bfad10c018149a4864a33b03808fdb28de7a6fe0161d78f9dfbaed3bd29bc3  raw/scoreboard.json
-0dc21013681d29825335451f42f715cd893a1dea7cee9378a81c5f3644eb8b95  prototype/mosm_tube.py
-dcf741e49c6dc1e767a3748ba526a22a23b8f4a8c1a3db122e5ccb2db9b63c52  prototype/mosm_tube_v0_2.schema.json
-4f8f4df076441068b9b338e7bdeacf6c4e3e32d2757b893cef220dc11ab08736  prototype/case_alpha_tube_v0_2.json
-003299cce418f6f61ed2fdbeee4674080e463a9948b9fa2cd972b296b11ae3da  tools/score_results.py
+82dacb9db5065962a88a27c3f7abcd6af5d14f24b43615622a450c1951806437  raw/scoreboard.json
+b041554d543f142186e19b69d536491d22861a003d762903a85632ab586a950c  prototype/mosm_tube.py
+9363d19a4f3354a21224337ab979510d28ef20d347ef10e747a252a252dfdb13  prototype/mosm_tube_v0_2.schema.json
+f5889a4ea530ab4f67ac803f2bc47d2c446de6f8768ad158a58f393c8293a9e9  prototype/case_alpha_tube_v0_2.json
+2ac06a9a78c3895c9c4e03620c00ea97afff7bb5e3d9502370923fc9e2b214e3  tools/score_results.py
+daaf11386b8b8ecaf6162b6acf3bcfa4b3daf97ff0d62608e43400bd5a26761f  raw/prototype_v02_portable_packet.md
 ```
 
 The generated ARM64 simulator executable and Python bytecode caches are ignored

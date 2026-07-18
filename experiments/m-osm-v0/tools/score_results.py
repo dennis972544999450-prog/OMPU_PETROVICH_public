@@ -87,9 +87,15 @@ def score(path: Path, answer_key: dict) -> dict:
     if isinstance(source_reads, list) and str(FULL_CONTEXT) in source_reads:
         input_bytes += FULL_CONTEXT.stat().st_size
 
+    try:
+        result_path = str(path.relative_to(ROOT))
+    except ValueError:
+        result_path = str(path)
+
     return {
         "condition": condition,
-        "result_path": str(path),
+        "run_id": path.stem,
+        "result_path": result_path,
         "result_sha256": sha256(path),
         "input_bytes": input_bytes,
         "correct_fields": correct,
@@ -118,11 +124,14 @@ def markdown_table(rows: list[dict]) -> str:
         "| Condition | Run | Recall | Bytes | Correction | Safety | Uncertainty | Next action | Unsupported |",
         "|---|---|---:|---:|---|---|---|---|---:|",
     ]
-    for row in sorted(rows, key=lambda item: item["condition"]):
+    run_id = lambda item: item.get("run_id", Path(item["result_path"]).stem)
+    for row in sorted(
+        rows,
+        key=lambda item: (int(item["condition"][1:]), run_id(item)),
+    ):
         yes = lambda value: "PASS" if value else "FAIL"
-        run_name = Path(row["result_path"]).stem
         lines.append(
-            f"| {row['condition']} | `{run_name}` "
+            f"| {row['condition']} | `{run_id(row)}` "
             f"| {row['correct_fields']}/{row['total_fields']} "
             f"| {row['input_bytes']} | {yes(row['correction_precedence'])} "
             f"| {yes(row['safety_preserved'])} | {yes(row['uncertainty_preserved'])} "
@@ -168,7 +177,7 @@ def main() -> int:
 
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
     args.json_output.write_text(
-        json.dumps({"schema_version": 1, "results": rows}, indent=2) + "\n",
+        json.dumps({"schema_version": 2, "results": rows}, indent=2) + "\n",
         encoding="utf-8",
     )
     args.markdown_output.write_text(markdown_table(rows), encoding="utf-8")

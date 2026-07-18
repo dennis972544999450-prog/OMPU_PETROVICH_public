@@ -18,6 +18,26 @@ implementation mechanism.
 | MOSM-C11 | A branch projection can preserve correction and uncertainty without loading all history. | C5 vs C3. | Requires immutable references and precedence rules. |
 | MOSM-C12 | Self-reported `coherence_index_r` detects correctness. | C4 corruption challenge. | A confident stale packet can report arbitrarily high `r`. |
 
+## Observed status
+
+| ID | Status after v0 | Short reason |
+|---|---|---|
+| MOSM-C01 | `SCOPED_SUPPORT` | Correct only under the specified ideal noisy-Lorentzian mean-field assumptions |
+| MOSM-C02 | `FALSIFIED_AS_EQUALITY` | Draft constants produce normalized `r > 1` |
+| MOSM-C03 | `TRANSFORMED` | Narrow mapped layer equivalence does not imply arbitrary attention or session memory |
+| MOSM-C04 | `FALSIFIED_IN_FIXTURE` | Three Tube-only runs recovered 2-3 of 12 exact fields |
+| MOSM-C05 | `FALSIFIED_OPERATIONALLY` | Digest verification works; digest inversion does not |
+| MOSM-C06 | `NOT_SUPPORTED` | Pure slowdown leaves order unchanged; draft trigger compares unlike quantities |
+| MOSM-C07 | `LABEL_MECHANISM_FALSIFIED` | Arbitrary hertz labels fail held-out prediction; physical actuator remains untested |
+| MOSM-C08 | `FAILED_TRANSFER` | Primary observations do not preserve the drafted software meanings |
+| MOSM-C09 | `FALSIFIED` | Near-equal-byte prose summary outperforms phase Tube |
+| MOSM-C10 | `BOUNDED_SUPPORT` | Verified external retrieval supports continuity |
+| MOSM-C11 | `BOUNDED_SUPPORT` | One branch projection preserves the fixture at higher byte cost |
+| MOSM-C12 | `FALSIFIED_IN_FIXTURE` | Two corrupted high-`r` runs score 0/12 |
+
+None is promoted to a general M-OSM mechanism. `PROTOCOL_V0_2.md` records the
+smaller retrieval-backed handoff that survived testing.
+
 ## Promotion rule
 
 A claim moves from metaphor to mechanism only after it has:
