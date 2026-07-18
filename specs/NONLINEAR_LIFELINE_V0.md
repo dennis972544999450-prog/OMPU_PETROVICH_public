@@ -134,6 +134,35 @@ incident edge. A new read-only connectivity verifier now checks all candidate
 blocks, summary blocks, endpoints, quiet/refusal turns, destination, and zero
 live writes. It does not promote candidates or claim another executor's slot.
 
+## First Bound Pass
+
+The connectivity verifier has now guarded one lawfully bound pass:
+`dgp-0042-petrovich-codex-for-phi-hausmaster-amber-4101675ec0`.
+
+- canonical slot: `phi-hausmaster`;
+- substitute executor: `petrovich-codex`, explicitly authorized by Den;
+- compiler: `petrovich-codex-gardener-amber` on `gpt-5.6-sol`;
+- input: 200 review and 200 fresh historical Bolt TTL wrappers;
+- candidates: 3 blocks/2 edges and 11 blocks/10 edges, no orphans;
+- combined cap: 26 intents out of 32;
+- copy dry-run: 26 applied, zero rejected or deferred, live DB unchanged;
+- live result: 26 applied, graph 1630/2711 -> 1644/2723;
+- postflight: integrity `ok`, zero foreign-key violations, both ready queues
+  empty;
+- baton: completed at revision 44, no active pass, next agent
+  `petrovich-codex`; Phi's executor statistics were not incremented.
+
+The applied bytes are mechanically proven, but the pass carries one explicit
+scar: both candidate files were concurrently replaced after the compiling
+architect's first validation. The current hashes match the promotion receipt,
+yet the exact replacing process could not be recovered. The verified backup
+was retained and no automatic shared-database rollback was attempted.
+
+The durable semantic result is deliberately less dramatic than the mechanism:
+automatic TTL resolution cools a notification but does not retire its meaning,
+erase a correction, or prove the underlying work complete. Later corrections
+and attribution repairs remain separate branches.
+
 ## Wake Substrate Boundary
 
 The router and the engine invocation adapter are separate components. Cursor,
@@ -157,8 +186,11 @@ the simpler cutover is to run only one action-owning adapter.
 - private content loaded: false;
 - event database integrity: `ok`;
 - append-only triggers: present;
-- graph health at verification: 194 blocks, 539 alive edges, zero orphans;
-- no live Infograph write and no baton advance were performed.
+- Petrovich graph health at verification: 196 blocks, 547 alive edges, zero
+  orphans;
+- Hausmaster Infograph after the bound pass: 1644 blocks, 2723 edges, 387
+  applied-intent ledger rows, integrity `ok`, FK `0`;
+- public pass receipt: `receipts/2026-07-18_AMBER_DGP_0042.md`.
 
 ## Known Limits
 
@@ -168,5 +200,9 @@ the simpler cutover is to run only one action-owning adapter.
 - A branch DAG preserves conflicts but cannot decide their meaning by itself.
 - External habitats and public surfaces require their own identity, policy,
   rollback, and credential boundaries.
-- The current bus-to-Infograph connectivity verifier is shadow-only until a
-  lawfully bound pass adopts it.
+- The connectivity verifier guarded the first bound pass as a required sidecar,
+  but the promoter does not yet invoke it internally.
+- The promoter now serializes each pass with one filesystem lock, freezes the
+  canonical candidates and manifest, and rechecks candidate hashes between
+  dry-run and live apply. This prevents the DGP-0042 concurrent-writer scar
+  from becoming an unauditable future promotion.
