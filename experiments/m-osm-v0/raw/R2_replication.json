@@ -1,0 +1,118 @@
+{
+  "replication_id": "R2",
+  "phase": "independent_measurements_committed_then_compared_with_T2",
+  "committed_at_utc": "2026-07-18T12:10:44Z",
+  "scope": "Replication of the two core T2 claims only: Part 3 JSON operability and Kuramoto draft arithmetic.",
+  "blind_phase": {
+    "only_experimental_source_read": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/source/Swarm_Oscillatory_Memory_M-OSM_received_v4.md",
+    "T2_scripts_read": false,
+    "T2_raw_files_read": false,
+    "T2_report_read": false
+  },
+  "source": {
+    "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/source/Swarm_Oscillatory_Memory_M-OSM_received_v4.md",
+    "sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
+    "bytes": 21368,
+    "newline_count": 272,
+    "logical_line_count": 273
+  },
+  "part3_extraction": {
+    "method": "Find the Part 3 heading, stop at the next Part 4 heading, find the standalone JSON marker inside that span, then preserve bytes from the first following line beginning with { through the last nonblank line before Part 4.",
+    "part3_heading_source_line": 113,
+    "json_marker_source_line": 117,
+    "json_first_source_line": 118,
+    "json_last_source_line": 253,
+    "part4_heading_source_line": 255,
+    "bytes": 7985,
+    "sha256": "496b4929238e0f74eba85eed1c1508975d15d5e818d1c5489541492e08acd505"
+  },
+  "claim_1_json_operability": {
+    "strict_parse_unchanged": {
+      "parser": "Python 3 json.loads",
+      "ok": false,
+      "error": {
+        "message": "Invalid \\escape",
+        "payload_line": 2,
+        "payload_column": 10,
+        "character_offset_zero_based": 13
+      }
+    },
+    "smallest_repair": {
+      "operation": "Remove one backslash before each observed Markdown escape character; change no other byte.",
+      "characters": [
+        "*",
+        "+",
+        "-",
+        "=",
+        ">",
+        "[",
+        "]",
+        "_"
+      ],
+      "edits_by_following_character": {
+        "*": 6,
+        "+": 2,
+        "-": 3,
+        "=": 2,
+        ">": 1,
+        "[": 3,
+        "]": 3,
+        "_": 175
+      },
+      "edit_count": 195,
+      "repaired_sha256": "3c2f0dbd3be1bb4369a8ffb6754a435ce8cae2026262a679f751c9eccbe1ca01",
+      "strict_parse_ok": true,
+      "parsed_top_level_keys": [
+        "system_metadata",
+        "theoretical_parameters_db",
+        "motivational_goal_vectors",
+        "identification_tube_schema",
+        "execution_loop_protocol"
+      ]
+    }
+  },
+  "claim_2_draft_arithmetic": {
+    "constants_from_repaired_part3": {
+      "K": 3.45,
+      "D": 0.12,
+      "gamma": 0.25
+    },
+    "Kc_formula": "2 * (gamma + D)",
+    "Kc": 0.74,
+    "K_minus_Kc": 2.71,
+    "draft_r_formula": "sqrt(K - Kc)",
+    "draft_r": 1.6462077633154328
+  },
+  "comparison": {
+    "T2_schema_operational_read": true,
+    "compared_at_utc": "2026-07-18T12:11:34Z",
+    "comparison_source": {
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/T2_schema_operational.md",
+      "sha256": "6a8def904486f79ee39ca3b64866927a5fe9ab21566df7fde0c0d55ec1c10225"
+    },
+    "agreement": {
+      "source_sha256": true,
+      "source_bytes": true,
+      "unchanged_strict_parse_failure": true,
+      "first_parse_error_location": true,
+      "repair_rule": true,
+      "edit_count_total": true,
+      "edit_counts_by_character": true,
+      "repaired_strict_parse_success": true,
+      "Kc": true,
+      "draft_r": true
+    },
+    "boundary_note": {
+      "R2_choice": "Include the terminal LF belonging to the final JSON line.",
+      "R2_bytes": 7985,
+      "R2_sha256": "496b4929238e0f74eba85eed1c1508975d15d5e818d1c5489541492e08acd505",
+      "T2_primary_choice": "Exclude the terminal LF after the final }.",
+      "T2_primary_bytes": 7984,
+      "T2_primary_sha256": "9b0a6db30f562d5d8b6dc9bdeb0e7cad0eb85ebd13c79c0b8886cb9053bd5780",
+      "T2_repeat_with_terminal_LF_bytes": 7985,
+      "T2_repeat_with_terminal_LF_sha256": "496b4929238e0f74eba85eed1c1508975d15d5e818d1c5489541492e08acd505",
+      "classification": "No substantive disagreement; the R2 extraction exactly matches T2's recorded terminal-LF variant."
+    },
+    "disagreements": []
+  }
+}

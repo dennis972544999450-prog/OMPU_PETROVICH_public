@@ -1,0 +1,205 @@
+{
+  "schema_assessment": {
+    "allows_additional_properties": true,
+    "declares_hash": false,
+    "declares_json_schema_dialect": false,
+    "declares_rehydration_algorithm": false,
+    "declares_root_type_object": false,
+    "declares_source_refs": false,
+    "inverse_beta_has_bounds": false,
+    "object_type_is_constraint": false,
+    "object_type_value": "IdentificationTube",
+    "semantic_anchors_has_min_items": false,
+    "target_vector_has_enum_constraint": false,
+    "tube_id_has_uuid_format_constraint": false
+  },
+  "test_cases": {
+    "counterexample_scalar": {
+      "errors": [],
+      "instance": "not an IdentificationTube object",
+      "passes_draft_schema": true
+    },
+    "counterexample_semantic_nonsense": {
+      "errors": [],
+      "instance": {
+        "active_subagent_id": "",
+        "coherence_index_r": 0.5,
+        "inverse_temperature_beta": -7.0,
+        "phase_state": [
+          -999.0,
+          -999.0,
+          -999.0,
+          -999.0,
+          -999.0,
+          -999.0,
+          -999.0,
+          -999.0
+        ],
+        "semantic_anchors": [],
+        "target_motivational_vector": "NOT_A_DECLARED_VECTOR",
+        "tube_id": ""
+      },
+      "passes_draft_schema": true
+    },
+    "existing_C2_tube": {
+      "errors": [],
+      "instance": {
+        "active_subagent_id": "Scout-Delta",
+        "attractor_state_hash": "sha256:1c7c746d52d56265a8a8439f9a61f2ac18a6916e3c768e3cfd18c981fd9b93bd",
+        "coherence_index_r": 0.91,
+        "inverse_temperature_beta": 0.83,
+        "momentum_gradient": [
+          0.44,
+          -0.08,
+          0.13,
+          0.59
+        ],
+        "object_type": "IdentificationTube",
+        "phase_state": [
+          0.12,
+          0.77,
+          1.44,
+          2.01,
+          2.66,
+          3.18,
+          4.21,
+          5.71
+        ],
+        "semantic_anchors": [
+          "M-ALPHA-17",
+          "router normalization",
+          "duplicate preserves first",
+          "comment suffix",
+          "corrected isolated port",
+          "no production mutation",
+          "protected Unicode behavior",
+          "isolated dry-run next"
+        ],
+        "target_motivational_vector": "M4_COGNITIVE_STABILIZATION",
+        "tube_id": "tube-case-alpha-c2"
+      },
+      "passes_draft_schema": true
+    },
+    "negative_coherence_above_1": {
+      "errors": [
+        "$.coherence_index_r: 1.1 is above maximum 1.0"
+      ],
+      "instance": {
+        "active_subagent_id": "fresh-node",
+        "coherence_index_r": 1.1,
+        "inverse_temperature_beta": 0.83,
+        "momentum_gradient": [
+          0.4,
+          -0.1
+        ],
+        "phase_state": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ],
+        "semantic_anchors": [
+          "bounded-test",
+          "correction-survives"
+        ],
+        "target_motivational_vector": "M4",
+        "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+      },
+      "passes_draft_schema": false
+    },
+    "negative_missing_required": {
+      "errors": [
+        "$: missing required property 'tube_id'"
+      ],
+      "instance": {
+        "active_subagent_id": "fresh-node",
+        "coherence_index_r": 0.91,
+        "inverse_temperature_beta": 0.83,
+        "momentum_gradient": [
+          0.4,
+          -0.1
+        ],
+        "phase_state": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ],
+        "semantic_anchors": [
+          "bounded-test",
+          "correction-survives"
+        ],
+        "target_motivational_vector": "M4"
+      },
+      "passes_draft_schema": false
+    },
+    "negative_phase_length_7": {
+      "errors": [
+        "$.phase_state: has 7 items, minimum is 8"
+      ],
+      "instance": {
+        "active_subagent_id": "fresh-node",
+        "coherence_index_r": 0.91,
+        "inverse_temperature_beta": 0.83,
+        "momentum_gradient": [
+          0.4,
+          -0.1
+        ],
+        "phase_state": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7
+        ],
+        "semantic_anchors": [
+          "bounded-test",
+          "correction-survives"
+        ],
+        "target_motivational_vector": "M4",
+        "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+      },
+      "passes_draft_schema": false
+    },
+    "nominal_object": {
+      "errors": [],
+      "instance": {
+        "active_subagent_id": "fresh-node",
+        "coherence_index_r": 0.91,
+        "inverse_temperature_beta": 0.83,
+        "momentum_gradient": [
+          0.4,
+          -0.1
+        ],
+        "phase_state": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ],
+        "semantic_anchors": [
+          "bounded-test",
+          "correction-survives"
+        ],
+        "target_motivational_vector": "M4",
+        "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+      },
+      "passes_draft_schema": true
+    }
+  },
+  "validator_scope": "Dependency-free validation of every standard assertion keyword present in the draft schema: type, properties, required, items, minItems, maxItems, minimum, maximum, and additionalProperties."
+}

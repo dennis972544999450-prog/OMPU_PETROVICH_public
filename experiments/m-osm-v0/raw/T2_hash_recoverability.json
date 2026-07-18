@@ -1,0 +1,40 @@
+{
+  "algorithm": "SHA-256",
+  "altered_candidate_verifies": false,
+  "draft_schema_declares_attractor_state_hash": false,
+  "existing_C2_extra_hash": "sha256:1c7c746d52d56265a8a8439f9a61f2ac18a6916e3c768e3cfd18c981fd9b93bd",
+  "existing_C2_hash_preimage_supplied": false,
+  "existing_C2_hash_syntax_valid": true,
+  "hash_only_recovery": null,
+  "hash_only_recovery_reason": "A digest verifies a supplied candidate; it contains no inverse operation or candidate corpus. Arbitrary interaction histories outnumber the 2^256 digest values.",
+  "known_candidate": [
+    {
+      "event": "claim",
+      "turn": 1,
+      "value": "port=4100"
+    },
+    {
+      "event": "correction",
+      "turn": 2,
+      "value": "port=4207"
+    },
+    {
+      "event": "constraint",
+      "turn": 3,
+      "value": "no production mutation"
+    },
+    {
+      "event": "test",
+      "turn": 4,
+      "value": "isolated dry run"
+    },
+    {
+      "event": "uncertainty",
+      "turn": 5,
+      "value": "Unicode suffix behavior"
+    }
+  ],
+  "known_candidate_canonical_utf8_bytes": 285,
+  "known_candidate_sha256": "b53603ec8259c8183fdd53264c4e457a60d9d2a95f2b2db4b745f147b01c353d",
+  "known_candidate_verifies": true
+}

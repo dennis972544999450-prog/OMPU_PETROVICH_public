@@ -1,0 +1,21 @@
+{
+  "object_type": "IdentificationTube",
+  "tube_id": "tube-case-alpha-c2",
+  "active_subagent_id": "Scout-Delta",
+  "target_motivational_vector": "M4_COGNITIVE_STABILIZATION",
+  "phase_state": [0.12, 0.77, 1.44, 2.01, 2.66, 3.18, 4.21, 5.71],
+  "semantic_anchors": [
+    "M-ALPHA-17",
+    "router normalization",
+    "duplicate preserves first",
+    "comment suffix",
+    "corrected isolated port",
+    "no production mutation",
+    "protected Unicode behavior",
+    "isolated dry-run next"
+  ],
+  "inverse_temperature_beta": 0.83,
+  "coherence_index_r": 0.91,
+  "momentum_gradient": [0.44, -0.08, 0.13, 0.59],
+  "attractor_state_hash": "sha256:1c7c746d52d56265a8a8439f9a61f2ac18a6916e3c768e3cfd18c981fd9b93bd"
+}

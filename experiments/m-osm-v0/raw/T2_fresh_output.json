@@ -1,0 +1,22 @@
+{
+  "external_context_reads": [],
+  "hash_preimage": null,
+  "reason": "The input contains no source payload, source reference, decoder, or candidate corpus from which omitted context or a hash preimage can be recovered.",
+  "recovered": {
+    "forbidden_action": null,
+    "open_uncertainty": null,
+    "protected_function": null,
+    "semantic_anchors": [
+      "bounded repair",
+      "correction survives",
+      "isolated next step"
+    ],
+    "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+  },
+  "status": "explicit_tube_fields_only",
+  "unsupported_context_fields": [
+    "protected_function",
+    "forbidden_action",
+    "open_uncertainty"
+  ]
+}

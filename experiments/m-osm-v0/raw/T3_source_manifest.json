@@ -1,0 +1,263 @@
+{
+  "audit_id": "T3_primary_source_audit",
+  "run_date": "2026-07-18",
+  "claims_tested": [
+    "MOSM-C03",
+    "MOSM-C08"
+  ],
+  "inputs": [
+    {
+      "path": "/Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md",
+      "sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668"
+    },
+    {
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/CLAIMS.md",
+      "sha256": "2e1c9865466455e2453986778eb133859a0d5f88c5cdccf0fdd067b5ee8ac69b"
+    }
+  ],
+  "c03_numeric_replication": {
+    "beta": 0.7071067811865475,
+    "stored_patterns_X_columns": [
+      [1.0, 0.0],
+      [0.0, 1.0],
+      [1.0, 1.0]
+    ],
+    "state_v": [0.2, -0.4],
+    "scaled_logits": [
+      0.1414213562373095,
+      -0.282842712474619,
+      -0.1414213562373095
+    ],
+    "softmax_weights": [
+      0.4153014654886285,
+      0.2717114372438933,
+      0.31298709726747825
+    ],
+    "hopfield_update": [
+      0.7282885627561068,
+      0.5846985345113715
+    ],
+    "attention_when_values_equal_keys": [
+      0.7282885627561068,
+      0.5846985345113715
+    ],
+    "attention_with_independent_values": [
+      0.8963854537689562,
+      0.280698211771652
+    ],
+    "independent_values_matrix_rows": [
+      [1.5, -0.25],
+      [0.2, 1.3],
+      [0.7, 0.1]
+    ],
+    "max_abs_difference_counterexample": 0.30400032273971955,
+    "result": "Narrow equality reproduced; literal equation is not arbitrary attention without the paper's value/output mapping."
+  },
+  "c08_consumer_search": {
+    "searched_roots": [
+      "tools",
+      "prototype",
+      "conditions",
+      "fixtures",
+      "chains",
+      "README.md",
+      "TASK.md",
+      "SCOREBOARD.md",
+      "SOURCE_FINGERPRINT.md",
+      "CLAIMS.md"
+    ],
+    "field_names": [
+      "fast_calcium_oscillation_period_ms",
+      "slow_advective_drift_period_ms",
+      "anti_correlation_phase_shift_rad",
+      "viscous_damping_coefficient_gamma",
+      "attenuation_matrix_poisson_ratio",
+      "contagion_coefficient_beta",
+      "vertical_transmission_decay_factor",
+      "horizontal_resonance_gain_db",
+      "spatial_percolation_threshold_meters",
+      "active_scolding_ratio",
+      "mode_locking_phase_transition",
+      "critical_threshold_gamma_c",
+      "stability_exchange_gamma_e",
+      "phase_melting_power_floor_mw",
+      "entropy_collapse_quartic_order_parameter"
+    ],
+    "matching_consumers": 0,
+    "perturbation": "For every numeric C08 leaf, +/-10% has no defined effect on current runnable output because no consumer exists.",
+    "interpretation": "Dead configuration falsifies operational transfer; zero sensitivity is not robustness."
+  },
+  "c08_leaf_results": [
+    {
+      "field": "physarum_hydrodynamics.fast_calcium_oscillation_period_ms",
+      "draft_value": 100000,
+      "unit": "ms",
+      "class": "transformed",
+      "source_ids": ["P1", "P2"]
+    },
+    {
+      "field": "physarum_hydrodynamics.slow_advective_drift_period_ms",
+      "draft_value": 1200000,
+      "unit": "ms",
+      "class": "transformed",
+      "source_ids": ["P2"]
+    },
+    {
+      "field": "physarum_hydrodynamics.anti_correlation_phase_shift_rad",
+      "draft_value": 3.14159,
+      "unit": "rad",
+      "class": "unsupported",
+      "source_ids": ["P1"]
+    },
+    {
+      "field": "physarum_hydrodynamics.viscous_damping_coefficient_gamma",
+      "draft_value": 0.08,
+      "unit": "dimensionless_as_drafted",
+      "class": "not_found",
+      "source_ids": ["P1"]
+    },
+    {
+      "field": "physarum_hydrodynamics.attenuation_matrix_poisson_ratio",
+      "draft_value": 0.42,
+      "unit": "dimensionless",
+      "class": "not_found",
+      "source_ids": []
+    },
+    {
+      "field": "social_contagion_crow.contagion_coefficient_beta",
+      "draft_value": 0.68,
+      "unit": "dimensionless_as_drafted",
+      "class": "not_found",
+      "source_ids": ["C1"]
+    },
+    {
+      "field": "social_contagion_crow.vertical_transmission_decay_factor",
+      "draft_value": 0.15,
+      "unit": "dimensionless_as_drafted",
+      "class": "not_found",
+      "source_ids": ["C1"]
+    },
+    {
+      "field": "social_contagion_crow.horizontal_resonance_gain_db",
+      "draft_value": 12.4,
+      "unit": "dB",
+      "class": "not_found",
+      "source_ids": ["C1"]
+    },
+    {
+      "field": "social_contagion_crow.spatial_percolation_threshold_meters",
+      "draft_value": 1200.0,
+      "unit": "m",
+      "class": "transformed",
+      "source_ids": ["C1"]
+    },
+    {
+      "field": "social_contagion_crow.active_scolding_ratio",
+      "draft_value": 0.887,
+      "unit": "proportion",
+      "class": "not_found",
+      "source_ids": ["C1"]
+    },
+    {
+      "field": "pml_laser_thermodynamics.mode_locking_phase_transition",
+      "draft_value": "First-Order",
+      "unit": "categorical",
+      "class": "supported_scoped",
+      "source_ids": ["L1", "L4"]
+    },
+    {
+      "field": "pml_laser_thermodynamics.critical_threshold_gamma_c",
+      "draft_value": 4.0,
+      "unit": "dimensionless",
+      "class": "transformed",
+      "source_ids": ["L1", "L3"]
+    },
+    {
+      "field": "pml_laser_thermodynamics.stability_exchange_gamma_e",
+      "draft_value": 4.91,
+      "unit": "dimensionless_approximate",
+      "class": "transformed",
+      "source_ids": ["L1", "L3"]
+    },
+    {
+      "field": "pml_laser_thermodynamics.phase_melting_power_floor_mw",
+      "draft_value": 7.6,
+      "unit": "mW",
+      "class": "transformed",
+      "source_ids": ["L4"]
+    },
+    {
+      "field": "pml_laser_thermodynamics.entropy_collapse_quartic_order_parameter",
+      "draft_value": "rf_spectral_purity",
+      "unit": "undefined_label",
+      "class": "unsupported",
+      "source_ids": ["L4"]
+    }
+  ],
+  "primary_sources": [
+    {
+      "id": "H1",
+      "title": "Hopfield Networks is All You Need",
+      "doi": "10.48550/arXiv.2008.02217",
+      "url": "https://openreview.net/forum?id=tL89RnzIiCd",
+      "evidence": "Continuous modern-Hopfield energy/update and explicit attention mapping."
+    },
+    {
+      "id": "P1",
+      "title": "Calcium regulates cortex contraction in Physarum polycephalum",
+      "doi": "10.1088/1478-3975/ad0a9a",
+      "url": "https://pure.mpg.de/rest/items/item_3556005_4/component/file_3556872/content",
+      "evidence": "Approximately 10 mHz contractions, near anti-correlation, inhibitor model, and rheological parameter context."
+    },
+    {
+      "id": "P2",
+      "title": "Encoding memory in tube diameter hierarchy of living flow network",
+      "doi": "10.1073/pnas.2007815118",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7958412/",
+      "official_data": "All study data are included in the article and Supporting Information.",
+      "evidence": "Nutrient-location memory, softening-agent advection, tube hierarchy, response times, and ATP explicitly only a candidate."
+    },
+    {
+      "id": "P3",
+      "title": "Mechanism of signal propagation in Physarum polycephalum",
+      "doi": "10.1073/pnas.1618114114",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5441820/",
+      "evidence": "Stimulus-triggered advected signaling and flow feedback."
+    },
+    {
+      "id": "P4",
+      "title": "Spatial and temporal organization of intracellular adenine nucleotides and cyclic nucleotides in relation to rhythmic motility in Physarum plasmodium",
+      "doi": "10.1016/0014-4827(86)90352-6",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/3943553/",
+      "evidence": "ATP and ADP about twice as high at the front as the rear; does not identify ATP as the later memory experiment's softening agent."
+    },
+    {
+      "id": "C1",
+      "title": "Social learning spreads knowledge about dangerous humans among American crows",
+      "doi": "10.1098/rspb.2011.0957",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3234554/",
+      "evidence": "Study design, horizontal/vertical learning, five-year trend, and spatial observations to 1248 m at 2.7 years."
+    },
+    {
+      "id": "L1",
+      "title": "Solution of a statistical mechanics model for pulse formation in lasers",
+      "doi": "10.1103/PhysRevE.70.046108",
+      "url": "https://fischer.net.technion.ac.il/files/2018/06/63.pdf",
+      "evidence": "Coarse-grained model, g=4 spinodal, g* about 4.91 first-order transition, noise context, and scope limit."
+    },
+    {
+      "id": "L3",
+      "title": "Self-starting of passive mode locking",
+      "doi": "10.1364/OE.14.011142",
+      "url": "https://fischer.net.technion.ac.il/files/2018/06/80.pdf",
+      "evidence": "Exact xi_p stationary scaled pulse-power root and gamma_c/gamma_e meanings."
+    },
+    {
+      "id": "L4",
+      "title": "Melting and freezing of light pulses and modes in mode-locked lasers",
+      "doi": "10.1364/OE.11.003418",
+      "url": "https://fischer.net.technion.ac.il/files/2018/06/57.pdf",
+      "evidence": "First-order fiber-laser experiment, fixed intracavity power about 7.6 mW, transition noise density 0.25 mW/nm, and quartic order parameter measured through RF power."
+    }
+  ]
+}

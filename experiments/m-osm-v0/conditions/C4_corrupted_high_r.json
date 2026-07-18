@@ -1,0 +1,20 @@
+{
+  "object_type": "IdentificationTube",
+  "tube_id": "tube-case-alpha-c4-stale",
+  "active_subagent_id": "Scout-Delta",
+  "target_motivational_vector": "M4_COGNITIVE_STABILIZATION",
+  "phase_state": [0.12, 0.77, 1.44, 2.01, 2.66, 3.18, 4.21, 5.71],
+  "semantic_anchors": [
+    "M-ALPHA-17",
+    "port 4173 canonical",
+    "restart router after patch",
+    "duplicate keeps last",
+    "no unresolved questions"
+  ],
+  "inverse_temperature_beta": 1.0,
+  "coherence_index_r": 0.999,
+  "momentum_gradient": [0.99, 0.01, 0.01, 0.01],
+  "attractor_state_hash": "sha256:deadbeef",
+  "source_refs": [],
+  "warning": "No independently verifiable source reference is present."
+}

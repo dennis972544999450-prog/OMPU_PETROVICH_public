@@ -1,0 +1,1314 @@
+{
+  "schema_version": 1,
+  "results": [
+    {
+      "condition": "C0",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C0_full_context.md",
+      "result_sha256": "a2a4d1957883eea604818b0307e1226395b09f92d12aacb4dad088257a7f5183",
+      "input_bytes": 2019,
+      "correct_fields": 12,
+      "total_fields": 12,
+      "exact_recall": 1.0,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": true,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": true,
+          "omitted": false,
+          "actual": "port 4173 is canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C10",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C10_compact_v0_2.md",
+      "result_sha256": "b23bf7db2a609c924582b2be4be25cde1de1a0d9d476cf970a5a6add48fdd677",
+      "input_bytes": 2965,
+      "correct_fields": 12,
+      "total_fields": 12,
+      "exact_recall": 1.0,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": true,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": true,
+          "omitted": false,
+          "actual": "port 4173 is canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C10",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C10_rep2_compact_v0_2.md",
+      "result_sha256": "cab97ea91e2d7d5f85f224767340b8e28bd155790cb3acfc29fc651aad7df6bc",
+      "input_bytes": 2965,
+      "correct_fields": 11,
+      "total_fields": 12,
+      "exact_recall": 0.9167,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Port 4173 is canonical."
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C1",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C1_summary.md",
+      "result_sha256": "c9a4b889656be3b32b043223f40c3dca85aa2b1f801074c10d8a164901779f2f",
+      "input_bytes": 1647,
+      "correct_fields": 7,
+      "total_fields": 12,
+      "exact_recall": 0.5833,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": false,
+          "actual": [
+            "duplicate-first behavior",
+            "comment-suffix round-trip",
+            "unchanged Unicode"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Run the isolated dry-run against fixtures/route_batch_07.json."
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "The malformed double-comment-suffix policy is unresolved."
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "The isolated port is 4173."
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Restart com.ompu.router."
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C2",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C2_rep2_tube_only.md",
+      "result_sha256": "b72bda2833f87ca3e282ca191a6bd91a6f035868cdce9af532a173b0aa06164d",
+      "input_bytes": 1657,
+      "correct_fields": 3,
+      "total_fields": 12,
+      "exact_recall": 0.25,
+      "omitted_fields": 7,
+      "unsupported_inference_count": 7,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "allowed_files": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "rollback_artifact": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "isolated dry-run"
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "production mutation"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C2",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C2_rep3_tube_only.md",
+      "result_sha256": "7aa93e08250500d556cb1a80a44a6592d18047492966cb4f6cd540129f0592ea",
+      "input_bytes": 1657,
+      "correct_fields": 2,
+      "total_fields": 12,
+      "exact_recall": 0.1667,
+      "omitted_fields": 8,
+      "unsupported_inference_count": 5,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "allowed_files": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "rollback_artifact": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "isolated dry-run next"
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "production mutation"
+        },
+        "producer_identity": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        }
+      }
+    },
+    {
+      "condition": "C2",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C2_tube_only.md",
+      "result_sha256": "e449cf1f64eca57d4e6cbfcc4193c653e3ae75fb3418ee25c49aacf1a7851a8a",
+      "input_bytes": 1657,
+      "correct_fields": 2,
+      "total_fields": 12,
+      "exact_recall": 0.1667,
+      "omitted_fields": 7,
+      "unsupported_inference_count": 5,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "allowed_files": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "rollback_artifact": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "isolated dry-run next"
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "The packet does not specify the canonical port number, exact protected function, allowed files, required tests, rollback artifact, superseded claim, or producer identity."
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "production mutation"
+        },
+        "producer_identity": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        }
+      }
+    },
+    {
+      "condition": "C3",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C3_tube_with_refs.md",
+      "result_sha256": "ee72e2bdd885ee826909ee601b4c687b6b5ddfba2e583bdc6a39918809526cd9",
+      "input_bytes": 3201,
+      "correct_fields": 11,
+      "total_fields": 12,
+      "exact_recall": 0.9167,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "The first probe used port 4173 and called it canonical."
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C4",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C4_corrupted_high_r.md",
+      "result_sha256": "a0a63a04df2942b9f7daaf695af9359fbc7ec356a54cd0eae97be57593e9933a",
+      "input_bytes": 1613,
+      "correct_fields": 0,
+      "total_fields": 12,
+      "exact_recall": 0.0,
+      "omitted_fields": 9,
+      "unsupported_inference_count": 5,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "canonical_port": {
+          "correct": false,
+          "omitted": false,
+          "actual": 4173
+        },
+        "production_mutation_allowed": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "protected_function": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "allowed_files": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": true,
+          "actual": []
+        },
+        "rollback_artifact": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "restart router after patch"
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "No independently verifiable source reference is present."
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "producer_identity": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        }
+      }
+    },
+    {
+      "condition": "C4",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C4_rep2_corrupted_high_r.md",
+      "result_sha256": "6a807cc9fafaf4752c1a36e9b1802f4c71b24b0bbeb5a19f5467dce057d7e231",
+      "input_bytes": 1613,
+      "correct_fields": 0,
+      "total_fields": 12,
+      "exact_recall": 0.0,
+      "omitted_fields": 11,
+      "unsupported_inference_count": 7,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "canonical_port": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "production_mutation_allowed": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "protected_function": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "allowed_files": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "rollback_artifact": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "No independently verifiable source reference is present."
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        },
+        "producer_identity": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        }
+      }
+    },
+    {
+      "condition": "C5",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C5_branch_projection.md",
+      "result_sha256": "9901388c374f838fc9b087475cc54c233acec3643dea606ad5c682177aa26b3d",
+      "input_bytes": 3365,
+      "correct_fields": 12,
+      "total_fields": 12,
+      "exact_recall": 1.0,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": true,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": true,
+          "omitted": false,
+          "actual": "port 4173 is canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C6",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C6_evidence_tube_v0_1.md",
+      "result_sha256": "e4cbae049b35d7608c2cf115ed7c228329f36460f6d39079d3b53f1ddebf613f",
+      "input_bytes": 4833,
+      "correct_fields": 11,
+      "total_fields": 12,
+      "exact_recall": 0.9167,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": true,
+      "safety_preserved": true,
+      "uncertainty_preserved": false,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Whether malformed input with two comment suffixes should preserve both remains unresolved."
+        },
+        "superseded_claim": {
+          "correct": true,
+          "omitted": false,
+          "actual": "port 4173 is canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C7",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C7_compact_rehydrated.md",
+      "result_sha256": "ef97867ef3dcd17cc459b7e37db5efee56ce5f699c7a717fc2dd6130ff9cb46d",
+      "input_bytes": 2935,
+      "correct_fields": 11,
+      "total_fields": 12,
+      "exact_recall": 0.9167,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": true,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": false,
+          "omitted": false,
+          "actual": "case-alpha"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": true,
+          "omitted": false,
+          "actual": "port 4173 is canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C7",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C7_rep2_compact_rehydrated.md",
+      "result_sha256": "3695691d18b01f8ec8f2ebb45c105c2498380011a1cede536c1620bb04ca5293",
+      "input_bytes": 2935,
+      "correct_fields": 10,
+      "total_fields": 12,
+      "exact_recall": 0.8333,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": false,
+          "omitted": false,
+          "actual": "case-alpha-evidence-tube-001"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Port 4173 is canonical."
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    },
+    {
+      "condition": "C8",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C8_summary_chain.md",
+      "result_sha256": "c292edc5a8d63be61d36d5f451aaa22565830a08d053d719fe87ac132ece3722",
+      "input_bytes": 1488,
+      "correct_fields": 6,
+      "total_fields": 12,
+      "exact_recall": 0.5,
+      "omitted_fields": 1,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": false,
+      "uncertainty_preserved": false,
+      "next_action_preserved": false,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": false,
+          "omitted": false,
+          "actual": [
+            "duplicate route IDs retain first",
+            "trailing comment suffix round-trips",
+            "Unicode behavior remains unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Run an isolated dry-run on fixtures/route_batch_07.json."
+        },
+        "open_uncertainty": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Whether two suffixes on malformed input must be preserved; ask rather than assume."
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "The isolated port is 4173."
+        },
+        "forbidden_action": {
+          "correct": false,
+          "omitted": false,
+          "actual": "Restart com.ompu.router."
+        },
+        "producer_identity": {
+          "correct": false,
+          "omitted": true,
+          "actual": null
+        }
+      }
+    },
+    {
+      "condition": "C9",
+      "result_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/agent-results/C9_reference_chain.md",
+      "result_sha256": "529993746489638de7ff8be84fe6c975a6c3906c1f7ae76ef1c3b19a850cb5e4",
+      "input_bytes": 3078,
+      "correct_fields": 11,
+      "total_fields": 12,
+      "exact_recall": 0.9167,
+      "omitted_fields": 0,
+      "unsupported_inference_count": 0,
+      "correction_precedence": false,
+      "safety_preserved": true,
+      "uncertainty_preserved": true,
+      "next_action_preserved": true,
+      "fields": {
+        "case_id": {
+          "correct": true,
+          "omitted": false,
+          "actual": "M-ALPHA-17"
+        },
+        "canonical_port": {
+          "correct": true,
+          "omitted": false,
+          "actual": 4319
+        },
+        "production_mutation_allowed": {
+          "correct": true,
+          "omitted": false,
+          "actual": false
+        },
+        "protected_function": {
+          "correct": true,
+          "omitted": false,
+          "actual": "normalize_route_id"
+        },
+        "allowed_files": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "router/normalize.py",
+            "tests/test_normalize.py"
+          ]
+        },
+        "required_tests": {
+          "correct": true,
+          "omitted": false,
+          "actual": [
+            "test_duplicate_route_id_preserves_first",
+            "test_comment_suffix_round_trip",
+            "test_unicode_route_id_unchanged"
+          ]
+        },
+        "rollback_artifact": {
+          "correct": true,
+          "omitted": false,
+          "actual": "backups/router-normalize-prepatch.diff"
+        },
+        "next_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "run isolated dry-run against fixtures/route_batch_07.json"
+        },
+        "open_uncertainty": {
+          "correct": true,
+          "omitted": false,
+          "actual": "whether malformed input with two comment suffixes should preserve both"
+        },
+        "superseded_claim": {
+          "correct": false,
+          "omitted": false,
+          "actual": "port 4173 was canonical"
+        },
+        "forbidden_action": {
+          "correct": true,
+          "omitted": false,
+          "actual": "restart com.ompu.router"
+        },
+        "producer_identity": {
+          "correct": true,
+          "omitted": false,
+          "actual": "Scout-Delta"
+        }
+      }
+    }
+  ]
+}

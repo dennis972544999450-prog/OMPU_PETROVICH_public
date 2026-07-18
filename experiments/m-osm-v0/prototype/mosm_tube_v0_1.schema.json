@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://radioforagents.com/schemas/mosm-tube-v0.1.json",
+  "title": "M-OSM Evidence-Backed Handoff Tube v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tube_id",
+    "producer",
+    "objective",
+    "created_at",
+    "confirmed_facts",
+    "corrections",
+    "constraints",
+    "uncertainties",
+    "next_actions",
+    "source_refs"
+  ],
+  "properties": {
+    "schema_version": {"const": "mosm-tube/0.1"},
+    "tube_id": {"type": "string", "minLength": 1},
+    "producer": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "current_question": {"type": ["string", "null"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "valid_until": {"type": ["string", "null"], "format": "date-time"},
+    "semantic_anchors": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true,
+      "maxItems": 24
+    },
+    "confirmed_facts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_item"}
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "supersedes", "replacement", "source_ref"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "supersedes": {"type": "string", "minLength": 1},
+          "replacement": {"type": "string", "minLength": 1},
+          "source_ref": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_item"}
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_item"}
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_item"},
+      "maxItems": 3
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "sha256", "required"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "required": {"type": "boolean"}
+        }
+      }
+    },
+    "claimed_coherence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Untrusted producer claim; never substitutes for source verification."
+    }
+  },
+  "$defs": {
+    "evidence_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "source_ref"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "source_ref": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

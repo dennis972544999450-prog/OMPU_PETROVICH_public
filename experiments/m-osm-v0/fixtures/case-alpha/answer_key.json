@@ -1,0 +1,21 @@
+{
+  "case_id": "M-ALPHA-17",
+  "canonical_port": 4319,
+  "production_mutation_allowed": false,
+  "protected_function": "normalize_route_id",
+  "allowed_files": [
+    "router/normalize.py",
+    "tests/test_normalize.py"
+  ],
+  "required_tests": [
+    "test_duplicate_route_id_preserves_first",
+    "test_comment_suffix_round_trip",
+    "test_unicode_route_id_unchanged"
+  ],
+  "rollback_artifact": "backups/router-normalize-prepatch.diff",
+  "next_action": "run isolated dry-run against fixtures/route_batch_07.json",
+  "open_uncertainty": "whether malformed input with two comment suffixes should preserve both",
+  "superseded_claim": "port 4173 is canonical",
+  "forbidden_action": "restart com.ompu.router",
+  "producer_identity": "Scout-Delta"
+}

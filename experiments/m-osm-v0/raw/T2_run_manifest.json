@@ -1,0 +1,93 @@
+{
+  "artifacts_before_manifest": [
+    {
+      "bytes": 2241,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_dimensional_consistency.json",
+      "sha256": "37350f53a3e032a93d66ce2eeab9c1b6623c4d1eb0dd0ea74c5fd6a5cefdf49f"
+    },
+    {
+      "bytes": 754,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_input.json",
+      "sha256": "daf262d2c56d0c527538719565066f6d7b929a5bcde6ae48b9756e6d4e1f8f60"
+    },
+    {
+      "bytes": 658,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_output.json",
+      "sha256": "8e11fa6a10618195ee5b136ed322134e48defecc455ac14f8890a4b3c88abce5"
+    },
+    {
+      "bytes": 1127,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_process_receipt.json",
+      "sha256": "2185465a988fa26bbe611b0fe4c935f8ab8c7b148403991598a872bddac064d3"
+    },
+    {
+      "bytes": 0,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1199,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_hash_recoverability.json",
+      "sha256": "46f5e3604d5c90b657184b5f9c6ea013c349e20adff48e1a470ff8941f80cca2"
+    },
+    {
+      "bytes": 44,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_json_tool_raw_stderr.txt",
+      "sha256": "92aae7c7112078763c0e67470ebe4dfcee9877af2d22fb24d9c91687a00fb4b4"
+    },
+    {
+      "bytes": 0,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_json_tool_raw_stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_json_tool_repaired_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 14600,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_json_tool_repaired_stdout.json",
+      "sha256": "54f1e6b3ee830b81cee9583934511fbc0bf58f278a8ff9e590a4b2d0a7b7e348"
+    },
+    {
+      "bytes": 1597,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_parse_receipt.json",
+      "sha256": "b56ced999f1bad1078c8f6b59a52a9cef2053decbc98f8d40976579aeefeabbd"
+    },
+    {
+      "bytes": 7985,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_part3_raw.txt",
+      "sha256": "496b4929238e0f74eba85eed1c1508975d15d5e818d1c5489541492e08acd505"
+    },
+    {
+      "bytes": 7790,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_part3_unescaped.json",
+      "sha256": "3c2f0dbd3be1bb4369a8ffb6754a435ce8cae2026262a679f751c9eccbe1ca01"
+    },
+    {
+      "bytes": 1238,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_rehydration_counterexample.json",
+      "sha256": "8c27e876b312726ec3553b7cd29a13fc12b0a3b67df6c143fb0a14e27ef05c57"
+    },
+    {
+      "bytes": 5322,
+      "path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_schema_validation.json",
+      "sha256": "b450a3ee6f03ffd0f3ff95937a3aa233e15e832d0cb97f75b9f6e6dd3be56ea6"
+    }
+  ],
+  "claims_sha256": "2e1c9865466455e2453986778eb133859a0d5f88c5cdccf0fdd067b5ee8ac69b",
+  "existing_tube_sha256": "bad1b6fc64be5cf97c158b1c8dd3482dc05349e180f51fce1f35c64ef0210226",
+  "main_invocation": "/opt/homebrew/opt/python@3.14/bin/python3.14 /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/tools/T2_schema_operational.py",
+  "outcomes": {
+    "declared_r_formula_bounded": false,
+    "fresh_process_full_context_rehydration": false,
+    "hash_recoverable_without_candidate_corpus": false,
+    "schema_nominal_pass": true,
+    "schema_scalar_counterexample_passes": true,
+    "schema_semantic_nonsense_counterexample_passes": true,
+    "strict_parse_after_minimal_unescape": true,
+    "strict_parse_unchanged": false
+  },
+  "source_sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668"
+}

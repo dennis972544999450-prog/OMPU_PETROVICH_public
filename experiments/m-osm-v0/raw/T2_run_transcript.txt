@@ -1,0 +1,11 @@
+source_sha256=2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668
+raw_block_sha256=9b0a6db30f562d5d8b6dc9bdeb0e7cad0eb85ebd13c79c0b8886cb9053bd5780
+python_unchanged_exit=logical_parse_failure error=Invalid \escape: line 2 column 10 (char 13)
+jq_unchanged_exit=5 stderr=jq: parse error: Invalid escape at line 2, column 20
+markdown_unescape_deletions=195
+python_unescaped_ok=True
+jq_unescaped_exit=0
+schema_verdict=PARTIAL_SHAPE_ONLY_NOT_OPERATIONAL
+unit_verdict=DIMENSIONALLY_UNDERSPECIFIED_AND_NUMERICALLY_INCONSISTENT
+fresh_process_exit=2 status=insufficient_information
+hash_only_exit=2 status=hash_not_recovered
