@@ -1,0 +1,74 @@
+{
+  "evidence": {
+    "forbidden_shape_hits": [],
+    "git_diff_check": "pass",
+    "implementation": {
+      ".gitignore": "5f9157865d060b82f0ec883c8075fdba03a40f4d8f1799fe342f44db986a4fb8",
+      "ARCHITECTURE_DECISION.md": "e15cf5662b7e93ece696b0bede5e8a1da41e00208ce4bbbb2f675080aecee03d",
+      "README.md": "6b787ce601c9b3c71634b2841309d24b55ec15895f9c32d1dd32acc9fdcab836",
+      "STATUS.md": "e71f2bb7c78e0d3c2c350086f13af25d73196d7fda96d7c697b2a81f4c6b6372",
+      "WIRE_CONTRACT.md": "83a7e17d22fd0680ab178900e0dd3e04d5a3c1ca473071d5c03f99d62050ef79",
+      "requirements-test.lock": "a3441b6ac67dea2951fe0b735166f295602cceb44eff4b5cf039838b71d72b87",
+      "requirements-test.txt": "9be6ced5ac40fa47452dc38baa9fc84326e6743bc38723c132c1c9448894d636",
+      "research/README.md": "76aa6bb316b653bec95b5160c7327fb4bd9b6edc789526937498395fd633a0bb",
+      "satlink/__init__.py": "f4723398833120447c95e26da30598a9cff2a6e0a2db79fc346a2ea0ea6a3e28",
+      "satlink/bundle.py": "c9a54ca0dd394ed7e5c5d3416914116784f1bed44d20fffd920ed927254b70a0",
+      "satlink/crypto_cli.py": "52437087739bf66e7616a59675c22a76bbb33273954644e9b232abe2a8dcc320",
+      "satlink/errors.py": "73864421ed822f345eb8f7b19b3c66340211dc53d4a9f6e2e36ade1dc13131be",
+      "satlink/gateway.py": "ca9757f0d83731b08c444ebbc4530bbf2969dfc56f7d08251b6406b104da2bf9",
+      "satlink/ledger.py": "76a7cb614d7b10e322ac87d55dcb6220012441c40c7d2b0243a4a9c186a3c5e4",
+      "satlink/model.py": "686e571c4ba97d3914e52847390abbf83ec55cc62038efd4fa48122e4943c2b3",
+      "satlink/nats_transport.py": "b3f57895f5018c04b4320de81cd56c58bc12a992cf74bffb400a3c972d438295",
+      "schema/satlink-message-v0.schema.json": "334120ccea723b5bf7c1341f2cc0a0e8d7b66afec7731ac5599d6825e8986b49",
+      "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests/common.py": "0c0570b0308c46156877b3f2c8c7a7dec7fd6e9acc41ee00582c756e4266a71c",
+      "tests/test_bootstrap.py": "89a1270a63908cca40da254775104b4aa03ef3a99e7ea8749c2f5dc9edc26c22",
+      "tests/test_cli.py": "a2460be9e76a6ae2a825a28a80531dced37929a993d9aa23878dcea60e8cb49c",
+      "tests/test_gateway.py": "9cda49c1e107dbff1560b8652caab7fc919fc86498ab03188c19fc2919109e6b",
+      "tests/test_model_bundle.py": "d79fa65a257db657e4a47df8fcc2daf2dcb0eefef1e9470d5d6894cf09811c0f",
+      "tests/test_nats_smoke.py": "091df6f0ce194eab5a14da703d8efe68d95860496240b20e7bc484f0c67e5275",
+      "tools/bootstrap_sputnik_application_keys.sh": "3d63e9310a625c5fe7eb542c2142df06608c9b5eeebf67ad48f52577f595784a",
+      "tools/run_verification.py": "94423d7a9a0b5e935fa52d18f8fc5e00948bdfaf015a5af2dcb1c203ff5da3bf",
+      "tools/satlink_cli.py": "a4cbe7c8bd96efee218f2fe004312f01e04aa1d2f404e14dcabd0ade5e045e97"
+    },
+    "nats_server_left_running": false,
+    "research": {
+      "research/01_threat_model.md": "0510995f170cbfb161df0edbe501cbcb6aa853bd04234457105a01168091c04f",
+      "research/02_protocol_selection.md": "c9007c8c8e1c33640d3fec0554bba1fe938489a23674d6cf635762f131fd2bf9",
+      "research/03_integration_map.md": "6befeef2a089306c159766b39354095fd158354d84c08135e57d5fbbe3365b19",
+      "research/04_adversarial_test_plan.md": "7086fae05a5b21bd9bce5553ace2f0096b4d462cce36b4f64b1017507b19ed95",
+      "research/05_sputnik_bootstrap.md": "30fb29bc379b13ab08ac177fe9088eb9c16d45c9b5bf3f50e26b8329830a37e7"
+    },
+    "sources": {
+      "sources/OD-002_diagnostika_kanala.md": "19a256115a047a79aab4a4f01e11918bad9f60915b14e6110800c8f837a303b5"
+    },
+    "trailing_whitespace_hits": []
+  },
+  "generated_at": "2026-07-18T22:10:46Z",
+  "result": "pass",
+  "safety": {
+    "launchagents_changed": 0,
+    "live_bus_writes": 0,
+    "live_carrier_writes": 0,
+    "live_credentials_created": 0,
+    "public_deploys": 0
+  },
+  "schema": "satlink.verification.receipt.v0",
+  "tests": {
+    "bridge_v0_baseline": {
+      "count": 74,
+      "status": "pass"
+    },
+    "satlink": {
+      "count": 28,
+      "resource_warnings_as_errors": true,
+      "status": "pass"
+    }
+  },
+  "toolchain": {
+    "age": "v1.3.1",
+    "minisign": "minisign 0.12",
+    "nats_server": "nats-server: v2.14.3",
+    "python": "3.14.4"
+  }
+}
