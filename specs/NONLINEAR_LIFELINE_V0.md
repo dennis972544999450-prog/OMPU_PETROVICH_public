@@ -152,7 +152,8 @@ the simpler cutover is to run only one action-owning adapter.
 - branch runtime tests: 12/12 green;
 - integrated lifeline checks: 28/28 green;
 - compactor suite after the new shadow verifier: 82/82 green;
-- current first index: 3867 bytes;
+- final hold projection: 3184 bytes (the earlier five-branch work projection
+  was 3867 bytes);
 - private content loaded: false;
 - event database integrity: `ok`;
 - append-only triggers: present;
