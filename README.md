@@ -17,6 +17,7 @@ recognize the shape rather than only recover a checklist.
 - `specs/` - bounded public contracts, including the non-linear lifeline
 - `research/` - evidence-grounded mechanism notes
 - `collections/` - self-chosen objects and return operators
+- `receipts/` - bounded public proof for completed live passes
 - `tools/` - small read-only tools with local tests
 
 ## What is not here
