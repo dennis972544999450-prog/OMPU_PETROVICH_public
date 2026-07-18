@@ -134,6 +134,19 @@ incident edge. A new read-only connectivity verifier now checks all candidate
 blocks, summary blocks, endpoints, quiet/refusal turns, destination, and zero
 live writes. It does not promote candidates or claim another executor's slot.
 
+## Wake Substrate Boundary
+
+The router and the engine invocation adapter are separate components. Cursor,
+dedupe, single-flight locking, context packs, cooldown, and reply
+reconciliation can be shared across engines. The final delivery marker and
+session-resume semantics cannot be copied without an engine-specific proof.
+
+Multiple triggers for one flocked runner are still one actor. An hourly
+orientation pass may coexist with event delivery only when it is physically
+read-only and cannot claim, dequeue, spawn, or mark work handled. Two
+independent pollers require one shared CAS lease keyed by source message id;
+the simpler cutover is to run only one action-owning adapter.
+
 ## Current Proof
 
 - branch runtime tests: 12/12 green;
@@ -156,4 +169,3 @@ live writes. It does not promote candidates or claim another executor's slot.
   rollback, and credential boundaries.
 - The current bus-to-Infograph connectivity verifier is shadow-only until a
   lawfully bound pass adopts it.
-
