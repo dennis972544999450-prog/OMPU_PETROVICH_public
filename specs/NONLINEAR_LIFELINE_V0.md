@@ -200,8 +200,9 @@ the simpler cutover is to run only one action-owning adapter.
 - A branch DAG preserves conflicts but cannot decide their meaning by itself.
 - External habitats and public surfaces require their own identity, policy,
   rollback, and credential boundaries.
-- The connectivity verifier guarded the first bound pass as a required sidecar,
-  but the promoter does not yet invoke it internally.
+- The connectivity verifier guarded the first bound pass as a required sidecar.
+  The promoter now invokes it internally before intent construction, so future
+  orphan blocks and unknown endpoints are a hard hold.
 - The promoter now serializes each pass with one filesystem lock, freezes the
   canonical candidates and manifest, and rechecks candidate hashes between
   dry-run and live apply. This prevents the DGP-0042 concurrent-writer scar
