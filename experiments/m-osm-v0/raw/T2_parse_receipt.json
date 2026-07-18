@@ -1,0 +1,46 @@
+{
+  "extraction": {
+    "payload_bytes": 7985,
+    "payload_sha256": "496b4929238e0f74eba85eed1c1508975d15d5e818d1c5489541492e08acd505",
+    "rule": "Find the Part 3 heading; before Part 4, find the standalone JSON label; take the first opening brace through the last nonblank line before Part 4.",
+    "source_byte_end_exclusive": 19679,
+    "source_byte_start_zero_based": 11694
+  },
+  "markdown_unescape": {
+    "repaired_bytes": 7790,
+    "repaired_sha256": "3c2f0dbd3be1bb4369a8ffb6754a435ce8cae2026262a679f751c9eccbe1ca01",
+    "replacement_counts": {
+      "*": 6,
+      "+": 2,
+      "-": 3,
+      "=": 2,
+      ">": 1,
+      "[": 3,
+      "]": 3,
+      "_": 175
+    },
+    "rule": "Remove a backslash only when it immediately precedes one of the punctuation bytes observed as invalid JSON escapes in this block: _, *, -, [, ], +, =, >. Do not alter valid JSON escapes or any other byte.",
+    "strict_parse_after_unescape": true,
+    "top_level_keys": [
+      "system_metadata",
+      "theoretical_parameters_db",
+      "motivational_goal_vectors",
+      "identification_tube_schema",
+      "execution_loop_protocol"
+    ],
+    "total_backslashes_removed": 195
+  },
+  "source": {
+    "bytes": 21368,
+    "path": "/Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md",
+    "sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668"
+  },
+  "strict_parse_unchanged": {
+    "character_offset_zero_based": 13,
+    "column": 10,
+    "error": "Invalid \\escape: line 2 column 10 (char 13)",
+    "error_type": "JSONDecodeError",
+    "line": 2,
+    "parsed": false
+  }
+}

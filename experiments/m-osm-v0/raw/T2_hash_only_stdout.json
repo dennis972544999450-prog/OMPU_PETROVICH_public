@@ -1,0 +1,17 @@
+{
+  "external_state_reads": [],
+  "hash_fields": [
+    "attractor_hash_sha256"
+  ],
+  "input_keys": [
+    "attractor_hash_sha256",
+    "interaction_count_claimed"
+  ],
+  "input_sha256": "d245c6d6a421f487edbb027ed780bd7d56503de7fc42889a9405207130370a52",
+  "isolated_python": true,
+  "mode": "hash-only",
+  "present_context_fields": [],
+  "reason": "A digest supplies an equality check, not a preimage or a candidate corpus. No context can be selected from the packet alone.",
+  "rehydrated_context": null,
+  "status": "hash_not_recovered"
+}

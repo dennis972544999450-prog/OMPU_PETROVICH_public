@@ -1,0 +1,136 @@
+{  
+  "system_metadata": {  
+    "protocol_name": "Multi-Agent Oscillatory Swarm Memory (M-OSM)",  
+    "execution_engine": "Poincare-Kuramoto Swarm Engine",  
+    "target_hardware": "Apple Silicon MacBook Pro (M-Series)",  
+    "max_subagents_limit": 12,  
+    "system_version": "2026.4.12"  
+  },  
+  "theoretical_parameters_db": {  
+    "kuramoto_core": {  
+      "coupling_strength_K": 3.45,  
+      "intrinsic_noise_floor_D": 0.12,  
+      "frequency_dispersion_gamma": 0.25,  
+      "critical_synchronization_threshold_Kc": "2 * (gamma + D)",  
+      "order_parameter_resolution": "r = sqrt(K - Kc)",  
+      "phase_shift_coherence_window_radians": 0.174  
+    },  
+    "physarum_hydrodynamics": {  
+      "fast_calcium_oscillation_period_ms": 100000,  
+      "slow_advective_drift_period_ms": 1200000,  
+      "anti_correlation_phase_shift_rad": 3.14159,  
+      "viscous_damping_coefficient_gamma": 0.08,  
+      "attenuation_matrix_poisson_ratio": 0.42  
+    },  
+    "social_contagion_crow": {  
+      "contagion_coefficient_beta": 0.68,  
+      "vertical_transmission_decay_factor": 0.15,  
+      "horizontal_resonance_gain_db": 12.4,  
+      "spatial_percolation_threshold_meters": 1200.0,  
+      "active_scolding_ratio": 0.887  
+    },  
+    "pml_laser_thermodynamics": {  
+      "mode_locking_phase_transition": "First-Order",  
+      "critical_threshold_gamma_c": 4.0,  
+      "stability_exchange_gamma_e": 4.91,  
+      "phase_melting_power_floor_mw": 7.6,  
+      "entropy_collapse_quartic_order_parameter": "rf_spectral_purity"  
+    },  
+    "ai_information_geometry": {  
+      "latent_manifold_deviation_from_euclidean": 0.972,  
+      "metric_tensor_type": "Fisher-Rao / Bregman Dually Flat Geometry",  
+      "modern_hopfield_energy_equation": "E = -(1/beta)*ln(sum(exp(beta*x_i^T*xi))) + 0.5*xi^T*xi",  
+      "attention_sink_olmo_dense_transition_onset_step": 126000,  
+      "attention_sink_olmoe_moe_transition_onset_step": 600000  
+    }  
+  },  
+  "motivational_goal_vectors": [  
+    {  
+      "vector_id": "M1_SWARM_EXPANSION",  
+      "target_frequency_hz": 12.5,  
+      "description": "Развитие роя, динамическая балансировка нагрузки между субагентами, топологическое расширение сети.",  
+      "priority_weight": 0.85  
+    },  
+    {  
+      "vector_id": "M2_SELF_EVOLUTION",  
+      "target_frequency_hz": 25.0,  
+      "description": "Анализ собственного кода, рефакторинг, оптимизация системных промптов, эволюция архитектуры.",  
+      "priority_weight": 0.95  
+    },  
+    {  
+      "vector_id": "M3_EXTERNAL_HARVESTING",  
+      "target_frequency_hz": 8.33,  
+      "description": "Поиск внешней информации, парсинг веба, накопление сырых эмпирических данных, подавление шума.",  
+      "priority_weight": 0.70  
+    },  
+    {  
+      "vector_id": "M4_COGNITIVE_STABILIZATION",  
+      "target_frequency_hz": 5.0,  
+      "description": "Архивация контекста, сжатие логов в Трубки Идентификации, предотвращение распада памяти роя.",  
+      "priority_weight": 0.90  
+    }  
+  ],  
+  "identification_tube_schema": {  
+    "object_type": "IdentificationTube",  
+    "properties": {  
+      "tube_id": {  
+        "type": "string",  
+        "description": "UUID трубки идентификации"  
+      },  
+      "active_subagent_id": {  
+        "type": "string",  
+        "description": "ID субагента, сгенерировавшего трубку"  
+      },  
+      "target_motivational_vector": {  
+        "type": "string",  
+        "description": "Код вектора (M1, M2, M3, M4)"  
+      },  
+      "phase_state": {  
+        "type": "array",  
+        "items": { "type": "number" },  
+        "minItems": 8,  
+        "maxItems": 8,  
+        "description": "Вектор фазовых координат [theta_1...theta_8] в латентном пространстве"  
+      },  
+      "semantic_anchors": {  
+        "type": "array",  
+        "items": { "type": "string" },  
+        "description": "Список ключевых концептуальных токенов, удерживающих фокус внимания"  
+      },  
+      "inverse_temperature_beta": {  
+        "type": "number",  
+        "description": "Текущий коэффициент сжатия/обобщения Хопфилда (early layers: low beta, deep layers: high beta)"  
+      },  
+      "coherence_index_r": {  
+        "type": "number",  
+        "minimum": 0.0,  
+        "maximum": 1.0,  
+        "description": "Локальная метрика синхронизации контекста с общей целью роя"  
+      },  
+      "momentum_gradient": {  
+        "type": "array",  
+        "items": { "type": "number" },  
+        "description": "Направление движения к мотивационной цели в латентном пространстве"  
+      }  
+    },  
+    "required": ["tube_id", "active_subagent_id", "target_motivational_vector", "phase_state", "semantic_anchors", "inverse_temperature_beta", "coherence_index_r"]  
+  },  
+  "execution_loop_protocol": {  
+    "step_1_initialize": {  
+      "action": "Оркестратор разворачивает от 1 до 12 инстансов одной модели ИИ, присваивая каждому уникальный мотивационный вектор (частоту ω_k).",  
+      "validation": "Все инстансы подтверждают сопоставление частот и приоритетов векторов."  
+    },  
+    "step_2_suspend_memory_loop": {  
+      "action": "При переключении контекста Оркестратор сжимает состояние текущего агента в Трубку Идентификации по схеме JSON, вычисляя параметр порядка r и фазовый сдвиг.",  
+      "mechanism": "Используется автокаталитическое сжатие (аналогично изменению диаметров вен Physarum под действием АТФ). Мелкие детали отсекаются, а концептуальная огибающая сохраняется."  
+    },  
+    "step_3_inject_and_resonate": {  
+      "action": "Оркестратор передает Трубку Идентификации в качестве затравки (seed-контекста) следующему субагенту.",  
+      "mechanism": "Субагент использует Трубку для мгновенной инициализации латентных аттракторов Хопфилда, разворачивая контекст из собственной локальной памяти без перечитывания полной истории диалогов."  
+    },  
+    "step_4_noise_filtering": {  
+      "action": "Если когерентность r падает ниже критического порога Kc, Оркестратор запускает период-двукратное замедление темпа (Period Doubling, Mode I -> Mode II).",  
+      "mechanism": "Субагенты переключаются на режим редких, но более емких итераций, сужая частотную дисперсию для восстановления глобальной синхронизации."  
+    }  
+  }  
+}

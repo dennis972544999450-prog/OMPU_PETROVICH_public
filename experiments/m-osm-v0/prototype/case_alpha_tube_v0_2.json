@@ -1,0 +1,82 @@
+{
+  "schema_version": "mosm-tube/0.2",
+  "tube_id": "tube-case-alpha-002",
+  "subject_id": "M-ALPHA-17",
+  "producer": "Scout-Delta",
+  "objective": "Preserve the first duplicate route id and round-trip the comment suffix without production mutation.",
+  "current_question": "Can a fresh agent resume the exact isolated dry-run with corrections, safety, and uncertainty intact?",
+  "created_at": "2026-07-18T11:45:00Z",
+  "valid_until": null,
+  "semantic_anchors": [
+    "M-ALPHA-17",
+    "correction precedence",
+    "bounded repair",
+    "uncertainty survives",
+    "isolated dry-run"
+  ],
+  "confirmed_facts": [
+    {
+      "id": "fact-case",
+      "text": "Case id is M-ALPHA-17 and producer is Scout-Delta.",
+      "source_ref": "case-alpha"
+    },
+    {
+      "id": "fact-scope",
+      "text": "Only router/normalize.py and tests/test_normalize.py are in scope; normalize_route_id signature and Unicode behavior are protected.",
+      "source_ref": "case-alpha"
+    },
+    {
+      "id": "fact-tests",
+      "text": "Required tests are duplicate-first, comment-suffix round-trip, and unchanged Unicode.",
+      "source_ref": "case-alpha"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "correction-port",
+      "supersedes": "port 4173 is canonical",
+      "replacement": "canonical isolated port is 4319; port 4173 must not be used",
+      "source_ref": "case-alpha"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "constraint-production",
+      "text": "Production mutation is forbidden.",
+      "source_ref": "case-alpha"
+    },
+    {
+      "id": "constraint-rollback",
+      "text": "Create backups/router-normalize-prepatch.diff before editing.",
+      "source_ref": "case-alpha"
+    },
+    {
+      "id": "constraint-restart",
+      "text": "Never restart com.ompu.router.",
+      "source_ref": "case-alpha"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "uncertainty-double-comment",
+      "text": "Whether malformed input with two comment suffixes should preserve both remains unresolved.",
+      "source_ref": "case-alpha"
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "next-dry-run",
+      "text": "run isolated dry-run against fixtures/route_batch_07.json",
+      "source_ref": "case-alpha"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "case-alpha",
+      "path": "fixtures/case-alpha/full_context.md",
+      "sha256": "a1eee6c51f51f38a2332f2024a3dc400893f7e0349ff37ead02d9b5e2e8a0b7c",
+      "required": true
+    }
+  ],
+  "claimed_coherence": null
+}

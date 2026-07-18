@@ -1,0 +1,12 @@
+{
+  "block_bytes": 7984,
+  "block_sha256": "9b0a6db30f562d5d8b6dc9bdeb0e7cad0eb85ebd13c79c0b8886cb9053bd5780",
+  "extraction_rule": "Between the exact Part 3 and Part 4 headings, take the substring from the first '{' after the standalone JSON marker through the last '}', inclusive.",
+  "language_marker_repr": "'JSON  '",
+  "part3_heading": "## **Part 3: Machine-Readable Operational JSON Dataset**",
+  "part4_heading": "## **Part 4: Swarm Prompt-Instruction for Sub-agents (Direct Injection)**",
+  "source_byte_end_exclusive_zero_based": 19678,
+  "source_byte_start_zero_based": 11694,
+  "source_character_end_exclusive_zero_based": 13600,
+  "source_character_start_zero_based": 7151
+}

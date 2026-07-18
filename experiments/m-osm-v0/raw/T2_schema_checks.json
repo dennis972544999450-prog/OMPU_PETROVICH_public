@@ -1,0 +1,68 @@
+{
+  "additional_properties_open": true,
+  "conforming_tube_errors": [],
+  "embedded_schema_top_level_keys": [
+    "object_type",
+    "properties",
+    "required"
+  ],
+  "enforced_constraints": {
+    "coherence_maximum": true,
+    "phase_state_exactly_eight": true,
+    "required": true
+  },
+  "hash_or_attractor_properties": [],
+  "ignored_top_level_keywords": [
+    "object_type"
+  ],
+  "missing_schema_dialect": true,
+  "missing_type_object": true,
+  "negative_constraint_results": {
+    "coherence_above_one": [
+      "$.coherence_index_r: 1.01 exceeds maximum 1.0"
+    ],
+    "missing_required": [
+      "$: missing required property 'tube_id'"
+    ],
+    "seven_phase_values": [
+      "$.phase_state: has 7 items, minimum is 8"
+    ]
+  },
+  "property_count": 8,
+  "required_count": 7,
+  "required_properties_exist": true,
+  "scalar_instance": {
+    "errors": [],
+    "instance": 7,
+    "valid": true
+  },
+  "semantically_bad_but_schema_valid": {
+    "errors": [],
+    "instance": {
+      "active_subagent_id": "agent-A",
+      "coherence_index_r": 0.8,
+      "inverse_temperature_beta": -999.0,
+      "momentum_gradient": [
+        1.0
+      ],
+      "phase_state": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_anchors": [],
+      "target_motivational_vector": "M9_NOT_DEFINED",
+      "tube_id": "not-a-uuid",
+      "undeclared_payload": "accepted because additionalProperties is not false"
+    },
+    "valid": true
+  },
+  "source_or_context_properties": [],
+  "validator_scope": "Local standards-semantics evaluator for every assertion keyword used by the embedded schema: type, properties, required, items, minItems, maxItems, minimum, maximum.",
+  "verdict": "PARTIAL_SHAPE_ONLY_NOT_OPERATIONAL"
+}

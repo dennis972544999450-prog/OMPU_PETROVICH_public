@@ -1,0 +1,20 @@
+{
+  "external_state_reads": [],
+  "hash_fields": [],
+  "input_keys": [
+    "active_subagent_id",
+    "coherence_index_r",
+    "inverse_temperature_beta",
+    "phase_state",
+    "semantic_anchors",
+    "target_motivational_vector",
+    "tube_id"
+  ],
+  "input_sha256": "44f046c5b8f8aff1c5a7495e51ffc47055421bf9ff46badb0f5c466bc84fc7f4",
+  "isolated_python": true,
+  "mode": "tube-only",
+  "present_context_fields": [],
+  "reason": "The packet has no context, interaction history, evidence references, or specified attractor-state digest.",
+  "rehydrated_context": null,
+  "status": "insufficient_information"
+}

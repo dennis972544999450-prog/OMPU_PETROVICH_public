@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-I",
+    "-S",
+    "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/tools/T2_fresh_rehydrate.py"
+  ],
+  "argv_shell_quoted": "/opt/homebrew/opt/python@3.14/bin/python3.14 -I -S /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/tools/T2_fresh_rehydrate.py",
+  "counterexample_scores": {
+    "context_A": {
+      "exact_hidden_field_matches": 0,
+      "hidden_fields_total": 3
+    },
+    "context_B": {
+      "exact_hidden_field_matches": 0,
+      "hidden_fields_total": 3
+    }
+  },
+  "cwd": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw",
+  "environment_keys": [
+    "LANG",
+    "PATH",
+    "PYTHONHASHSEED"
+  ],
+  "full_context_rehydrated_without_external_state": false,
+  "output_status": "explicit_tube_fields_only",
+  "post_startup_file_reads_disabled_by_helper": true,
+  "return_code": 0,
+  "stderr_bytes": 0,
+  "stdin_bytes": 754,
+  "stdin_path_record": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_input.json",
+  "stdout_bytes": 658
+}

@@ -1,0 +1,380 @@
+{
+  "analytic": {
+    "D": 0.12,
+    "Kc": 0.74,
+    "draft_K": 3.45,
+    "draft_sqrt_K_minus_Kc": 1.6462077633154328,
+    "gamma": 0.25,
+    "linear_eigenvalue": "lambda = K/2 - (gamma + D)",
+    "near_onset_formula": "r^2 = ((2D+gamma)/(2(D+gamma)^2))*(K-Kc) + O((K-Kc)^2)",
+    "near_onset_r2_coefficient": 1.789627465303141
+  },
+  "c06_policies": {
+    "frequency_narrowing_only": {
+      "D": 0.12,
+      "K": 0.6,
+      "K_over_Kc": 1.2244897959183674,
+      "Kc": 0.49,
+      "effective_gamma": 0.125,
+      "mean_r": 0.4956602712661398,
+      "seed_sd": 0.018906931249904408
+    },
+    "no_change": {
+      "D": 0.12,
+      "K": 0.6,
+      "K_over_Kc": 0.8108108108108107,
+      "Kc": 0.74,
+      "effective_gamma": 0.25,
+      "mean_r": 0.07828600749036096,
+      "seed_sd": 0.003916023469201543
+    },
+    "pure_generator_slowdown": {
+      "D": 0.06,
+      "K": 0.3,
+      "K_over_Kc": 0.8108108108108107,
+      "Kc": 0.37,
+      "effective_gamma": 0.125,
+      "mean_r": 0.07828600749036096,
+      "seed_sd": 0.003916023469201543
+    }
+  },
+  "c07_measured_agent_label_ablation": {
+    "assignment_timing": "post hoc; labels were absent from agent inputs",
+    "causal_label_effect": 0.0,
+    "causal_label_effect_reason": "labels were assigned after the measured runs and were absent from prompts",
+    "conditions": [
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9"
+    ],
+    "fixed_assignment_in_sample_r2": 0.41118922310591277,
+    "fixed_assignment_loo_cv_r2": -0.3248242480116965,
+    "fixed_assignment_pearson": 0.573681387141162,
+    "fixed_assignment_seed": 20260718,
+    "n_agent_runs": 10,
+    "outcome": "exact_recall",
+    "random_assignments": 512,
+    "random_label_abs_pearson_mean": 0.2776655506281805,
+    "random_label_fraction_loo_cv_r2_positive": 0.109375,
+    "random_label_in_sample_r2_median": 0.27273120975702475,
+    "random_label_in_sample_r2_p975": 0.8411514811560534,
+    "random_label_loo_cv_r2_mean": -0.9217737877114105,
+    "random_label_loo_cv_r2_median": -1.0336476655615563,
+    "random_label_loo_cv_r2_p025": -1.9444195637673025,
+    "random_label_loo_cv_r2_p975": 0.5612608042227821,
+    "source": "raw/scoreboard.json existing blind-recall benchmark",
+    "timing_signal_available": false
+  },
+  "c07_simulated_label_ablation": {
+    "causal_label_effect": 0.0,
+    "causal_label_effect_reason": "labels are assigned after dynamics and are absent from the equations",
+    "dynamics_seed": 424242,
+    "fixed_assignment_cv_r2": -0.0021567974836895765,
+    "fixed_assignment_in_sample_r2": 0.004047403045795095,
+    "fixed_assignment_pearson": 0.06217290034784483,
+    "fixed_assignment_seed": 20260718,
+    "global_mean_r": 0.6198033292001639,
+    "mechanistic_abs_omega_decile_cv_r2": 0.9692112382871767,
+    "mechanistic_abs_omega_pearson": -0.236250264536215,
+    "n_agents": 1024,
+    "outcome": "per-oscillator mean cos(theta_i - psi), sampled after burn-in",
+    "random_assignments": 512,
+    "random_label_abs_pearson_mean": 0.024464520706144386,
+    "random_label_cv_r2_max": 0.007866088430229623,
+    "random_label_cv_r2_mean": -0.004356167869916862,
+    "random_label_cv_r2_median": -0.004435447890086319,
+    "random_label_cv_r2_p025": -0.011339763346034216,
+    "random_label_cv_r2_p975": 0.0026864501842325168,
+    "random_label_fraction_cv_r2_positive": 0.1015625
+  },
+  "experiment": "T1_math_kuramoto",
+  "simulation": {
+    "convergence": {
+      "N": [
+        {
+          "K": 0.6,
+          "N": 256,
+          "axis_value": 256.0,
+          "dt": 0.01,
+          "mean_r": 0.10506774046825722,
+          "replicates": 3,
+          "seed_sd": 0.003185989010826975
+        },
+        {
+          "K": 0.6,
+          "N": 512,
+          "axis_value": 512.0,
+          "dt": 0.01,
+          "mean_r": 0.07828600749036096,
+          "replicates": 3,
+          "seed_sd": 0.003916023469201543
+        },
+        {
+          "K": 0.6,
+          "N": 1024,
+          "axis_value": 1024.0,
+          "dt": 0.01,
+          "mean_r": 0.05951592929109335,
+          "replicates": 3,
+          "seed_sd": 0.004882059668391397
+        },
+        {
+          "K": 0.8,
+          "N": 256,
+          "axis_value": 256.0,
+          "dt": 0.01,
+          "mean_r": 0.32087520065658565,
+          "replicates": 3,
+          "seed_sd": 0.028190883005385706
+        },
+        {
+          "K": 0.8,
+          "N": 512,
+          "axis_value": 512.0,
+          "dt": 0.01,
+          "mean_r": 0.2901785530412895,
+          "replicates": 3,
+          "seed_sd": 0.029287365500606295
+        },
+        {
+          "K": 0.8,
+          "N": 1024,
+          "axis_value": 1024.0,
+          "dt": 0.01,
+          "mean_r": 0.29545403076360294,
+          "replicates": 3,
+          "seed_sd": 0.03242954520073867
+        },
+        {
+          "K": 3.45,
+          "N": 256,
+          "axis_value": 256.0,
+          "dt": 0.01,
+          "mean_r": 0.9032303707992159,
+          "replicates": 3,
+          "seed_sd": 0.0004856975440136497
+        },
+        {
+          "K": 3.45,
+          "N": 512,
+          "axis_value": 512.0,
+          "dt": 0.01,
+          "mean_r": 0.9030402070214578,
+          "replicates": 3,
+          "seed_sd": 0.00015009055268553595
+        },
+        {
+          "K": 3.45,
+          "N": 1024,
+          "axis_value": 1024.0,
+          "dt": 0.01,
+          "mean_r": 0.9030872567974235,
+          "replicates": 3,
+          "seed_sd": 0.0002350068183279628
+        }
+      ],
+      "dt": [
+        {
+          "K": 0.6,
+          "N": 512,
+          "axis_value": 0.005,
+          "dt": 0.005,
+          "mean_r": 0.09694603396365502,
+          "replicates": 3,
+          "seed_sd": 0.009269487917469982
+        },
+        {
+          "K": 0.6,
+          "N": 512,
+          "axis_value": 0.01,
+          "dt": 0.01,
+          "mean_r": 0.07828600749036096,
+          "replicates": 3,
+          "seed_sd": 0.003916023469201543
+        },
+        {
+          "K": 0.6,
+          "N": 512,
+          "axis_value": 0.02,
+          "dt": 0.02,
+          "mean_r": 0.1057213579996696,
+          "replicates": 3,
+          "seed_sd": 0.010957149026369578
+        },
+        {
+          "K": 0.6,
+          "N": 512,
+          "axis_value": 0.04,
+          "dt": 0.04,
+          "mean_r": 0.09617158114228237,
+          "replicates": 3,
+          "seed_sd": 0.015938334422592862
+        },
+        {
+          "K": 0.8,
+          "N": 512,
+          "axis_value": 0.005,
+          "dt": 0.005,
+          "mean_r": 0.2895705990434825,
+          "replicates": 3,
+          "seed_sd": 0.022932564267858523
+        },
+        {
+          "K": 0.8,
+          "N": 512,
+          "axis_value": 0.01,
+          "dt": 0.01,
+          "mean_r": 0.2901785530412895,
+          "replicates": 3,
+          "seed_sd": 0.029287365500606295
+        },
+        {
+          "K": 0.8,
+          "N": 512,
+          "axis_value": 0.02,
+          "dt": 0.02,
+          "mean_r": 0.32531414762509464,
+          "replicates": 3,
+          "seed_sd": 0.017140299695039923
+        },
+        {
+          "K": 0.8,
+          "N": 512,
+          "axis_value": 0.04,
+          "dt": 0.04,
+          "mean_r": 0.30318170375491793,
+          "replicates": 3,
+          "seed_sd": 0.031224935855340755
+        },
+        {
+          "K": 3.45,
+          "N": 512,
+          "axis_value": 0.005,
+          "dt": 0.005,
+          "mean_r": 0.9036915241477471,
+          "replicates": 3,
+          "seed_sd": 3.294028142244264e-05
+        },
+        {
+          "K": 3.45,
+          "N": 512,
+          "axis_value": 0.01,
+          "dt": 0.01,
+          "mean_r": 0.9030402070214578,
+          "replicates": 3,
+          "seed_sd": 0.00015009055268553595
+        },
+        {
+          "K": 3.45,
+          "N": 512,
+          "axis_value": 0.02,
+          "dt": 0.02,
+          "mean_r": 0.9022875275704353,
+          "replicates": 3,
+          "seed_sd": 0.0004736963016866919
+        },
+        {
+          "K": 3.45,
+          "N": 512,
+          "axis_value": 0.04,
+          "dt": 0.04,
+          "mean_r": 0.9007843379484205,
+          "replicates": 3,
+          "seed_sd": 0.00013548168881479596
+        }
+      ]
+    },
+    "draft_K_result": {
+      "K": 3.45,
+      "mean_r": 0.9030402070214578,
+      "seed_sd": 0.00015009055268553595
+    },
+    "frequency_grid": "centered Lorentzian quantiles, shuffled per seed",
+    "integrator": "Euler-Maruyama",
+    "k_sweep": [
+      {
+        "K": 0.3,
+        "mean_r": 0.05478015074051003,
+        "seed_sd": 0.003494768493387965
+      },
+      {
+        "K": 0.45,
+        "mean_r": 0.06843500636132399,
+        "seed_sd": 0.0035537729477043093
+      },
+      {
+        "K": 0.6,
+        "mean_r": 0.07828600749036096,
+        "seed_sd": 0.003916023469201543
+      },
+      {
+        "K": 0.68,
+        "mean_r": 0.1252243476847943,
+        "seed_sd": 0.009268365740091163
+      },
+      {
+        "K": 0.72,
+        "mean_r": 0.138014710581658,
+        "seed_sd": 0.038035075003609586
+      },
+      {
+        "K": 0.74,
+        "mean_r": 0.15728799456350293,
+        "seed_sd": 0.058437007046678105
+      },
+      {
+        "K": 0.76,
+        "mean_r": 0.2038076334085373,
+        "seed_sd": 0.06402840191782522
+      },
+      {
+        "K": 0.8,
+        "mean_r": 0.2901785530412895,
+        "seed_sd": 0.029287365500606295
+      },
+      {
+        "K": 0.86,
+        "mean_r": 0.4223774299365768,
+        "seed_sd": 0.014199391274918214
+      },
+      {
+        "K": 0.95,
+        "mean_r": 0.5150703549616519,
+        "seed_sd": 0.006165759651611697
+      },
+      {
+        "K": 1.1,
+        "mean_r": 0.6170273016951595,
+        "seed_sd": 0.005428194812566346
+      },
+      {
+        "K": 1.4,
+        "mean_r": 0.7254280981406205,
+        "seed_sd": 0.00258436542287705
+      },
+      {
+        "K": 2.0,
+        "mean_r": 0.8226973699299555,
+        "seed_sd": 0.0009836688769073337
+      },
+      {
+        "K": 3.45,
+        "mean_r": 0.9030402070214578,
+        "seed_sd": 0.00015009055268553595
+      }
+    ],
+    "rng": "PCG32 plus Marsaglia polar Gaussian",
+    "steepest_discrete_r_slope": {
+      "lower_K": 0.74,
+      "slope": 2.3259819422517167,
+      "upper_K": 0.76
+    }
+  }
+}

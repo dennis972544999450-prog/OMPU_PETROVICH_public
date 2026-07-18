@@ -1,0 +1,8 @@
+{
+  "character_offset_zero_based": 13,
+  "column": 10,
+  "exception_type": "JSONDecodeError",
+  "line": 2,
+  "message": "Invalid \\escape: line 2 column 10 (char 13)",
+  "ok": false
+}

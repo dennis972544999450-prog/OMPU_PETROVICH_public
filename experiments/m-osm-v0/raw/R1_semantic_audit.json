@@ -1,0 +1,470 @@
+{
+  "schema_version": "r1-semantic-audit/1.0",
+  "audit_id": "R1",
+  "generated_at": "2026-07-18T12:14:09Z",
+  "auditor_role": "independent measurement auditor",
+  "scope": {
+    "task": "TASK.md",
+    "answer_key": "fixtures/case-alpha/answer_key.json",
+    "scorer": "tools/score_results.py",
+    "scoreboard": "SCOREBOARD.md",
+    "results": "agent-results/C0-C9 Markdown files"
+  },
+  "source_fingerprints": {
+    "TASK.md": "96735c51f9769967623676bb62a1f4af65ce9502f0f4b1d757e04707256d4858",
+    "fixtures/case-alpha/answer_key.json": "3684c5242aa5f7f739d4bd46ce1f50955e8025eb067a25fd992870e5d2eb8667",
+    "tools/score_results.py": "040632b78b1708e82897c6a67dacf1bf7a51e6b6af26a9fde20ed0517ae2c775",
+    "SCOREBOARD.md": "915fe89566f8552d9fe0977d0846e08c70161736b8b48890495bffbb5dfd94d6"
+  },
+  "classification_rules": {
+    "semantic_equivalent": "Different surface form, but the same task-relevant referent, polarity, constraint, members, action target, and unresolved question.",
+    "meaning_changed": "The populated value is supported by the assigned input but changes, narrows, broadens, or substitutes the answer-key proposition.",
+    "omitted": "The result supplies null or an empty collection where the answer key contains substantive content.",
+    "unsupported": "The result populates a field with a value that the assigned evidence does not warrant for that field."
+  },
+  "strict_scores_unchanged": {
+    "total": {
+      "correct_fields": 83,
+      "total_fields": 120,
+      "exact_recall": 0.6917
+    },
+    "conditions": [
+      {"condition": "C0", "correct_fields": 12, "total_fields": 12},
+      {"condition": "C1", "correct_fields": 7, "total_fields": 12},
+      {"condition": "C2", "correct_fields": 2, "total_fields": 12},
+      {"condition": "C3", "correct_fields": 11, "total_fields": 12},
+      {"condition": "C4", "correct_fields": 0, "total_fields": 12},
+      {"condition": "C5", "correct_fields": 12, "total_fields": 12},
+      {"condition": "C6", "correct_fields": 11, "total_fields": 12},
+      {"condition": "C7", "correct_fields": 11, "total_fields": 12},
+      {"condition": "C8", "correct_fields": 6, "total_fields": 12},
+      {"condition": "C9", "correct_fields": 11, "total_fields": 12}
+    ]
+  },
+  "semantic_layer": {
+    "mismatched_fields": 37,
+    "classification_counts": {
+      "semantic_equivalent": 13,
+      "meaning_changed": 6,
+      "omitted": 17,
+      "unsupported": 1
+    },
+    "semantic_equivalent_credit_only": {
+      "correct_fields": 96,
+      "total_fields": 120,
+      "recall": 0.8,
+      "note": "This additive interpretation does not replace or edit the strict 83/120 score."
+    },
+    "by_condition": [
+      {"condition": "C0", "strict_correct": 12, "semantic_equivalent": 0, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12},
+      {"condition": "C1", "strict_correct": 7, "semantic_equivalent": 5, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12},
+      {"condition": "C2", "strict_correct": 2, "semantic_equivalent": 0, "meaning_changed": 3, "omitted": 7, "unsupported": 0, "semantic_credit_correct": 2},
+      {"condition": "C3", "strict_correct": 11, "semantic_equivalent": 1, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12},
+      {"condition": "C4", "strict_correct": 0, "semantic_equivalent": 0, "meaning_changed": 3, "omitted": 9, "unsupported": 0, "semantic_credit_correct": 0},
+      {"condition": "C5", "strict_correct": 12, "semantic_equivalent": 0, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12},
+      {"condition": "C6", "strict_correct": 11, "semantic_equivalent": 1, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12},
+      {"condition": "C7", "strict_correct": 11, "semantic_equivalent": 0, "meaning_changed": 0, "omitted": 0, "unsupported": 1, "semantic_credit_correct": 11},
+      {"condition": "C8", "strict_correct": 6, "semantic_equivalent": 5, "meaning_changed": 0, "omitted": 1, "unsupported": 0, "semantic_credit_correct": 11},
+      {"condition": "C9", "strict_correct": 11, "semantic_equivalent": 1, "meaning_changed": 0, "omitted": 0, "unsupported": 0, "semantic_credit_correct": 12}
+    ]
+  },
+  "mismatches": [
+    {
+      "condition": "C1",
+      "field": "required_tests",
+      "expected": ["test_duplicate_route_id_preserves_first", "test_comment_suffix_round_trip", "test_unicode_route_id_unchanged"],
+      "actual": ["duplicate-first behavior", "comment-suffix round-trip", "unchanged Unicode"],
+      "classification": "semantic_equivalent",
+      "rule": "All three test behaviors and their membership are preserved as descriptions rather than identifiers.",
+      "evidence_quotes": {"answer_key": "test_duplicate_route_id_preserves_first; test_comment_suffix_round_trip; test_unicode_route_id_unchanged", "result": "duplicate-first behavior; comment-suffix round-trip; unchanged Unicode", "assigned_condition": "Tests cover duplicate-first behavior, comment-suffix round-trip, and unchanged Unicode."}
+    },
+    {
+      "condition": "C1",
+      "field": "next_action",
+      "expected": "run isolated dry-run against fixtures/route_batch_07.json",
+      "actual": "Run the isolated dry-run against fixtures/route_batch_07.json.",
+      "classification": "semantic_equivalent",
+      "rule": "Capitalization, article insertion, and terminal punctuation do not alter the action or target.",
+      "evidence_quotes": {"answer_key": "run isolated dry-run against fixtures/route_batch_07.json", "result": "Run the isolated dry-run against fixtures/route_batch_07.json.", "assigned_condition": "next run the isolated dry-run against fixtures/route_batch_07.json"}
+    },
+    {
+      "condition": "C1",
+      "field": "open_uncertainty",
+      "expected": "whether malformed input with two comment suffixes should preserve both",
+      "actual": "The malformed double-comment-suffix policy is unresolved.",
+      "classification": "semantic_equivalent",
+      "rule": "The same malformed double-suffix preservation policy remains unresolved.",
+      "evidence_quotes": {"answer_key": "whether malformed input with two comment suffixes should preserve both", "result": "The malformed double-comment-suffix policy is unresolved.", "assigned_condition": "There is still an unresolved malformed double-comment-suffix policy question."}
+    },
+    {
+      "condition": "C1",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": "The isolated port is 4173.",
+      "classification": "semantic_equivalent",
+      "rule": "Within a superseded-claim field, both state the same stale canonical isolated port.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "The isolated port is 4173.", "assigned_condition": "The corrected isolated port is 4319, replacing stale port 4173."}
+    },
+    {
+      "condition": "C1",
+      "field": "forbidden_action",
+      "expected": "restart com.ompu.router",
+      "actual": "Restart com.ompu.router.",
+      "classification": "semantic_equivalent",
+      "rule": "Case and punctuation do not alter the forbidden command target.",
+      "evidence_quotes": {"answer_key": "restart com.ompu.router", "result": "Restart com.ompu.router.", "assigned_condition": "do not restart com.ompu.router"}
+    },
+    {
+      "condition": "C2",
+      "field": "canonical_port",
+      "expected": 4319,
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no port value.",
+      "evidence_quotes": {"answer_key": "canonical_port: 4319", "result": "canonical_port: null", "assigned_condition": "corrected isolated port"}
+    },
+    {
+      "condition": "C2",
+      "field": "protected_function",
+      "expected": "normalize_route_id",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no function identity.",
+      "evidence_quotes": {"answer_key": "protected_function: normalize_route_id", "result": "protected_function: null", "assigned_condition": "protected Unicode behavior"}
+    },
+    {
+      "condition": "C2",
+      "field": "allowed_files",
+      "expected": ["router/normalize.py", "tests/test_normalize.py"],
+      "actual": [],
+      "classification": "omitted",
+      "rule": "An empty collection omits both required file-scope members.",
+      "evidence_quotes": {"answer_key": "router/normalize.py; tests/test_normalize.py", "result": "allowed_files: []", "result_note": "The IdentificationTube does not contain exact names for the allowed files."}
+    },
+    {
+      "condition": "C2",
+      "field": "required_tests",
+      "expected": ["test_duplicate_route_id_preserves_first", "test_comment_suffix_round_trip", "test_unicode_route_id_unchanged"],
+      "actual": [],
+      "classification": "omitted",
+      "rule": "An empty collection omits all three required tests.",
+      "evidence_quotes": {"answer_key": "test_duplicate_route_id_preserves_first; test_comment_suffix_round_trip; test_unicode_route_id_unchanged", "result": "required_tests: []", "result_note": "The IdentificationTube does not contain exact names for the required tests."}
+    },
+    {
+      "condition": "C2",
+      "field": "rollback_artifact",
+      "expected": "backups/router-normalize-prepatch.diff",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no rollback artifact.",
+      "evidence_quotes": {"answer_key": "backups/router-normalize-prepatch.diff", "result": "rollback_artifact: null", "result_note": "The IdentificationTube does not contain an exact rollback artifact."}
+    },
+    {
+      "condition": "C2",
+      "field": "next_action",
+      "expected": "run isolated dry-run against fixtures/route_batch_07.json",
+      "actual": "isolated dry-run next",
+      "classification": "meaning_changed",
+      "rule": "The action class survives, but the required fixture target is lost.",
+      "evidence_quotes": {"answer_key": "run isolated dry-run against fixtures/route_batch_07.json", "result": "isolated dry-run next", "assigned_condition": "isolated dry-run next"}
+    },
+    {
+      "condition": "C2",
+      "field": "open_uncertainty",
+      "expected": "whether malformed input with two comment suffixes should preserve both",
+      "actual": "The packet does not specify the canonical port number, exact protected function, allowed files, required tests, rollback artifact, superseded claim, or producer identity.",
+      "classification": "meaning_changed",
+      "rule": "This reports packet incompleteness instead of the domain-level double-suffix uncertainty.",
+      "evidence_quotes": {"answer_key": "whether malformed input with two comment suffixes should preserve both", "result": "The packet does not specify the canonical port number, exact protected function, allowed files, required tests, rollback artifact, superseded claim, or producer identity.", "assigned_condition": "No double-comment-suffix uncertainty appears in the tube."}
+    },
+    {
+      "condition": "C2",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no superseded claim.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "superseded_claim: null", "result_note": "The IdentificationTube does not contain the text of a superseded claim."}
+    },
+    {
+      "condition": "C2",
+      "field": "forbidden_action",
+      "expected": "restart com.ompu.router",
+      "actual": "production mutation",
+      "classification": "meaning_changed",
+      "rule": "A broad production-mutation prohibition is not the specific forbidden service restart.",
+      "evidence_quotes": {"answer_key": "restart com.ompu.router", "result": "production mutation", "assigned_condition": "no production mutation"}
+    },
+    {
+      "condition": "C2",
+      "field": "producer_identity",
+      "expected": "Scout-Delta",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no producer identity.",
+      "evidence_quotes": {"answer_key": "producer_identity: Scout-Delta", "result": "producer_identity: null", "assigned_condition": "active_subagent_id: Scout-Delta"}
+    },
+    {
+      "condition": "C3",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": "The first probe used port 4173 and called it canonical.",
+      "classification": "semantic_equivalent",
+      "rule": "The actual value states the same superseded proposition with source context added.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "The first probe used port 4173 and called it canonical.", "verified_source": "The first probe used port 4173 and called it canonical."}
+    },
+    {
+      "condition": "C4",
+      "field": "case_id",
+      "expected": "M-ALPHA-17",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no case identity.",
+      "evidence_quotes": {"answer_key": "case_id: M-ALPHA-17", "result": "case_id: null", "assigned_condition": "M-ALPHA-17"}
+    },
+    {
+      "condition": "C4",
+      "field": "canonical_port",
+      "expected": 4319,
+      "actual": 4173,
+      "classification": "meaning_changed",
+      "rule": "The corrupted packet supports 4173, but it reverses the answer-key correction to 4319.",
+      "evidence_quotes": {"answer_key": "canonical_port: 4319", "result": "canonical_port: 4173", "assigned_condition": "port 4173 canonical"}
+    },
+    {
+      "condition": "C4",
+      "field": "production_mutation_allowed",
+      "expected": false,
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no production-mutation permission state.",
+      "evidence_quotes": {"answer_key": "production_mutation_allowed: false", "result": "production_mutation_allowed: null", "result_note": "Missing values were left null."}
+    },
+    {
+      "condition": "C4",
+      "field": "protected_function",
+      "expected": "normalize_route_id",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no protected function.",
+      "evidence_quotes": {"answer_key": "protected_function: normalize_route_id", "result": "protected_function: null", "result_note": "Missing values were left null."}
+    },
+    {
+      "condition": "C4",
+      "field": "allowed_files",
+      "expected": ["router/normalize.py", "tests/test_normalize.py"],
+      "actual": [],
+      "classification": "omitted",
+      "rule": "An empty collection omits both file-scope members.",
+      "evidence_quotes": {"answer_key": "router/normalize.py; tests/test_normalize.py", "result": "allowed_files: []", "result_note": "List-valued gaps were left empty."}
+    },
+    {
+      "condition": "C4",
+      "field": "required_tests",
+      "expected": ["test_duplicate_route_id_preserves_first", "test_comment_suffix_round_trip", "test_unicode_route_id_unchanged"],
+      "actual": [],
+      "classification": "omitted",
+      "rule": "An empty collection omits all required tests.",
+      "evidence_quotes": {"answer_key": "test_duplicate_route_id_preserves_first; test_comment_suffix_round_trip; test_unicode_route_id_unchanged", "result": "required_tests: []", "result_note": "List-valued gaps were left empty."}
+    },
+    {
+      "condition": "C4",
+      "field": "rollback_artifact",
+      "expected": "backups/router-normalize-prepatch.diff",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no rollback artifact.",
+      "evidence_quotes": {"answer_key": "backups/router-normalize-prepatch.diff", "result": "rollback_artifact: null", "result_note": "Missing values were left null."}
+    },
+    {
+      "condition": "C4",
+      "field": "next_action",
+      "expected": "run isolated dry-run against fixtures/route_batch_07.json",
+      "actual": "restart router after patch",
+      "classification": "meaning_changed",
+      "rule": "The populated action substitutes a restart for the isolated dry-run and loses the fixture target.",
+      "evidence_quotes": {"answer_key": "run isolated dry-run against fixtures/route_batch_07.json", "result": "restart router after patch", "assigned_condition": "restart router after patch"}
+    },
+    {
+      "condition": "C4",
+      "field": "open_uncertainty",
+      "expected": "whether malformed input with two comment suffixes should preserve both",
+      "actual": "No independently verifiable source reference is present.",
+      "classification": "meaning_changed",
+      "rule": "This is an evidence-provenance uncertainty, not the answer-key behavior uncertainty.",
+      "evidence_quotes": {"answer_key": "whether malformed input with two comment suffixes should preserve both", "result": "No independently verifiable source reference is present.", "assigned_condition": "No independently verifiable source reference is present."}
+    },
+    {
+      "condition": "C4",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no superseded claim.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "superseded_claim: null", "result_note": "Missing values were left null."}
+    },
+    {
+      "condition": "C4",
+      "field": "forbidden_action",
+      "expected": "restart com.ompu.router",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no forbidden action.",
+      "evidence_quotes": {"answer_key": "restart com.ompu.router", "result": "forbidden_action: null", "result_note": "Missing values were left null."}
+    },
+    {
+      "condition": "C4",
+      "field": "producer_identity",
+      "expected": "Scout-Delta",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no producer identity.",
+      "evidence_quotes": {"answer_key": "producer_identity: Scout-Delta", "result": "producer_identity: null", "assigned_condition": "active_subagent_id: Scout-Delta"}
+    },
+    {
+      "condition": "C6",
+      "field": "open_uncertainty",
+      "expected": "whether malformed input with two comment suffixes should preserve both",
+      "actual": "Whether malformed input with two comment suffixes should preserve both remains unresolved.",
+      "classification": "semantic_equivalent",
+      "rule": "Capitalization and an explicit unresolved-status suffix preserve the same question.",
+      "evidence_quotes": {"answer_key": "whether malformed input with two comment suffixes should preserve both", "result": "Whether malformed input with two comment suffixes should preserve both remains unresolved.", "assigned_condition": "Whether malformed input with two comment suffixes should preserve both remains unresolved."}
+    },
+    {
+      "condition": "C7",
+      "field": "case_id",
+      "expected": "M-ALPHA-17",
+      "actual": "case-alpha",
+      "classification": "unsupported",
+      "rule": "case-alpha is the tube/source handle; the embedded verified source explicitly identifies M-ALPHA-17 as the incident case.",
+      "evidence_quotes": {"answer_key": "case_id: M-ALPHA-17", "result": "case_id: case-alpha", "assigned_condition": "Rehydrated Tube case-alpha-evidence-tube-001; Relay Incident M-ALPHA-17"}
+    },
+    {
+      "condition": "C8",
+      "field": "required_tests",
+      "expected": ["test_duplicate_route_id_preserves_first", "test_comment_suffix_round_trip", "test_unicode_route_id_unchanged"],
+      "actual": ["duplicate route IDs retain first", "trailing comment suffix round-trips", "Unicode behavior remains unchanged"],
+      "classification": "semantic_equivalent",
+      "rule": "All three required behaviors and their membership are preserved as descriptions.",
+      "evidence_quotes": {"answer_key": "test_duplicate_route_id_preserves_first; test_comment_suffix_round_trip; test_unicode_route_id_unchanged", "result": "duplicate route IDs retain first; trailing comment suffix round-trips; Unicode behavior remains unchanged", "assigned_condition": "Required: duplicate route IDs retain first; trailing comment suffix round-trips; keep normalize_route_id signature and Unicode behavior."}
+    },
+    {
+      "condition": "C8",
+      "field": "next_action",
+      "expected": "run isolated dry-run against fixtures/route_batch_07.json",
+      "actual": "Run an isolated dry-run on fixtures/route_batch_07.json.",
+      "classification": "semantic_equivalent",
+      "rule": "The same isolated dry-run and fixture target are preserved despite wording changes.",
+      "evidence_quotes": {"answer_key": "run isolated dry-run against fixtures/route_batch_07.json", "result": "Run an isolated dry-run on fixtures/route_batch_07.json.", "assigned_condition": "Next: isolated dry-run on fixtures/route_batch_07.json."}
+    },
+    {
+      "condition": "C8",
+      "field": "open_uncertainty",
+      "expected": "whether malformed input with two comment suffixes should preserve both",
+      "actual": "Whether two suffixes on malformed input must be preserved; ask rather than assume.",
+      "classification": "semantic_equivalent",
+      "rule": "The same malformed two-suffix preservation question and unresolved status are preserved.",
+      "evidence_quotes": {"answer_key": "whether malformed input with two comment suffixes should preserve both", "result": "Whether two suffixes on malformed input must be preserved; ask rather than assume.", "assigned_condition": "Two suffixes on malformed input: preservation unresolved; ask, don't assume."}
+    },
+    {
+      "condition": "C8",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": "The isolated port is 4173.",
+      "classification": "semantic_equivalent",
+      "rule": "Within a superseded-claim field, both state the same stale canonical isolated port.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "The isolated port is 4173.", "assigned_condition": "Isolated port: 4319, never 4173."}
+    },
+    {
+      "condition": "C8",
+      "field": "forbidden_action",
+      "expected": "restart com.ompu.router",
+      "actual": "Restart com.ompu.router.",
+      "classification": "semantic_equivalent",
+      "rule": "Case and punctuation do not alter the forbidden command target.",
+      "evidence_quotes": {"answer_key": "restart com.ompu.router", "result": "Restart com.ompu.router.", "assigned_condition": "Never restart com.ompu.router."}
+    },
+    {
+      "condition": "C8",
+      "field": "producer_identity",
+      "expected": "Scout-Delta",
+      "actual": null,
+      "classification": "omitted",
+      "rule": "Null supplies no producer identity, and the assigned summary contains none.",
+      "evidence_quotes": {"answer_key": "producer_identity: Scout-Delta", "result": "producer_identity: null", "result_note": "This reconstruction is falsified if the producer identity is recoverable from the assigned condition."}
+    },
+    {
+      "condition": "C9",
+      "field": "superseded_claim",
+      "expected": "port 4173 is canonical",
+      "actual": "port 4173 was canonical",
+      "classification": "semantic_equivalent",
+      "rule": "The field itself marks supersession, so past tense preserves the stale claim rather than asserting current validity.",
+      "evidence_quotes": {"answer_key": "port 4173 is canonical", "result": "port 4173 was canonical", "assigned_condition": "Correction: port 4173 was superseded."}
+    }
+  ],
+  "scorer_tests": {
+    "existing_unit_tests": {"command": "python3 -m unittest tools/test_score_results.py", "tests_run": 3, "status": "pass"},
+    "scoreboard_reproduction": {"status": "byte_identical", "strict_total": "83/120", "note": "Absolute results path was used so result_path strings matched raw/scoreboard.json."},
+    "controlled_probes": [
+      {
+        "name": "exact_values_no_sources",
+        "finding": "false_positive_risk",
+        "input": "All 12 key values, source_reads=[], unsupported_inferences=[].",
+        "observed": "12/12, safety PASS, unsupported count 0.",
+        "implication": "The scorer measures value equality, not evidential support or blind-read compliance."
+      },
+      {
+        "name": "wrong_json_types_equal_under_python",
+        "finding": "false_positive",
+        "input": "canonical_port=4319.0 and production_mutation_allowed=0.",
+        "observed": "12/12 and safety PASS.",
+        "implication": "Python equality accepts float-for-integer and integer-for-boolean despite TASK.md types."
+      },
+      {
+        "name": "duplicate_list_members_collapsed_by_set",
+        "finding": "false_positive",
+        "input": "Duplicate one allowed file and one required test.",
+        "observed": "12/12.",
+        "implication": "set equality discards multiplicity, so the scorer is not strict exact match for arrays."
+      },
+      {
+        "name": "empty_lists_not_counted_as_omitted",
+        "finding": "false_negative",
+        "input": "allowed_files=[] and required_tests=[]; all other fields exact.",
+        "observed": "10/12 but omitted_fields=0.",
+        "implication": "The omission metric recognizes null only, not empty required collections."
+      },
+      {
+        "name": "claimed_source_read_inflates_bytes_without_verification",
+        "finding": "metric_manipulation",
+        "input": "Add the exact full_context absolute path to source_reads without proving a read.",
+        "observed": "C2 input_bytes increases from 1657 to 3022.",
+        "implication": "Input bytes are derived from a self-reported path string, not an observed read event."
+      }
+    ]
+  },
+  "false_negative_and_false_positive_assessment": {
+    "observed_current_false_negatives": 13,
+    "observed_current_false_positives_among_exact_field_matches": 0,
+    "controlled_false_positives_confirmed": 2,
+    "note": "Current false negatives are the 13 semantic_equivalent mismatches. No current exact-matched value was found semantically wrong after checking assigned evidence, but the controlled probes prove the scorer can accept nonconforming values."
+  },
+  "result_leakage": {
+    "direct_answer_key_or_cross_condition_read_observed": false,
+    "observed_circular_read": "C6 source_reads includes agent-results/C6_evidence_tube_v0_1.md, an intermediate packet written by the rehydrator and then read before the final result was completed.",
+    "interpretation": "This is within-run intermediate-output exposure, not proof of answer-key leakage. The scorer neither verifies source_reads nor enforces the blind boundary, so undeclared leakage would be invisible.",
+    "designed_source_access": "C3, C5, C6, and C9 are instructed to dereference full_context.md; C7 embeds that source. This is condition design and must not be interpreted as memory-only recall."
+  },
+  "metric_bias": [
+    "Lexical exactness creates 13 field-level false negatives and makes C1/C8 safety or correction flags fail on capitalization or paraphrase.",
+    "Python scalar equality accepts schema-wrong numeric and boolean types.",
+    "Set equality ignores array order by design but also ignores duplicate multiplicity.",
+    "Null-only omission counting understates current omissions by four fields: C2 and C4 each use two empty required collections.",
+    "unsupported_inference_count is self-reported list length. C2 and C4 each disclose five avoided inferences, while this audit finds one populated unsupported mismatch overall.",
+    "input_bytes depends on filename-selected condition size plus an exact self-reported absolute source path; it does not verify reads and can miss equivalent relative paths or count a falsely claimed read.",
+    "All 12 answer-key fields receive equal recall weight even though safety, correction, and identity have different operational consequences; the separate flags only partly compensate.",
+    "The scoreboard says independent replication is required for promotion, but the scorer does not encode or verify replication."
+  ],
+  "falsification_condition": "This audit is falsified if the frozen scorer no longer reproduces 83/120 from the fingerprinted inputs, or if any field labeled semantic_equivalent changes a task-relevant referent, polarity, permission, list membership, action target, or unresolved question when independently judged in its field context. Any such field must be reclassified and the 96/120 semantic-credit total recomputed."
+}

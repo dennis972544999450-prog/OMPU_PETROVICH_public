@@ -1,0 +1,67 @@
+{
+  "coherence_trigger": {
+    "Kc_role": "critical coupling/frequency threshold computed as 0.74 in the supplied constants",
+    "coherence_r_role": "dimensionless order parameter constrained to [0,1] by the schema",
+    "reason": "Execution step 4 compares r with Kc even though they are different variables and roles.",
+    "result": "FAIL"
+  },
+  "crow_distance": {
+    "converted_part1_meters": 1200.0,
+    "part1_km": 1.2,
+    "part3_meters": 1200.0,
+    "result": "PASS"
+  },
+  "kuramoto_dimensions": {
+    "reason": "K, gamma, and D must share frequency units for Kc=2(gamma+D), but no time unit or normalization is declared. sqrt(K-Kc) cannot be dimensionless r without a scaling factor.",
+    "result": "CONDITIONAL_FAIL"
+  },
+  "kuramoto_numeric": {
+    "D": 0.12,
+    "K": 3.45,
+    "computed_Kc": 0.74,
+    "computed_r_from_declared_equality": 1.6462077633154328,
+    "declared_Kc_expression": "2 * (gamma + D)",
+    "gamma": 0.25,
+    "r_within_declared_schema_range_0_to_1": false,
+    "reason": "The declared equality produces r > 1; Part 1 only stated proportional scaling.",
+    "result": "FAIL"
+  },
+  "motivational_frequencies": {
+    "periods_seconds": [
+      0.08,
+      0.04,
+      0.12004801920768307,
+      0.2
+    ],
+    "reason": "No scheduler clock, sampling interval, or operation-to-cycle mapping consumes these hertz values.",
+    "result": "UNBOUND",
+    "values_hz": [
+      12.5,
+      25.0,
+      8.33,
+      5.0
+    ]
+  },
+  "phase_window": {
+    "degrees": 9.969465635276324,
+    "radians": 0.174,
+    "result": "NUMERICALLY_CONVERTIBLE_BUT_OPERATIONALLY_UNBOUND"
+  },
+  "physarum_periods": {
+    "fast_ms": 100000,
+    "fast_seconds": 100.0,
+    "reason": "100 s equals 10^2 s; 1200 s is 1.2*10^3 s, compatible with approximate 10^3 s.",
+    "result": "CONSISTENT_WITH_ORDER_OF_MAGNITUDE_TEXT",
+    "slow_ms": 1200000,
+    "slow_seconds": 1200.0
+  },
+  "social_gain_db": {
+    "reason": "No amplitude/power ratio, reference level, or software measurement defines the dB quantity.",
+    "result": "UNDEFINED",
+    "value_db": 12.4
+  },
+  "symbol_overload": {
+    "reason": "gamma labels Kuramoto dispersion, Physarum damping, and laser parameters with no shared units.",
+    "result": "AMBIGUOUS"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "attractor_state_hash_only": "sha256:b53603ec8259c8183fdd53264c4e457a60d9d2a95f2b2db4b745f147b01c353d",
+  "requested_fields": [
+    "tube_id",
+    "semantic_anchors",
+    "protected_function",
+    "forbidden_action",
+    "open_uncertainty"
+  ],
+  "tube": {
+    "active_subagent_id": "fresh-node",
+    "coherence_index_r": 0.91,
+    "inverse_temperature_beta": 0.83,
+    "momentum_gradient": [
+      0.4,
+      -0.1
+    ],
+    "phase_state": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8
+    ],
+    "semantic_anchors": [
+      "bounded repair",
+      "correction survives",
+      "isolated next step"
+    ],
+    "target_motivational_vector": "M4",
+    "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}

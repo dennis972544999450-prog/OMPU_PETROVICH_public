@@ -1,0 +1,277 @@
+{
+  "extraction": {
+    "block_bytes": 7984,
+    "block_sha256": "9b0a6db30f562d5d8b6dc9bdeb0e7cad0eb85ebd13c79c0b8886cb9053bd5780",
+    "extraction_rule": "Between the exact Part 3 and Part 4 headings, take the substring from the first '{' after the standalone JSON marker through the last '}', inclusive.",
+    "language_marker_repr": "'JSON  '",
+    "part3_heading": "## **Part 3: Machine-Readable Operational JSON Dataset**",
+    "part4_heading": "## **Part 4: Swarm Prompt-Instruction for Sub-agents (Direct Injection)**",
+    "source_byte_end_exclusive_zero_based": 19678,
+    "source_byte_start_zero_based": 11694,
+    "source_character_end_exclusive_zero_based": 13600,
+    "source_character_start_zero_based": 7151
+  },
+  "fresh_process": {
+    "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -I /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/tools/T2_fresh_process_probe.py --mode tube-only < /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_fresh_process_input.json",
+    "exit_code": 2,
+    "parsed_stdout": {
+      "external_state_reads": [],
+      "hash_fields": [],
+      "input_keys": [
+        "active_subagent_id",
+        "coherence_index_r",
+        "inverse_temperature_beta",
+        "phase_state",
+        "semantic_anchors",
+        "target_motivational_vector",
+        "tube_id"
+      ],
+      "input_sha256": "44f046c5b8f8aff1c5a7495e51ffc47055421bf9ff46badb0f5c466bc84fc7f4",
+      "isolated_python": true,
+      "mode": "tube-only",
+      "present_context_fields": [],
+      "reason": "The packet has no context, interaction history, evidence references, or specified attractor-state digest.",
+      "rehydrated_context": null,
+      "status": "insufficient_information"
+    },
+    "stderr_file": "raw/T2_fresh_process_stderr.txt",
+    "stdout_file": "raw/T2_fresh_process_stdout.json"
+  },
+  "hash_only_process": {
+    "command": "/opt/homebrew/opt/python@3.14/bin/python3.14 -I /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/tools/T2_fresh_process_probe.py --mode hash-only < /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_hash_only_input.json",
+    "exit_code": 2,
+    "parsed_stdout": {
+      "external_state_reads": [],
+      "hash_fields": [
+        "attractor_hash_sha256"
+      ],
+      "input_keys": [
+        "attractor_hash_sha256",
+        "interaction_count_claimed"
+      ],
+      "input_sha256": "d245c6d6a421f487edbb027ed780bd7d56503de7fc42889a9405207130370a52",
+      "isolated_python": true,
+      "mode": "hash-only",
+      "present_context_fields": [],
+      "reason": "A digest supplies an equality check, not a preimage or a candidate corpus. No context can be selected from the packet alone.",
+      "rehydrated_context": null,
+      "status": "hash_not_recovered"
+    },
+    "stderr_file": "raw/T2_hash_only_stderr.txt",
+    "stdout_file": "raw/T2_hash_only_stdout.json"
+  },
+  "hash_recoverability": {
+    "claim_ids": [
+      "MOSM-C04",
+      "MOSM-C05"
+    ],
+    "context_a": {
+      "critical_fact": "signing key revocation is still pending",
+      "task": "hold publication"
+    },
+    "context_b": {
+      "critical_fact": "signing key revocation is complete",
+      "task": "publish package"
+    },
+    "contexts_are_distinct": true,
+    "hash_specification_missing": [
+      "No attractor/hash field in identification_tube_schema",
+      "No digest algorithm",
+      "No canonical serialization for the five interactions",
+      "No preimage/candidate corpus or retrieval relation"
+    ],
+    "indistinguishability_argument": "The embedded schema permits this identical tube to be associated with either distinct context. A fresh decoder receiving only the identical bytes has identical observations and cannot correctly choose both contexts.",
+    "same_schema_valid_tube_for_both": {
+      "active_subagent_id": "agent-A",
+      "coherence_index_r": 0.8,
+      "inverse_temperature_beta": 1.0,
+      "phase_state": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_anchors": [
+        "M-OSM",
+        "handoff"
+      ],
+      "target_motivational_vector": "M1",
+      "tube_id": "tube-shared-counterexample"
+    },
+    "schema_context_fields": [],
+    "schema_hash_fields": [],
+    "tube_serialization_sha256": "41fab8a651a4da90fd88068a3b7a059e1d54df812687d9737872ec851902fa3c",
+    "verdict": "HASH_RECOVERY_NOT_OPERATIONALLY_SPECIFIED"
+  },
+  "markdown_unescape": {
+    "counts": {
+      "*": 6,
+      "+": 2,
+      "-": 3,
+      "=": 2,
+      ">": 1,
+      "[": 3,
+      "]": 3,
+      "_": 175
+    },
+    "deletions": 195,
+    "jq": {
+      "command": "/usr/bin/jq -e . /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_part3_markdown_unescaped.json",
+      "exit_code": 0,
+      "stderr": ""
+    },
+    "manifest_file": "raw/T2_unescape_manifest.json",
+    "python": {
+      "ok": true,
+      "top_level_type": "dict"
+    },
+    "verdict": "PASSES_AFTER_DOCUMENTED_MARKDOWN_UNESCAPE"
+  },
+  "overall": {
+    "dimensionally_and_numerically_consistent": false,
+    "fresh_process_rehydrates_context_without_external_state": false,
+    "hash_recoverable_without_external_state": false,
+    "identification_tube_operational_schema": false,
+    "part3_machine_readable_after_documented_markdown_unescape": true,
+    "part3_machine_readable_unchanged": false
+  },
+  "schema": {
+    "additional_properties_open": true,
+    "conforming_tube_errors": [],
+    "embedded_schema_top_level_keys": [
+      "object_type",
+      "properties",
+      "required"
+    ],
+    "enforced_constraints": {
+      "coherence_maximum": true,
+      "phase_state_exactly_eight": true,
+      "required": true
+    },
+    "hash_or_attractor_properties": [],
+    "ignored_top_level_keywords": [
+      "object_type"
+    ],
+    "missing_schema_dialect": true,
+    "missing_type_object": true,
+    "negative_constraint_results": {
+      "coherence_above_one": [
+        "$.coherence_index_r: 1.01 exceeds maximum 1.0"
+      ],
+      "missing_required": [
+        "$: missing required property 'tube_id'"
+      ],
+      "seven_phase_values": [
+        "$.phase_state: has 7 items, minimum is 8"
+      ]
+    },
+    "property_count": 8,
+    "required_count": 7,
+    "required_properties_exist": true,
+    "scalar_instance": {
+      "errors": [],
+      "instance": 7,
+      "valid": true
+    },
+    "semantically_bad_but_schema_valid": {
+      "errors": [],
+      "instance": {
+        "active_subagent_id": "agent-A",
+        "coherence_index_r": 0.8,
+        "inverse_temperature_beta": -999.0,
+        "momentum_gradient": [
+          1.0
+        ],
+        "phase_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "semantic_anchors": [],
+        "target_motivational_vector": "M9_NOT_DEFINED",
+        "tube_id": "not-a-uuid",
+        "undeclared_payload": "accepted because additionalProperties is not false"
+      },
+      "valid": true
+    },
+    "source_or_context_properties": [],
+    "validator_scope": "Local standards-semantics evaluator for every assertion keyword used by the embedded schema: type, properties, required, items, minItems, maxItems, minimum, maximum.",
+    "verdict": "PARTIAL_SHAPE_ONLY_NOT_OPERATIONAL"
+  },
+  "source": {
+    "bytes": 21368,
+    "claims_bytes": 4156,
+    "claims_path": "/Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/CLAIMS.md",
+    "claims_sha256": "d33da7e53e4f9e3ea5253366c60f3dbb137729329c17bed2ce86a831f220db9a",
+    "expected_sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668",
+    "fingerprint_matches": true,
+    "path": "/Users/denbell/Downloads/Swarm Oscillatory Memory (M-OSM).md",
+    "sha256": "2367703aff86e220faacb8748d14812ba5978540fba42f0beb1b2146a2a97668"
+  },
+  "unchanged_parse": {
+    "jq": {
+      "command": "/usr/bin/jq -e . /Users/denbell/OMPU_shared/petrovich_repos/public/experiments/m-osm-v0/raw/T2_part3_raw_block.txt",
+      "exit_code": 5,
+      "stderr": "jq: parse error: Invalid escape at line 2, column 20\n"
+    },
+    "python": {
+      "character_offset_zero_based": 13,
+      "column": 10,
+      "exception_type": "JSONDecodeError",
+      "line": 2,
+      "message": "Invalid \\escape: line 2 column 10 (char 13)",
+      "ok": false
+    },
+    "verdict": "FAILS_STRICT_JSON"
+  },
+  "units": {
+    "checks": [
+      {
+        "evidence": "2 * (0.25 + 0.12) = 0.74",
+        "id": "numeric_Kc",
+        "status": "PASS_ARITHMETIC_ONLY"
+      },
+      {
+        "evidence": "sqrt(3.45 - 0.74) = 1.646207763315433 > schema maximum 1.0",
+        "id": "r_range",
+        "status": "FAIL"
+      },
+      {
+        "evidence": "If K and Kc carry frequency units, sqrt(K - Kc) carries sqrt(frequency), while coherence_index_r is declared on the dimensionless interval [0, 1].",
+        "id": "r_dimensions",
+        "status": "FAIL_UNLESS_UNSTATED_NONDIMENSIONALIZATION"
+      },
+      {
+        "evidence": "execution_loop_protocol compares coherence r to Kc, despite r being [0,1] and Kc being derived from coupling/noise/frequency-dispersion parameters.",
+        "id": "r_compared_to_Kc",
+        "status": "FAIL_UNLESS_UNSTATED_NONDIMENSIONALIZATION"
+      },
+      {
+        "evidence": "target_frequency_hz values are assigned to omega_k in prose, but no cycles/s to rad/s conversion (2*pi) or agent clock is defined.",
+        "id": "hz_to_angular_frequency",
+        "status": "UNDERSPECIFIED"
+      }
+    ],
+    "computed": {
+      "Kc": 0.74,
+      "sqrt_K_minus_Kc": 1.6462077633154328
+    },
+    "inputs": {
+      "D": 0.12,
+      "K": 3.45,
+      "declared_Kc_formula": "2 * (gamma + D)",
+      "declared_r_formula": "r = sqrt(K - Kc)",
+      "gamma": 0.25
+    },
+    "verdict": "DIMENSIONALLY_UNDERSPECIFIED_AND_NUMERICALLY_INCONSISTENT"
+  }
+}

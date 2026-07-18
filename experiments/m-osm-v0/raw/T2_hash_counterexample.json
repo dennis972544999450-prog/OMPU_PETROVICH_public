@@ -1,0 +1,47 @@
+{
+  "claim_ids": [
+    "MOSM-C04",
+    "MOSM-C05"
+  ],
+  "context_a": {
+    "critical_fact": "signing key revocation is still pending",
+    "task": "hold publication"
+  },
+  "context_b": {
+    "critical_fact": "signing key revocation is complete",
+    "task": "publish package"
+  },
+  "contexts_are_distinct": true,
+  "hash_specification_missing": [
+    "No attractor/hash field in identification_tube_schema",
+    "No digest algorithm",
+    "No canonical serialization for the five interactions",
+    "No preimage/candidate corpus or retrieval relation"
+  ],
+  "indistinguishability_argument": "The embedded schema permits this identical tube to be associated with either distinct context. A fresh decoder receiving only the identical bytes has identical observations and cannot correctly choose both contexts.",
+  "same_schema_valid_tube_for_both": {
+    "active_subagent_id": "agent-A",
+    "coherence_index_r": 0.8,
+    "inverse_temperature_beta": 1.0,
+    "phase_state": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "semantic_anchors": [
+      "M-OSM",
+      "handoff"
+    ],
+    "target_motivational_vector": "M1",
+    "tube_id": "tube-shared-counterexample"
+  },
+  "schema_context_fields": [],
+  "schema_hash_fields": [],
+  "tube_serialization_sha256": "41fab8a651a4da90fd88068a3b7a059e1d54df812687d9737872ec851902fa3c",
+  "verdict": "HASH_RECOVERY_NOT_OPERATIONALLY_SPECIFIED"
+}

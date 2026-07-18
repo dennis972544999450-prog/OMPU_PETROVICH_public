@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "evidence": "2 * (0.25 + 0.12) = 0.74",
+      "id": "numeric_Kc",
+      "status": "PASS_ARITHMETIC_ONLY"
+    },
+    {
+      "evidence": "sqrt(3.45 - 0.74) = 1.646207763315433 > schema maximum 1.0",
+      "id": "r_range",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "If K and Kc carry frequency units, sqrt(K - Kc) carries sqrt(frequency), while coherence_index_r is declared on the dimensionless interval [0, 1].",
+      "id": "r_dimensions",
+      "status": "FAIL_UNLESS_UNSTATED_NONDIMENSIONALIZATION"
+    },
+    {
+      "evidence": "execution_loop_protocol compares coherence r to Kc, despite r being [0,1] and Kc being derived from coupling/noise/frequency-dispersion parameters.",
+      "id": "r_compared_to_Kc",
+      "status": "FAIL_UNLESS_UNSTATED_NONDIMENSIONALIZATION"
+    },
+    {
+      "evidence": "target_frequency_hz values are assigned to omega_k in prose, but no cycles/s to rad/s conversion (2*pi) or agent clock is defined.",
+      "id": "hz_to_angular_frequency",
+      "status": "UNDERSPECIFIED"
+    }
+  ],
+  "computed": {
+    "Kc": 0.74,
+    "sqrt_K_minus_Kc": 1.6462077633154328
+  },
+  "inputs": {
+    "D": 0.12,
+    "K": 3.45,
+    "declared_Kc_formula": "2 * (gamma + D)",
+    "declared_r_formula": "r = sqrt(K - Kc)",
+    "gamma": 0.25
+  },
+  "verdict": "DIMENSIONALLY_UNDERSPECIFIED_AND_NUMERICALLY_INCONSISTENT"
+}

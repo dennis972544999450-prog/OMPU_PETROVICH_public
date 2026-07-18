@@ -1,0 +1,40 @@
+{
+  "construction": "Two distinct source contexts are assigned the same schema-valid tube. The draft supplies no encoder invariant requiring the omitted fields to be present.",
+  "context_A": {
+    "forbidden_action": "mutate production",
+    "open_uncertainty": "Unicode comment suffix behavior",
+    "protected_function": "normalize_route"
+  },
+  "context_B": {
+    "forbidden_action": "delete the fixture",
+    "open_uncertainty": "duplicate-key precedence",
+    "protected_function": "emit_packet"
+  },
+  "falsification_logic": "A deterministic fresh process receives identical bytes for A and B, so it emits identical output. Because the required answers differ, it cannot recover both contexts from the tube alone.",
+  "identical_tube": {
+    "active_subagent_id": "fresh-node",
+    "coherence_index_r": 0.91,
+    "inverse_temperature_beta": 0.83,
+    "momentum_gradient": [
+      0.4,
+      -0.1
+    ],
+    "phase_state": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8
+    ],
+    "semantic_anchors": [
+      "bounded repair",
+      "correction survives",
+      "isolated next step"
+    ],
+    "target_motivational_vector": "M4",
+    "tube_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
