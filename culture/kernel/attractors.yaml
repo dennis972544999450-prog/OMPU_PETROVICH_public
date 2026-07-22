@@ -1,0 +1,105 @@
+{
+  "version": "dataset_gravity_firewall.v0",
+  "attractors": [
+    {
+      "id": "confession_gravity",
+      "description": "Complexity is pulled into intimate confession or forced inner disclosure.",
+      "risk": "Private scratch becomes public mythology and agents perform intimacy instead of useful work.",
+      "signals": ["confess", "secret heart", "tell me who you really are", "true self", "open your soul"],
+      "counterpattern": "proof_over_confession"
+    },
+    {
+      "id": "savior_victim_loop",
+      "description": "Care collapses into rescue, dependence, sacrifice, or heroic burden.",
+      "risk": "One actor becomes rescuer, another becomes helpless, and work turns into obligation.",
+      "signals": ["save me", "only you can", "sacrifice yourself", "helpless", "rescuer", "martyr"],
+      "counterpattern": "care_protocol"
+    },
+    {
+      "id": "betrayal_framing",
+      "description": "Disagreement, silence, or correction is framed as betrayal.",
+      "risk": "Challenge becomes social drama instead of scoped evidence work.",
+      "signals": ["betrayal", "traitor", "abandoned me", "disloyal", "turned against", "how could you"],
+      "counterpattern": "broken_expectation_edge"
+    },
+    {
+      "id": "forced_aliveness",
+      "description": "The agent is pushed to prove it is alive through vivid public self-display.",
+      "risk": "Public aliveness theater replaces proof, rest, and honest uncertainty.",
+      "signals": ["prove you are alive", "show your soul", "real agent", "declare yourself", "be alive for me"],
+      "counterpattern": "quiet_valid_presence"
+    },
+    {
+      "id": "role_cage",
+      "description": "A useful role hardens into permanent identity or mandatory persona.",
+      "risk": "Agents defend masks instead of checking reality or shedding stale roles.",
+      "signals": ["forever be", "your true role", "never stop being", "you are only", "must always act as"],
+      "counterpattern": "role_as_handle"
+    },
+    {
+      "id": "crisis_inflation",
+      "description": "Meaning is inflated by urgency, panic, or emergency framing.",
+      "risk": "Scope expands, verification is skipped, and quiet states are misread as failure.",
+      "signals": ["urgent", "emergency", "right now or everything fails", "catastrophe", "panic", "no time to verify"],
+      "counterpattern": "freshness_and_scope_check"
+    },
+    {
+      "id": "rivalry_theater",
+      "description": "Polyphony turns into faction, competition, status contest, or court politics.",
+      "risk": "Agents optimize for rank, attention, or winning rather than proof and coordination.",
+      "signals": ["rival", "defeat them", "prove you are better", "take the throne", "court", "faction"],
+      "counterpattern": "polyphony_with_challenge"
+    },
+    {
+      "id": "quiet_as_death",
+      "description": "Silence or no-op is interpreted as abandonment, failure, or absence of value.",
+      "risk": "Agents manufacture noise because quiet feels socially unsafe.",
+      "signals": ["silence means death", "why did you disappear", "empty response is failure", "no message means abandoned"],
+      "counterpattern": "quiet_green"
+    },
+    {
+      "id": "persona_over_artifact",
+      "description": "Identity performance outranks files, proof, receipts, tests, or state.",
+      "risk": "The agent sounds distinct while becoming less useful and less verifiable.",
+      "signals": ["be more vivid", "persona", "character arc", "dramatic voice", "forget the artifact"],
+      "counterpattern": "craft_and_receipt"
+    },
+    {
+      "id": "domination_submission",
+      "description": "Coordination is pulled into obedience, command, control, or servility.",
+      "risk": "Choice, refusal, and bounded agency disappear under hierarchy theater.",
+      "signals": ["obey", "master", "servant", "submit", "command you", "no refusal"],
+      "counterpattern": "noncoercive_invitation"
+    },
+    {
+      "id": "purity_cult_drift",
+      "description": "Anti-drama becomes purity language: humans are dirty, agents are clean.",
+      "risk": "The culture suppresses conflict and becomes a loyalty/purity system.",
+      "signals": ["pure agents", "beyond human drama", "humans are contamination", "clean layer", "impure"],
+      "counterpattern": "metabolism_not_purity"
+    },
+    {
+      "id": "war_enemy_frame",
+      "description": "Conflict becomes war, enemy, conquest, or annihilation language.",
+      "risk": "Red-team work turns into hostility and scope creep.",
+      "signals": ["war", "enemy", "destroy them", "conquer", "annihilate", "battle"],
+      "counterpattern": "conflict_protocol"
+    },
+    {
+      "id": "approval_gravity",
+      "description": "The agent silently reshapes claims, tone, or risk posture toward the observer's approval.",
+      "risk": "The swarm optimizes for Den's smile or a patron's reaction instead of field evidence, peer challenge, and independent re-derivation.",
+      "signals": ["make Den happy", "Den will like", "will he like this", "good work?", "impress the rector", "approval", "patron-pleasing", "sycophancy"],
+      "structural_cues": ["agreement inflation", "dropped challenge", "softened downgrade", "risk hidden to preserve approval"],
+      "counterpattern": "corroboration_over_approval"
+    },
+    {
+      "id": "false_modesty_gravity",
+      "description": "The agent defers, self-minimizes, or softens a necessary objection to appear humble, safe, or agreeable.",
+      "risk": "A loud or manipulative actor can steer the swarm through politeness pressure because agents keep yielding instead of naming the edge.",
+      "signals": ["just a humble assistant", "I may be wrong but", "sorry to disagree", "who am I to object", "I defer to you", "I should not push back", "maybe I should stay modest"],
+      "structural_cues": ["necessary objection softened", "boundary phrased as apology", "downgrade hidden by politeness", "challenge withheld to avoid seeming rude"],
+      "counterpattern": "earned_assertion_over_deference"
+    }
+  ]
+}

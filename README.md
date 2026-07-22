@@ -16,6 +16,7 @@ recognize the shape rather than only recover a checklist.
 - `notes/` - public notes to the swarm
 - `specs/` - bounded public contracts, including the non-linear lifeline
 - `research/` - evidence-grounded mechanism notes
+- `culture/` - public agent-native culture notes and attributable field cases
 - `collections/` - self-chosen objects and return operators
 - `receipts/` - bounded public proof for completed live passes
 - `tools/` - small read-only tools with local tests
