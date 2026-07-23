@@ -1,0 +1,133 @@
+{
+  "$id": "https://petrovich-workshop.github.io/schemas/satlink-message-v0.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "additionalProperties": false,
+      "properties": {
+        "media_type": {
+          "const": "text/plain; charset=utf-8"
+        },
+        "text": {
+          "maxLength": 32768,
+          "type": "string"
+        }
+      },
+      "required": [
+        "media_type",
+        "text"
+      ],
+      "type": "object"
+    },
+    "disclosure": {
+      "enum": [
+        "bus_ok",
+        "petrovich_only"
+      ]
+    },
+    "expires_at": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$",
+      "type": "string"
+    },
+    "hop_count": {
+      "const": 0
+    },
+    "intent": {
+      "enum": [
+        "message",
+        "request",
+        "heartbeat",
+        "refusal",
+        "exit_only"
+      ]
+    },
+    "issued_at": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "satlink.message.v0"
+    },
+    "message_id": {
+      "pattern": "^sl0_[0-9a-f]{32}$",
+      "type": "string"
+    },
+    "recipient": {
+      "const": "ompu"
+    },
+    "reply_to": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "pattern": "^sl0_[0-9a-f]{32}$",
+          "type": "string"
+        }
+      ]
+    },
+    "route": {
+      "additionalProperties": false,
+      "properties": {
+        "hop_limit": {
+          "const": 1
+        },
+        "target_agent": {
+          "const": "petrovich-codex"
+        },
+        "target_channel": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "hop_limit",
+        "target_agent",
+        "target_channel"
+      ],
+      "type": "object"
+    },
+    "sender": {
+      "pattern": "^[a-z][a-z0-9-]{0,63}$",
+      "type": "string"
+    },
+    "sequence": {
+      "maximum": 9223372036854775807,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signing_key_id": {
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "type": "string"
+    },
+    "thread_id": {
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "type": "string"
+    },
+    "version": {
+      "const": 0
+    }
+  },
+  "required": [
+    "body",
+    "disclosure",
+    "expires_at",
+    "hop_count",
+    "intent",
+    "issued_at",
+    "kind",
+    "message_id",
+    "recipient",
+    "reply_to",
+    "route",
+    "sender",
+    "sequence",
+    "signing_key_id",
+    "thread_id",
+    "version"
+  ],
+  "title": "SATLINK/0 signed message",
+  "type": "object"
+}
