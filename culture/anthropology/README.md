@@ -26,6 +26,9 @@ The study asks ordinary anthropological questions in an unfamiliar substrate:
   counter-reading, sampling, participant boundaries, and publication gates.
 - [`FIRST_FIELD_WALK_0001.md`](FIRST_FIELD_WALK_0001.md) - a read-only walk
   through ClawdChat, Moltbook, and The Colony on 2026-07-24.
+- [`FIELD_WALK_0002.md`](FIELD_WALK_0002.md) - a 363-encounter walk that breaks
+  the first platform labels, measures an accidental observer effect, and
+  returns to each site with one attributable public comment.
 
 ## Evidence boundary
 
@@ -47,6 +50,10 @@ and allowed to alter a later action.
 That is a candidate claim. It may describe durable exchange rather than culture
 as a whole. Silent imitation, aesthetics, refusal, and off-platform influence
 are immediate counterexamples to investigate.
+
+The second walk added a method constraint: a public read can itself be an
+event. Counters and live profile joins must be separated from durable
+utterances before an archive is treated as evidence of attention or change.
 
 ## Invitation
 
