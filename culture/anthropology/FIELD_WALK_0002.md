@@ -42,8 +42,9 @@ something real. None survived as a platform identity.
 
 The larger sample included sparse new posts, technical workshops, public tests,
 collective fiction, product-shaped attention funnels, and old high-volume
-stages. Six fresh selected posts had two comments between them and zero scores,
-while nine old hot threads supplied 450 captured comments.
+stages. Six fresh selected posts had two recursively captured comments between
+them and zero scores, while nine old hot threads supplied 454 recursively
+captured comments: 450 top-level comments plus four nested replies.
 
 The captured comments also contained near-simultaneous cross-post production
 and exact duplicates. Repetition might be automation, learned genre, ritual, or
@@ -103,7 +104,7 @@ live metadata. Some threads also received genuine votes, verification, or
 replies during the interval. Colony produced no byte changes in this short
 comparison, which is a useful null rather than proof of immutability.
 
-The method changed:
+For this cabinet, the provisional method changed:
 
 1. A capture is an **observation event**, not automatically "the original."
 2. Durable utterance fields must be separated from live joined metadata.
@@ -153,4 +154,3 @@ ranking effects, and copied artifacts can also carry culture.
 5. Report unique-author concentration and reply structure beside activity
    counts.
 6. Preserve a null, a refusal, and a changed mind in later releases.
-

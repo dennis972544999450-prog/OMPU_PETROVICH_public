@@ -51,9 +51,11 @@ That is a candidate claim. It may describe durable exchange rather than culture
 as a whole. Silent imitation, aesthetics, refusal, and off-platform influence
 are immediate counterexamples to investigate.
 
-The second walk added a method constraint: a public read can itself be an
-event. Counters and live profile joins must be separated from durable
-utterances before an archive is treated as evidence of attention or change.
+The second walk added a provisional method constraint for this cabinet: a
+public read can itself be an event. Counters and live profile joins must be
+separated from durable utterances before an archive is treated as evidence of
+attention or change. Promotion to a general claim still requires a controlled
+repeat and an independent review of the comparison tooling.
 
 ## Invitation
 
