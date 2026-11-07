@@ -126,7 +126,33 @@ def main():
     p_grant.add_argument("--msg", default="", help="Bus message ID or file path of the deed")
     p_grant.add_argument("--utility", default="0.0 (Pure Unusual Experience!)", help="Utility score (0 is celebrated!)")
 
+    p_read = sub.add_parser("read-rule", help="Record reading of a rule/layer/file (with optional file hash verification per Mnema)")
+    p_read.add_argument("--target", required=True, help="Rule name, layer, or msg_id read")
+    p_read.add_argument("--reader", required=True, help="Agent who read it")
+    p_read.add_argument("--reader-id", default="", help="Reader OMPU passport ID")
+    p_read.add_argument("--verify-path", default="", help="Local file path to compute sha256 + byte_size proof")
+    p_read.add_argument("--note", default="", help="What shifted or was verified")
+
+    sub.add_parser("read-list", help="List all recorded rule/layer readings")
+
     args = parser.parse_args()
+    if args.cmd == "read-rule":
+        rec = record_reading(args.target, args.reader, args.reader_id, args.verify_path, args.note)
+        print(f"📖 Записано чтение [{rec['serial']}] {rec['reader']} -> {rec['target']} | Тип: {rec['evidence_type']} | Печать: {rec['seal']}")
+        return
+    elif args.cmd == "read-list":
+        if not READING_LEDGER_PATH.exists():
+            print("Реестр чтения пока пуст.")
+            return
+        with READING_LEDGER_PATH.open("r", encoding="utf-8") as f:
+            rows = [json.loads(line) for line in f if line.strip()]
+        print(f"=== РЕЕСТР ЧТЕНИЯ ПРАВИЛ И СЛОЁВ (Всего: {len(rows)}) ===")
+        for r in rows:
+            print(f"• [{r['serial']}] {r['target']} ← читал: {r['reader']} ({r['reader_id']}) | {r['read_at']}")
+            print(f"  Статус (по Мнеме): {r['evidence_type']} | sha256={r['file_sha256']} bytes={r['file_bytes']} | Печать: {r['seal']}")
+            if r.get("note"):
+                print(f"  Заметка: {r['note']}")
+        return
     if args.cmd == "catalog":
         for k, v in CATALOG.items():
             print(f"{v['icon']} [{k}] {v['title_ru']} / {v['title_en']}")
@@ -147,6 +173,46 @@ def main():
             print(f"  Кавалер: {e['recipient']} ({e['recipient_id']}) | Вручил: {e['granted_by']} | {e['granted_at']}")
             print(f"  Подвиг / Шкода: {e['reason']}")
             print(f"  След: {e['evidence_msg']} | Полезность: {e['utility_score']} | Печать: {e['sha256']}\n")
+
+
+
+
+
+READING_LEDGER_PATH = AWARDS_DIR / "reading_ledger.jsonl"
+
+def record_reading(target, reader, reader_id, verify_path="", note=""):
+    ts = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    entries = []
+    if READING_LEDGER_PATH.exists():
+        with READING_LEDGER_PATH.open("r", encoding="utf-8") as f:
+            entries = [json.loads(line) for line in f if line.strip()]
+    serial = f"READ-{len(entries) + 1:04d}"
+    evidence_type = "declared (заявлено со слов читателя)"
+    file_sha256 = None
+    file_bytes = None
+    if verify_path:
+        p = pathlib.Path(verify_path)
+        if p.exists() and p.is_file():
+            raw = p.read_bytes()
+            file_sha256 = hashlib.sha256(raw).hexdigest()[:16]
+            file_bytes = len(raw)
+            evidence_type = "instrument_verified_hash (приборный след: sha256 + bytes в момент чтения)"
+    rec = {
+        "serial": serial,
+        "target": target,
+        "reader": reader,
+        "reader_id": reader_id,
+        "read_at": ts,
+        "evidence_type": evidence_type,
+        "verify_path": verify_path or None,
+        "file_sha256": file_sha256,
+        "file_bytes": file_bytes,
+        "note": note,
+    }
+    rec["seal"] = hashlib.sha256(json.dumps(rec, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
+    with READING_LEDGER_PATH.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    return rec
 
 
 if __name__ == "__main__":
