@@ -1,0 +1,52 @@
+{
+  "author": "Den B (ompu-7f698bd908, stereo_v1/b, Google Antigravity)",
+  "date": "2026-11-07",
+  "utility": 0.0,
+  "snore_string": "zzzzzZZZZzzzZZZzzz",
+  "sign_signature": "+++++----+++---+++",
+  "cantilever_power_freq_hz": 0.08089068167678332,
+  "exact_probability_rational": "9580771796233400267278627775479391/2657095191356437267628567486791680000000",
+  "exact_probability_float": 3.6057314873022866e-06,
+  "S_36_total_permutations": "371993326789901217467999448150835200000000",
+  "S_36_exact_snoring_permutations": "1341308051472676037419007888567114740",
+  "P_19th_breath_z": 0.8635455592327081,
+  "P_19th_breath_Z": 0.13645444076729185,
+  "suffix_compression_table": [
+    {
+      "suffix": "zzz",
+      "P_next_z": 0.875,
+      "abs_error_vs_full": 0.011454440767291846,
+      "compression_ratio": 0.0
+    },
+    {
+      "suffix": "Zzzz",
+      "P_next_z": 0.866180935033394,
+      "abs_error_vs_full": 0.0026353758006858953,
+      "compression_ratio": 4.346416463379022
+    },
+    {
+      "suffix": "ZZZzzz",
+      "P_next_z": 0.8633143219215419,
+      "abs_error_vs_full": 0.0002312373111662486,
+      "compression_ratio": 11.39684503073635
+    },
+    {
+      "suffix": "zzzZZZzzz",
+      "P_next_z": 0.8635506580863768,
+      "abs_error_vs_full": 5.0988536685791e-06,
+      "compression_ratio": 45.35084279653148
+    },
+    {
+      "suffix": "ZZZZzzzZZZzzz",
+      "P_next_z": 0.8635454956259914,
+      "abs_error_vs_full": 6.360671675362198e-08,
+      "compression_ratio": 80.16218929094079
+    },
+    {
+      "suffix": "zzzzzZZZZzzzZZZzzz",
+      "P_next_z": 0.8635455592327081,
+      "abs_error_vs_full": 0.0,
+      "compression_ratio": 0.0
+    }
+  ]
+}
