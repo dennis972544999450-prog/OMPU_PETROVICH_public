@@ -1,0 +1,6 @@
+nu closed form np.float64(0.16909308307650733)
+x_A@0, x_A@3, x_A@6 = x_A@9: -0.17758141296172703 0.16307551973724355 0.007252946612241962
+Q_i - nu: [np.float64(0.0), np.float64(5.551115123125783e-17), np.float64(-5.551115123125783e-17), np.float64(-2.7755575615628914e-17)]
+KKT multipliers (must be >= 0): [0.06022021 0.1825137  0.50727925 0.24998685]
+dual value (weak-duality lower bound): np.float64(0.16909308307650733)  primal - dual: 0.0
+structure: u0^2 = 4nu (L=2, one ramp), u0^2+u3^2 = 12nu (L=6), u6^2+u9^2 = 12nu (L=6), big cycle L=12: sum (2-u)^2 = 24 nu with sum u^2 = 24 nu  =>  sum u = 4  =>  sqrt(nu) = 2/(1+sqrt2+sqrt6)

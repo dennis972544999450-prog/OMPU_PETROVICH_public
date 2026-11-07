@@ -1,0 +1,80 @@
+Floating clearance verification suite v0.1-wip; 3.14.4 numpy 2.5.2
+[PASS] V1.kstar.pair: K* exact 1/6 (expected 1/6), LP 0.166666666667
+[PASS] V2.tight.pair: 6 tight edges by cycles == by Floyd; 4 tight simple cycles; pinched nodes ['A@0', 'A@6', 'B@0', 'B@6']
+[PASS] V1.kstar.two partners: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.two partners: 10 tight edges by cycles == by Floyd; 3 tight simple cycles; pinched nodes ['A@0', 'A@3', 'A@6', 'A@9']
+[PASS] V1.kstar.irrational: K* exact 1/2 (expected 1/2), LP 0.500000000000
+[PASS] V2.tight.irrational: 14 tight edges by cycles == by Floyd; 4 tight simple cycles; pinched nodes ['A@0', 'A@2', 'B@0', 'B@2']
+[PASS] V1.kstar.connected T: K* exact 1 (expected 1), LP 1.000000000000
+[PASS] V2.tight.connected T: 17 tight edges by cycles == by Floyd; 8 tight simple cycles; pinched nodes ['A@0', 'A@6', 'B@0', 'B@6', 'X@0']
+[PASS] V1.kstar.#1: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.#1: 12 tight edges by cycles == by Floyd; 6 tight simple cycles; pinched nodes ['A@0', 'A@3', 'A@6', 'A@9', 'B@0', 'B@3', 'B@6', 'B@9']
+[PASS] V1.kstar.#3: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.#3: 10 tight edges by cycles == by Floyd; 3 tight simple cycles; pinched nodes ['D@0', 'D@6']
+[PASS] V1.kstar.#5: K* exact 1/4 (expected 1/4), LP 0.250000000000
+[PASS] V2.tight.#5: 17 tight edges by cycles == by Floyd; 8 tight simple cycles; pinched nodes ['A@0', 'A@6', 'D@0', 'D@6']
+[PASS] V1.kstar.short arc 1/8: K* exact 8 (expected 8), LP 8.000000000000
+[PASS] V2.tight.short arc 1/8: 4 tight edges by cycles == by Floyd; 1 tight simple cycles; pinched nodes []
+[PASS] V1.kstar.asym-1: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.asym-1: 10 tight edges by cycles == by Floyd; 3 tight simple cycles; pinched nodes ['A@0', 'A@2', 'A@3', 'A@7']
+[PASS] V1.kstar.asym-2: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.asym-2: 10 tight edges by cycles == by Floyd; 3 tight simple cycles; pinched nodes ['A@0', 'A@1', 'A@4', 'A@9']
+[PASS] V1.kstar.asym-3: K* exact 1/3 (expected 1/3), LP 0.333333333333
+[PASS] V2.tight.asym-3: 14 tight edges by cycles == by Floyd; 4 tight simple cycles; pinched nodes ['A@0', 'A@3', 'A@6', 'A@9']
+[PASS] V1.kstar.cyclic triple (Prosvet): K* exact 1/4 (expected 1/4), LP 0.250000000000
+[PASS] V2.tight.cyclic triple (Prosvet): 6 tight edges by cycles == by Floyd; 1 tight simple cycles; pinched nodes []
+[PASS] V1.kstar.triple 0,1,7.5 L=10: K* exact 3/7 (expected 3/7), LP 0.428571428571
+[PASS] V2.tight.triple 0,1,7.5 L=10: 6 tight edges by cycles == by Floyd; 1 tight simple cycles; pinched nodes []
+[PASS] V1.kstar.full order A>B>C / C>B>A: K* exact 2/3 (expected 2/3), LP 0.666666666667
+[PASS] V2.tight.full order A>B>C / C>B>A: 6 tight edges by cycles == by Floyd; 1 tight simple cycles; pinched nodes []
+[PASS] V1.kstar.GLM example L=2: K* exact 100 (expected 100), LP 100.000000000000
+[PASS] V2.tight.GLM example L=2: 6 tight edges by cycles == by Floyd; 4 tight simple cycles; pinched nodes ['B@0', 'B@1', 'C@0', 'C@1']
+[PASS] V2.random: 200 random schemes (seed 20261107): 11 with pinched nodes, all with >= 2 tight cycles; Floyd/cycles mismatches 0
+[PASS] V3.arc_lemma: R(a,b) closed form == exact integral of min(K, a+ct, b+c(d-t)) on 1333 random rational cases
+[PASS] V3.arc_lemma_K_inf: max integral without slope cap == m + W (tent), 1000 cases
+[PASS] V3.exact_deficit: F(p,q;m) = (p^2+q^2)/2 - ((p+q-m)_+/2)^2 equals the convex form; midpoint convexity holds (3000 cases)
+[PASS] V3.transparent_mark.special: F(1,1-m1;m1) + F(1-m1,0;m2) = 1/2 = F(1,0;m1+m2) for m1 < 1 <= m1+m2 (500 cases)
+[PASS] V3.transparent_mark.general: run deficit F(p,q;m1+m2) == min_r [F(p,r;m1) + F(r,q;m2)] on 3000 random feasible cases; max |diff| 4.0e-15
+[PASS] V3.arc_lemma_maximal: LP maximum of the integral over grid profiles (N=400) == R(a,b) on 30 random cases (7 tents); max rel diff 1.9e-05
+[PASS] V4.nu.pair: nu in [0.1666666667, 0.1666666667], expected 0.1666666667; |P| = 4
+[PASS] V4.nu.two partners: nu in [0.1666666667, 0.1666666667], expected 0.1666666667; |P| = 4
+[PASS] V4.nu.irrational: nu in [0.3431457505, 0.3431457505], expected 0.3431457505; |P| = 4
+[PASS] V4.nu.connected T: nu in [0.1666666667, 0.1666666667], expected 0.1666666667; |P| = 5
+[PASS] V4.nu.#1: nu in [0.3333333333, 0.3333333333], expected 0.3333333333; |P| = 8
+[PASS] V4.nu.#3: nu in [0.0833333333, 0.0833333333], expected 0.0833333333; |P| = 2
+[PASS] V4.nu.#5: nu in [0.1666666667, 0.1666666667], expected 0.1666666667; |P| = 4
+[PASS] V4.nu.short arc 1/8: nu in [0.0000000000, 0.0000000000], expected 0.0000000000; |P| = 0 (trivial: P is empty, nu = 0 by definition)
+[PASS] V4.nu.asym-1: nu in [0.1715728753, 0.1715728753], expected 0.1715728753; |P| = 4
+[PASS] V4.nu.asym-2: nu in [0.1909830056, 0.1909830056], expected 0.1909830056; |P| = 4
+[PASS] V4.nu.asym-3: nu in [0.1690930831, 0.1690930831], expected 0.1690930831; |P| = 4
+[PASS] V4.nu.cyclic triple (Prosvet): nu in [0.0000000000, 0.0000000000], expected 0.0000000000; |P| = 0 (trivial: P is empty, nu = 0 by definition)
+[PASS] V4.nu.triple 0,1,7.5 L=10: nu in [0.0000000000, 0.0000000000], expected 0.0000000000; |P| = 0 (trivial: P is empty, nu = 0 by definition)
+[PASS] V4.nu.full order A>B>C / C>B>A: nu in [0.0000000000, 0.0000000000], expected 0.0000000000; |P| = 0 (trivial: P is empty, nu = 0 by definition)
+[PASS] V5.pair.6/5: pair kappa=6/5: K=1/5, c=1/5, slacks=['0', '0'] (upper side: C <= (2/L)K^2/eps)
+[PASS] V5.pair.3/2: pair kappa=3/2: K=1/4, c=1/8, slacks=['0', '0'] (upper side: C <= (2/L)K^2/eps)
+[PASS] V5.pair.2: pair kappa=2: K=1/3, c=1/9, slacks=['0', '0'] (upper side: C <= (2/L)K^2/eps)
+[PASS] V5.pair.5/2: pair kappa=5/2: K=5/12, c=1/9, slacks=['0', '0'] (upper side: C <= 8K*/L)
+[PASS] V5.pair.4: pair kappa=4: K=2/3, c=1/9, slacks=['0', '0'] (upper side: C <= 8K*/L)
+[PASS] V5.partners.4/3: two partners kappa=4/3: K=4/9, c=8/27, slacks=['0', '0', '0', '0'] (upper side: C <= K^2/(6 eps))
+[PASS] V5.partners.3/2: two partners kappa=3/2: K=1/2, c=1/4, slacks=['0', '0', '0', '0'] (upper side: C <= K^2/(6 eps))
+[PASS] V5.partners.9/5: two partners kappa=9/5: K=3/5, c=9/40, slacks=['0', '0', '0', '0'] (upper side: C <= K^2/(6 eps))
+[PASS] V5.partners.2: two partners kappa=2: K=2/3, c=2/9, slacks=['0', '0', '0', '0'] (upper side: C <= K^2/(6 eps))
+[PASS] V6.gridLP.pair.1.2: grid LP N=1200: C = 0.200000, expected 0.200000 (closed form 02.11); rel -1.42e-13; formula nu K^2/eps = 0.200000; 0.6 s
+[PASS] V6.gridLP.pair.1.5: grid LP N=1200: C = 0.125000, expected 0.125000 (closed form 02.11); rel +2.01e-13; formula nu K^2/eps = 0.125000; 0.6 s
+[PASS] V6.gridLP.pair.2.0: grid LP N=1200: C = 0.111111, expected 0.111111 (closed form 02.11); rel +1.17e-13; formula nu K^2/eps = 0.111111; 0.5 s
+[PASS] V6.gridLP.pair.3.0: grid LP N=1200: C = 0.111111, expected 0.111111 (closed form 02.11); rel +3.36e-13; formula nu K^2/eps = 0.125000 [below formula]; 0.8 s
+[PASS] V6.gridLP.two partners.1.2: grid LP N=1200: C = 0.400000, expected 0.400000 (closed form 06.11); rel -4.23e-13; formula nu K^2/eps = 0.400000; 1.6 s
+[PASS] V6.gridLP.two partners.1.5: grid LP N=1200: C = 0.250000, expected 0.250000 (closed form 06.11); rel +3.40e-14; formula nu K^2/eps = 0.250000; 1.7 s
+[PASS] V6.gridLP.two partners.1.8: grid LP N=1200: C = 0.225000, expected 0.225000 (closed form 06.11); rel -1.56e-06; formula nu K^2/eps = 0.225000; 1.7 s
+[PASS] V6.gridLP.two partners.2.5: grid LP N=1200: C = 0.222222, expected 0.222222 (closed form 06.11); rel +2.18e-14; formula nu K^2/eps = 0.231481 [below formula]; 1.3 s
+[PASS] V6.gridLP.irrational.1.3: grid LP N=1200: C = 0.966513, expected 0.966527 (Theorem 4.2 formula (below kappa_A = 1.7071)); rel -1.51e-05; formula nu K^2/eps = 0.966527; 0.9 s
+[PASS] V6.gridLP.asym-1.1.06: grid LP N=1200: C = 1.070880, expected 1.070996 (Theorem 4.2 formula (downward departure at 1.093836)); rel -1.09e-04; formula nu K^2/eps = 1.070996; 1.2 s
+[PASS] V6.gridLP.asym-1.1.15: grid LP N=1200: C = 0.475263, expected 0.475277 (exact solver C*eps/K^2 = 0.16172, below formula (downward departure)); rel -2.87e-05; formula nu K^2/eps = 0.504234 [below formula]; 2.3 s
+[PASS] V6.gridLP.asym-2.1.15: grid LP N=1200: C = 0.574109, expected 0.574121 (exact solver C*eps/K^2 = 0.195353, above formula (upward departure)); rel -1.98e-05; formula nu K^2/eps = 0.561278 [above formula]; 2.0 s
+[PASS] V6.gridLP.#3.1.1: grid LP N=1200: C = 0.336111, expected 0.336111 (Theorem 4.2 formula (upward departure only at 8/7)); rel -6.96e-07; formula nu K^2/eps = 0.336111; 2.4 s
+[PASS] V6.gridLP.asym-2.1.09: grid LP N=1200: C = 0.840358, expected 0.840396 (Theorem 4.2 formula (upward departure at 2 - 2 sqrt5/5 = 1.10557)); rel -4.56e-05; formula nu K^2/eps = 0.840396; 2.0 s
+[PASS] V6.gridLP.#3.1.16: grid LP N=1200 (lower bound on C) = 0.236725 > formula nu K^2/eps = 0.233611 by +1.33e-02 (past the predicted upward departure 8/7 = 1.142857): C departs upward; 2.9 s
+[PASS] V6.gridLP.asym-2.1.12: grid LP N=1200 (lower bound on C) = 0.668107 > formula nu K^2/eps = 0.665470 by +3.96e-03 (past the predicted upward departure 1.105573): C departs upward; 1.5 s
+
+76 checks, 0 failed, 26 s
+ALL_CHECKS_PASSED

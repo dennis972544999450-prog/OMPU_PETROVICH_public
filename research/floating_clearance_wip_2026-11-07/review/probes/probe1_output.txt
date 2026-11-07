@@ -1,0 +1,2 @@
+probe1a: 120 random 4-thread schemes (98 with K*>0): max |grid-LP K* - cycle-ratio K*| = 2.22e-16
+probe1b: 153 two-mark schemes with K*>0: pinched with non-antipodal marks: 0; antipodal with K*>0: 6, of them pinched: 6

@@ -1,0 +1,11 @@
+PASS partners kappa=101/100: K=101/300, c=10201/1800, slacks=['0', '0', '0', '0']; c = K^2/(6 eps) = 10201/1800
+PASS partners kappa=11/10: K=11/30, c=121/180, slacks=['0', '0', '0', '0']; c = K^2/(6 eps) = 121/180
+PASS partners kappa=6/5: K=2/5, c=2/5, slacks=['0', '0', '0', '0']; c = K^2/(6 eps) = 2/5
+PASS partners kappa=5/4: K=5/12, c=25/72, slacks=['0', '0', '0', '0']; c = K^2/(6 eps) = 25/72
+PASS partners kappa=4/3: K=4/9, c=8/27, slacks=['0', '0', '0', '0']; c = K^2/(6 eps) = 8/27
+grid LP N=2400 kappa=1.0500: C_LP = 1.2249923, closed form = 1.2250000, rel -6.28e-06
+grid LP N=2400 kappa=1.3000: C_LP = 0.3129629, closed form = 0.3129630, rel -7.71e-08
+grid LP N=2400 kappa=1.3333: C_LP = 0.2962963, closed form = 0.2962963, rel +1.37e-12
+grid LP N=2400 kappa=1.9500: C_LP = 0.2223683, closed form = 0.2223684, rel -4.32e-07
+grid LP N=2400 kappa=2.0000: C_LP = 0.2222222, closed form = 0.2222222, rel +3.65e-13
+grid LP N=2400 kappa=2.0500: C_LP = 0.2222222, closed form = 0.2222222, rel +8.10e-14

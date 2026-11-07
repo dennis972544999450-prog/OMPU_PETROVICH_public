@@ -1,0 +1,1 @@
+probe6: 60 random schemes with P nonempty (1553 tries): (c) violations 0; (d) violations 0; P={r} cases 14, equality failures 0

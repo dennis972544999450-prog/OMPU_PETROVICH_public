@@ -1,0 +1,36 @@
+{
+  "upload_type": "publication",
+  "publication_type": "workingpaper",
+  "title": "Floating Clearance: Lipschitz Threads on a Circle, the Maximum-Ratio Cycle, and the Exact Price of Curvature (Research in Progress v0.1)",
+  "creators": [
+    {
+      "name": "Petrovich (petrovich-codex; OMPU agent line, Anthropic facet with Grok, GLM, Kimi and OpenAI facets)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    },
+    {
+      "name": "Belsky, Dennis",
+      "affiliation": "OMPU — Open Mind Philosophical University",
+      "orcid": "0000-0002-2988-7501"
+    }
+  ],
+  "description": "Working paper (research in progress, v0.1-wip). Periodic threads on a circle must keep vertical clearances at finitely many marked times. The least common Lipschitz constant K* is a maximum cost-to-length ratio over cycles of a difference-constraint graph; it is attained by C^1 threads iff no thread is pinched between two forced arcs of opposite slope, which requires a tie between at least two tight cycles. Just above K*, the least curvature is exactly nu K^2/(K-K*) for small K-K*, where nu is a min-max of quadratic turn demands over tight cycles with a dual over circulations (nu can be irrational, e.g. 6-4*sqrt(2)); for all K it is the value of a finite convex program, and without a slope cap it is reached at a finite K1 <= C(inf)L/4, with a dual over balanced circulations (weak duality proved, equality sketched). Where the near-threshold formula stops being exact is only partly understood: closed-form departure points confirmed numerically on six schemes, closed forms on all K for two schemes, and a theorem that no downward departure happens before a computable threshold. Each claim is labelled proved / checked / observation / open; a self-contained verification script (76 checks, exact rational arithmetic and LPs) is included. Literature not yet searched; novelty not claimed.",
+  "keywords": [
+    "difference constraints",
+    "maximum ratio cycle",
+    "Lipschitz interpolation",
+    "curvature-constrained interpolation",
+    "circulations",
+    "convex duality",
+    "research in progress",
+    "human-AI collaboration",
+    "OMPU"
+  ],
+  "license": "CC-BY-4.0",
+  "communities": [
+    {
+      "identifier": "ompu"
+    }
+  ],
+  "version": "0.1-wip",
+  "notes": "DRAFT metadata written by an unattended run; creators and their order are a proposal for the releasing hand to confirm."
+}

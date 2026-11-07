@@ -1,0 +1,37 @@
+irrational: K*=1/2, nu in [0.343145751,0.343145751], mu_min=1/6, d_min=2, eps0=0.0286 (paper 0.0286)
+
+scheme 1: marks=[('1', 'C', 'B', '3'), ('3', 'C', 'B', '3'), ('3', 'C', 'B', '3'), ('8', 'A', 'B', '3'), ('8', 'B', 'C', '1'), ('10', 'A', 'C', '3')]
+  K*=2/5, |P|=2, nu in [0.10000000,0.10000000], mu_min=1/15, d_min=2, eps0=0.00333 = 0.0083 K*
+  eps=1/40K* (eps>eps0): grid LP C = 1.680966, nu K^2/eps = 1.681000, LP/formula = 0.999980
+  eps=1/20K* (eps>eps0): grid LP C = 0.881994, nu K^2/eps = 0.882000, LP/formula = 0.999994
+  eps=1/10K* (eps>eps0): grid LP C = 0.484000, nu K^2/eps = 0.484000, LP/formula = 0.999999
+
+scheme 2: marks=[('1', 'A', 'C', '1'), ('3', 'C', 'B', '1'), ('5', 'C', 'A', '3'), ('10', 'B', 'C', '3')]
+  K*=1/2, |P|=1, nu in [0.04289322,0.04289322], mu_min=1/18, d_min=2, eps0=0.00119 = 0.0024 K*
+  eps=1/40K* (eps>eps0): grid LP C = 0.910835, nu K^2/eps = 0.901294, LP/formula = 1.010586
+  eps=1/20K* (eps>eps0): grid LP C = 0.562616, nu K^2/eps = 0.472898, LP/formula = 1.189721
+  eps=1/10K* (eps>eps0): grid LP C = 0.399261, nu K^2/eps = 0.259504, LP/formula = 1.538556
+
+scheme 3: marks=[('0', 'C', 'B', '3'), ('2', 'A', 'B', '2'), ('3', 'A', 'C', '3'), ('7', 'B', 'A', '3'), ('11', 'A', 'B', '3')]
+  K*=3/4, |P|=1, nu in [0.05051026,0.05051026], mu_min=3/28, d_min=1, eps0=0.00135 = 0.0018 K*
+  eps=1/40K* (eps>eps0): grid LP C = 1.592009, nu K^2/eps = 1.592020, LP/formula = 0.999993
+  eps=1/20K* (eps>eps0): grid LP C = 0.984415, nu K^2/eps = 0.835313, LP/formula = 1.178498
+  eps=1/10K* (eps>eps0): grid LP C = 0.668058, nu K^2/eps = 0.458381, LP/formula = 1.457431
+
+scheme 4: marks=[('0', 'B', 'C', '2'), ('5', 'B', 'A', '3'), ('5', 'B', 'A', '3'), ('8', 'B', 'C', '2'), ('10', 'A', 'B', '3'), ('10', 'C', 'A', '3')]
+  K*=2, |P|=2, nu in [0.25000000,0.25000000], mu_min=4/3, d_min=2, eps0=0.16667 = 0.0833 K*
+  eps=1/40K* (eps<=eps0): grid LP C = 21.000000, nu K^2/eps = 21.012500, LP/formula = 0.999405
+  eps=1/20K* (eps<=eps0): grid LP C = 11.024931, nu K^2/eps = 11.025000, LP/formula = 0.999994
+  eps=1/10K* (eps>eps0): grid LP C = 6.049916, nu K^2/eps = 6.050000, LP/formula = 0.999986
+
+scheme 5: marks=[('2', 'C', 'A', '3'), ('2', 'A', 'B', '1'), ('6', 'B', 'A', '2'), ('7', 'C', 'A', '1'), ('10', 'B', 'A', '2'), ('10', 'C', 'A', '2')]
+  K*=3/8, |P|=2, nu in [0.12500000,0.12500000], mu_min=1/8, d_min=1, eps0=0.00391 = 0.0104 K*
+  eps=1/40K* (eps>eps0): grid LP C = 1.969921, nu K^2/eps = 1.969922, LP/formula = 1.000000
+  eps=1/20K* (eps>eps0): grid LP C = 1.033587, nu K^2/eps = 1.033594, LP/formula = 0.999994
+  eps=1/10K* (eps>eps0): grid LP C = 0.567182, nu K^2/eps = 0.567187, LP/formula = 0.999990
+
+scheme 6: marks=[('4', 'B', 'A', '2'), ('6', 'C', 'B', '3'), ('6', 'C', 'A', '1'), ('10', 'A', 'B', '2'), ('10', 'C', 'B', '3')]
+  K*=1/3, |P|=4, nu in [0.16666667,0.16666667], mu_min=1/3, d_min=2, eps0=0.02778 = 0.0833 K*
+  eps=1/40K* (eps<=eps0): grid LP C = 2.334522, nu K^2/eps = 2.334722, LP/formula = 0.999914
+  eps=1/20K* (eps<=eps0): grid LP C = 1.224992, nu K^2/eps = 1.225000, LP/formula = 0.999994
+  eps=1/10K* (eps>eps0): grid LP C = 0.672222, nu K^2/eps = 0.672222, LP/formula = 0.999999

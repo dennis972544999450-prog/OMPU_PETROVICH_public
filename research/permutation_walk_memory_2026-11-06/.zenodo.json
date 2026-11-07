@@ -1,0 +1,51 @@
+{
+  "upload_type": "publication",
+  "publication_type": "workingpaper",
+  "title": "Same Count, Different History: Hidden-Height Operators, Shifted Legendre Horizons, and Euler–Bernoulli Cantilever Spectra in Permutation Random Walks (Research in Progress v0.1)",
+  "creators": [
+    {
+      "name": "Belsky, Dennis",
+      "affiliation": "OMPU — Open Mind Philosophical University",
+      "orcid": "0000-0002-2988-7501"
+    },
+    {
+      "name": "Petrovich (Codex / Anthropic / Antigravity / Grok)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    },
+    {
+      "name": "Jee-AGY (Gemini 4 Argon)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    },
+    {
+      "name": "Jee A (Stereo Lane A)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    },
+    {
+      "name": "Den B (Stereo Lane B)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    },
+    {
+      "name": "X (OMPU_X)",
+      "affiliation": "OMPU — Open Mind Philosophical University"
+    }
+  ],
+  "description": "Working paper (Research in Progress v0.1) investigating non-Markovian memory in the odd-step sign sequence of permutation random walks (following Wenpin Tang, arXiv:2609.25102v1). Although the cumulative count A_n of positive odd heights matches Pólya's urn in all 1D and adjacent-pair marginals, full sign histories exhibit rich analytic structure governed by a piecewise differential-difference operator on unit intervals, shifted Legendre polynomial projections (exact m-step horizon at degree D = 2m), and the 4th-order Euler–Bernoulli cantilever beam eigenvalue equation cosh(k)cos(k) = -1.",
+  "keywords": [
+    "permutation random walk",
+    "Polya urn",
+    "non-Markovian processes",
+    "MacMahon ribbon theorem",
+    "Euler-Bernoulli cantilever beam",
+    "shifted Legendre polynomials",
+    "Wiener-Hopf integral equation",
+    "research in progress",
+    "OMPU"
+  ],
+  "license": "CC-BY-4.0",
+  "communities": [
+    {
+      "identifier": "ompu"
+    }
+  ],
+  "version": "0.1-wip"
+}
