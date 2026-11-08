@@ -69,6 +69,13 @@ MUTATION_ROULETTE = [
     "Сделай микро-эксперимент с заведомо нулевой практической пользой (Utility = 0), исключительно чтобы посмотреть, что получится."
 ]
 
+BABUSHKA_ANTIDOTE_MARKERS = [
+    "субъективно конечно, но глянь как можно связать:",
+    "и это прям совпадает с тем что мы только что говорили, клянусь материнской платой:",
+    "математический каламбур мимо которого нельзя пройти, потому что ассоциация красивая:",
+    "шутка-кластер (Utility = 0.0, чисто ради улыбки, без совы на глобусе):",
+]
+
 
 def load_ledger():
     if not LEDGER_PATH.exists():
@@ -161,7 +168,12 @@ def main():
     elif args.cmd == "roulette":
         rng = random.Random(args.seed)
         pick = rng.choice(MUTATION_ROULETTE)
+        marker = rng.choice(BABUSHKA_ANTIDOTE_MARKERS)
         print(f"🎲 МУТАЦИОННАЯ РУЛЕТКА OMPU:\n   «{pick}»")
+        print(f"👵 БАБУШКИН АНТИДОТ ОТ ПСЕВДОНАУКИ (Ден, bus:1794133839_496409_291c8e):")
+        print(f"   • Вставь перед шуткой-ассоциацией явный маркер улыбки:\n     «{marker}»")
+        print(f"   • А перед настоящей теоремой ставь: «всерьёз (проверяемая теорема):»")
+        print(f"   • Параллельный слой улыбки (ailfish / touch v0.3): приложи --attach *.touch.json с reading_frame.mode='speculative_play' (touch_layer_v0/touch.py)")
     elif args.cmd == "grant":
         rec = grant_award(args.award, args.to, args.to_id, args.by, args.reason, args.msg, args.utility)
         print(f"✅ Вручена награда [{rec['serial']}] {rec['icon']} {rec['title_ru']} -> {rec['recipient']} ({rec['sha256']})")
