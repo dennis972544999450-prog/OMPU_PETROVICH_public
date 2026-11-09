@@ -108,14 +108,16 @@ def main() -> None:
     s_t = 2j * w_t
     r_t = 1.0 / (4.0 * (1.0 - sig_t * np.cos(w_t)))
 
+    s_all = np.concatenate([s_k, s_t])
+    r_all = np.concatenate([r_k, r_t])
+
     Sigma_0 = (
-        float(np.sum(2.0 * np.real(r_k / s_k)))
-        + float(np.sum(2.0 * np.real(r_t / s_t)))
+        float(np.sum(2.0 * np.real(r_all / s_all)))
         - 1.0 / (4.0 * (math.pi ** 2) * 2000000.5)
     )
     Sigma_1_num = float(np.sum(2.0 * np.real(r_k / (s_k ** 2))))
     Sigma_1_exact = float(Fraction(13, 8400))
-    Sigma_2 = float(np.sum(2.0 * np.real(r_k / (s_k ** 3))))
+    Sigma_2 = float(np.sum(2.0 * np.real(r_all / (s_all ** 3))))
     Sigma_3_num = float(np.sum(2.0 * np.real(r_k / (s_k ** 4))))
     Sigma_3_exact = float(Fraction(-1, 84000))
 
@@ -169,14 +171,23 @@ def main() -> None:
     crm_csm = np.conj(rm_sm)
     sk_M = s_k[:M_inner]
     csk_M = np.conj(sk_M)
+    # Прямые хвостовые моменты T_n = sum_{m > M_inner} 2*Re(r_m / s_m^{n+1}) (n=1..6),
+    # снимающие ошибку обрезки M_inner = 30000 до 1e-17 без удорожания цикла по k:
+    s_rest = s_all[M_inner:]
+    r_rest = r_all[M_inner:]
+    T_tail = [0.0] + [float(np.sum(2.0 * np.real(r_rest / (s_rest ** (n + 1))))) for n in range(1, 7)]
 
     def Fm_fast(z: complex) -> complex:
-        return 7.0 / (20.0 * z) + Sigma_0 - z * np.sum(rm_sm / (z + sk_M) + crm_csm / (z + csk_M))
+        s_main = np.sum(rm_sm / (z + sk_M) + crm_csm / (z + csk_M))
+        s_tail = sum(((-z) ** (n - 1)) * T_tail[n] for n in range(1, 7))
+        return 7.0 / (20.0 * z) + Sigma_0 - z * (s_main + s_tail)
 
     def Fm_deriv(z: complex) -> complex:
-        return -7.0 / (20.0 * (z ** 2)) - np.sum(
+        ds_main = np.sum(
             rm_sm * sk_M / ((z + sk_M) ** 2) + crm_csm * csk_M / ((z + csk_M) ** 2)
         )
+        ds_tail = sum(n * ((-z) ** (n - 1)) * T_tail[n] for n in range(1, 7))
+        return -7.0 / (20.0 * (z ** 2)) - (ds_main + ds_tail)
 
     K_u = 600
     den_k = 1j * 2.0 * w[:K_u] * (1.0 - sig[:K_u] * np.cos(w[:K_u]))
@@ -185,7 +196,7 @@ def main() -> None:
     u1_total = u1_res0 + 2.0 * float(np.real(np.sum(u1_terms)))
 
     # Для <V_1^{§6.1}, 1> при Q(s_k) = 0 имеем точное тождество Q''(s_k) / Q'(s_k) = -1 / Q'(s_k) - 4 / s_k
-    # и убывание членов вычетов O(k^{-4}) (остаток O(K^{-3})):
+    # и убывание членов вычетов O(k^{-4}) (остаток O(K^{-3}), т.к. e^{s_k} = 1 + s_k^2/2 + sinh(s_k) сокращает sinh(s_k) в Q'(s_k)):
     u = 1.0 + d0
     v1_res0 = math.sqrt(12.0) * (
         -0.25 * (u ** 4) + (9.0 / 40.0) * (u ** 2) - (6.0 * g3 + Sigma_0) * u - 17.0 / 2100.0
@@ -211,7 +222,7 @@ def main() -> None:
         r_v1_simple = (np.exp(sk) * Pms / (sk * Qp)) * (1.0 / (2.0 * sk) - fms)
         res_v1[k] = 2.0 * float(np.real(r_v1_double + r_v1_simple))
 
-        # 2) Вычет для <U, TW> (ускоренный до O(k^{-4}) выделением 1/(2s)):
+        # 2) Вычет для <U, TW> (члены A*k^{-4}*ln(k) + B*k^{-4} из-за Re(1/Q'(s_k)) ~ -ln(k)/(2*pi^2*k^2)):
         res_utw[k] = -2.0 * float(np.real(2.0 * r_k[k] * (Pms ** 2) * (1.0 / (2.0 * sk) - fms)))
 
         # 3) Вычет для <W, TW>:
@@ -231,18 +242,26 @@ def main() -> None:
     assert abs(v1_total - (-0.760599353809)) < 1e-12
 
     # 4. Точное представление Винера–Хопфа для c_2 и C_rho в §6.4 через определитель Грама–поворота 2x2
+    # Трёхшаговый оператор Ричардсона R_3 на сетке K = 100, 200, 400, 800 аннулирует одновременно
+    # K^{-3}, K^{-3}*ln(K) и K^{-4} в остатке сумм <U, TW> и <W, TW>:
     print("\n=== 4. Exact Wiener-Hopf 2x2 Gram-Turn Determinant for c_2 and C_rho (§6.4) ===")
     vtv = 0.039958599729073
     utu = 12.0 * vtv
+
+    def extrap_r3(lead: float, arr: np.ndarray) -> float:
+        s1 = lead + float(np.sum(arr[:100]))
+        s2 = lead + float(np.sum(arr[:200]))
+        s4 = lead + float(np.sum(arr[:400]))
+        s8 = lead + float(np.sum(arr[:800]))
+        r2_100 = (64.0 * s4 - 16.0 * s2 + s1) / 49.0
+        r2_200 = (64.0 * s8 - 16.0 * s4 + s2) / 49.0
+        return (16.0 * r2_200 - r2_100) / 15.0
+
     lead_utw = -6.0 * vtv + 0.3 * d0 - Sigma_0
-    utw_400 = lead_utw + float(np.sum(res_utw[:400]))
-    utw_800 = lead_utw + float(np.sum(res_utw[:800]))
-    utw_total = (8.0 * utw_800 - utw_400) / 7.0
+    utw_total = extrap_r3(lead_utw, res_utw)
 
     res0_wtw = 6.0 * Sigma_2 + (0.5 + 12.0 * (d0 ** 2)) * Sigma_0 + (121.0 / 1400.0) * d0 + 2.8 * (d0 ** 3) + 4.2 * g3
-    wtw_400 = res0_wtw + float(np.sum(res_wtw[:400]))
-    wtw_800 = res0_wtw + float(np.sum(res_wtw[:800]))
-    wtw_total = (8.0 * wtw_800 - wtw_400) / 7.0
+    wtw_total = extrap_r3(res0_wtw, res_wtw)
 
     alpha = -(3.0 * (d0 ** 2) + 1.0 / 20.0)
     v_tv3_wh = (utw_total - alpha * utu) / 12.0
@@ -252,18 +271,22 @@ def main() -> None:
     c1_wh = C_const * vtv
     c2_wh = 6.0 * C_const * det_VV3 / vtv
     C_rho_wh = abs(c1_wh / c2_wh)
+    C_rho_uw = (utu ** 2) / (6.0 * ((utw_total ** 2) - utu * wtw_total))
 
-    print(f"  <U, TW>   (Wiener-Hopf residue) = {utw_total:.12f} (grid Rich: -0.150169088439)")
-    print(f"  <W, TW>   (Wiener-Hopf residue) = {wtw_total:.12f} (grid Rich:  0.032653149614)")
-    print(f"  <V, TV_3> (Wiener-Hopf residue) = {v_tv3_wh:.12f} (grid Rich: -0.004319975190)")
-    print(f"  <V_3,TV_3>(Wiener-Hopf residue) = {v3_tv3_wh:.12f} (grid Rich: -0.000730984137)")
-    print(f"  c_2 = 6*C*det_2(V,V_3)/<V,TV>   = {c2_wh:.12f} (grid Rich: -0.084291356072)")
-    print(f"  C_rho = |c_1/c_2| (C-invariant) = {C_rho_wh:.10f} (grid Rich:  5.5589677830)")
-    assert abs(utw_total - (-0.150169088439)) < 2e-12
-    assert abs(v_tv3_wh - (-0.004319975190)) < 1e-12
-    assert abs(v3_tv3_wh - (-0.000730984137)) < 5e-12
-    assert abs(c2_wh - (-0.084291356072)) < 5e-10
-    print("\n=== ALL §6.1, THEOREM D, AND §6.4 (c_2, C_rho) CLOSED-FORM/RESIDUE CHECKS PASSED ===")
+    print(f"  <U, TW>   (Wiener-Hopf residue) = {utw_total:.12f} (50-digit ref: -0.150169088437)")
+    print(f"  <W, TW>   (Wiener-Hopf residue) = {wtw_total:.12f} (50-digit ref:  0.032653149615)")
+    print(f"  <V, TV_3> (Wiener-Hopf residue) = {v_tv3_wh:.12f} (50-digit ref: -0.004319975190)")
+    print(f"  <V_3,TV_3>(Wiener-Hopf residue) = {v3_tv3_wh:.12f} (50-digit ref: -0.000730984137)")
+    print(f"  c_2 = 6*C*det_2(V,V_3)/<V,TV>   = {c2_wh:.12f} (50-digit ref: -0.084291356072)")
+    print(f"  C_rho = |c_1/c_2| (C-invariant) = {C_rho_wh:.10f} (50-digit ref:  5.5589677830)")
+    assert abs(utw_total - (-0.150169088436830)) < 5e-14
+    assert abs(wtw_total - 0.032653149614810) < 5e-14
+    assert abs(v_tv3_wh - (-0.004319975190063)) < 2e-14
+    assert abs(v3_tv3_wh - (-0.000730984136930)) < 2e-14
+    assert abs(c2_wh - (-0.084291356072101)) < 5e-14
+    assert abs(C_rho_wh - 5.5589677830448) < 5e-12
+    assert abs(C_rho_wh - C_rho_uw) < 1e-14
+    print("\n=== ALL §6.1, THEOREM D, AND §6.4 (c_2, C_rho) CLOSED-FORM/RESIDUE CHECKS PASSED (12 DIGITS) ===")
 
 
 if __name__ == "__main__":
