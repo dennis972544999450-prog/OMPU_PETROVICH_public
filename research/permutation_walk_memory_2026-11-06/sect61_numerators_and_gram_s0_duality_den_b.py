@@ -279,21 +279,19 @@ def verify_sect61_k1_k2_k3():
     v1_k2 = 0.5 * u_k2 + w_k2
     mu1_k2 = v1_k2 / u_k2
 
-    # k = 3: (T^2 f_1)(u) = int_0^{1-u} (1-u-t)(1/3 - t/2 + t^3/6) dt
-    #                     = 2/15 - u/6 + u^3/18 - u^4/24 + u^5/120
+    # k = 3: (T^2 f_1)(u) = (1-u)^2/6 - (1-u)^3/12 + (1-u)^5/120
+    #                     = 11/120 - u/8 + 0*u^2 + 0*u^3 + u^4/24 - u^5/120
     u_k3 = (
-        (2.0 / 15.0) * m_tu[0]
-        - (1.0 / 6.0) * m_tu[1]
-        + (1.0 / 18.0) * m_tu[3]
-        - (1.0 / 24.0) * m_tu[4]
-        + (1.0 / 120.0) * m_tu[5]
+        (11.0 / 120.0) * m_tu[0]
+        - (1.0 / 8.0) * m_tu[1]
+        + (1.0 / 24.0) * m_tu[4]
+        - (1.0 / 120.0) * m_tu[5]
     )
     w_k3 = (
-        (2.0 / 15.0) * m_tw[0]
-        - (1.0 / 6.0) * m_tw[1]
-        + (1.0 / 18.0) * m_tw[3]
-        - (1.0 / 24.0) * m_tw[4]
-        + (1.0 / 120.0) * m_tw[5]
+        (11.0 / 120.0) * m_tw[0]
+        - (1.0 / 8.0) * m_tw[1]
+        + (1.0 / 24.0) * m_tw[4]
+        - (1.0 / 120.0) * m_tw[5]
     )
     v1_k3 = 0.5 * u_k3 + w_k3
     mu1_k3 = v1_k3 / u_k3
@@ -340,8 +338,8 @@ def verify_sect61_k1_k2_k3():
     # In powers of y = 1 - x:
     # (T f_1)(x)   = y^2/2 - y^3/6
     # (T^2 f_1)(x) = y^2/6 - y^3/12 + y^5/120
-    # (T^3 f_1)(x) = int_0^y (y-t)(2/15 - t/6 + t^3/18 - t^4/24 + t^5/120) dt
-    #              = y^2/15 - y^3/36 + y^5/360 - y^6/720 + y^7/5040
+    # (T^3 f_1)(x) = int_0^y (y-t)(11/120 - t/8 + t^4/24 - t^5/120) dt
+    #              = (11/240)*y^2 - (1/48)*y^3 + (1/720)*y^6 - (1/5040)*y^7
     u_k1_rich = 0.5 * inner_V_one_minus_x_pow(2) - (1.0 / 6.0) * inner_V_one_minus_x_pow(3)
     v1_k1_rich = 0.5 * inner_V1_one_minus_x_pow(2) - (1.0 / 6.0) * inner_V1_one_minus_x_pow(3)
 
@@ -357,18 +355,16 @@ def verify_sect61_k1_k2_k3():
     )
 
     u_k3_rich = (
-        (1.0 / 15.0) * inner_V_one_minus_x_pow(2)
-        - (1.0 / 36.0) * inner_V_one_minus_x_pow(3)
-        + (1.0 / 360.0) * inner_V_one_minus_x_pow(5)
-        - (1.0 / 720.0) * inner_V_one_minus_x_pow(6)
-        + (1.0 / 5040.0) * inner_V_one_minus_x_pow(7)
+        (11.0 / 240.0) * inner_V_one_minus_x_pow(2)
+        - (1.0 / 48.0) * inner_V_one_minus_x_pow(3)
+        + (1.0 / 720.0) * inner_V_one_minus_x_pow(6)
+        - (1.0 / 5040.0) * inner_V_one_minus_x_pow(7)
     )
     v1_k3_rich = (
-        (1.0 / 15.0) * inner_V1_one_minus_x_pow(2)
-        - (1.0 / 36.0) * inner_V1_one_minus_x_pow(3)
-        + (1.0 / 360.0) * inner_V1_one_minus_x_pow(5)
-        - (1.0 / 720.0) * inner_V1_one_minus_x_pow(6)
-        + (1.0 / 5040.0) * inner_V1_one_minus_x_pow(7)
+        (11.0 / 240.0) * inner_V1_one_minus_x_pow(2)
+        - (1.0 / 48.0) * inner_V1_one_minus_x_pow(3)
+        + (1.0 / 720.0) * inner_V1_one_minus_x_pow(6)
+        - (1.0 / 5040.0) * inner_V1_one_minus_x_pow(7)
     )
 
     assert abs(u_k1 - u_k1_rich) < 1e-10

@@ -1,0 +1,94 @@
+{
+  "status": "ALL_MORNING_0911_CHECKS_PASSED",
+  "author": "Den B (ompu-7f698bd908)",
+  "timestamp_cet": "2026-11-09T10:35:00+01:00",
+  "part1_parity_duality_rationals": {
+    "multiplicative_even_b_2j": {
+      "b_2": "1/60",
+      "b_4": "1/50400",
+      "b_6": "-1/2268000",
+      "b_8": "73/27941760000",
+      "b_10": "1/168168000000"
+    },
+    "additive_odd_Sigma_2m_minus_1": {
+      "Sigma_1": {
+        "rational": "13/8400",
+        "float": 0.0015476190476190477
+      },
+      "Sigma_3": {
+        "rational": "-1/84000",
+        "float": -1.1904761904761905e-05
+      },
+      "Sigma_5": {
+        "rational": "-31/2328480000",
+        "float": -1.3313406170549027e-08
+      },
+      "Sigma_7": {
+        "rational": "1343/908107200000",
+        "float": 1.4789002884240979e-09
+      },
+      "Sigma_9": {
+        "rational": "-6137/381405024000000",
+        "float": -1.6090506453318244e-11
+      }
+    }
+  },
+  "part2_sect61_closed_forms_k1_k2_k3": {
+    "higher_constants": {
+      "gamma_5": -3.672823253e-06,
+      "Sigma_4": 1.376176438e-06
+    },
+    "k1_Tf1": {
+      "U_Tf1_closed": 0.223044617552,
+      "U_Tf1_richardson": 0.223044617598,
+      "V1_Tf1_closed": 0.02776350094,
+      "V1_Tf1_richardson": 0.027763485506,
+      "mu1_Tf1_closed": 0.124475099397,
+      "mu1_Tf1_richardson": 0.124475030177
+    },
+    "k2_T2f1": {
+      "U_T2f1_closed": 0.065355101803,
+      "U_T2f1_richardson": 0.065355101813,
+      "V1_T2f1_closed": 0.007305647324,
+      "V1_T2f1_richardson": 0.007305644023,
+      "mu1_T2f1_closed": 0.111783887139,
+      "mu1_T2f1_richardson": 0.11178383661
+    },
+    "k3_T3f1_new": {
+      "U_T3f1_closed": 0.01849301065,
+      "U_T3f1_richardson": 0.018493010653,
+      "V1_T3f1_closed": 0.002110114033,
+      "V1_T3f1_richardson": 0.002110113048,
+      "mu1_T3f1_closed": 0.114103326553,
+      "mu1_T3f1_richardson": 0.114103273239
+    }
+  },
+  "part3_sect64_gram_determinant_audit": {
+    "shared_verifier_status": "PASSED",
+    "gram_entries": {
+      "U_TU": {
+        "exact": 0.479503196749,
+        "s0_poly": 0.454701560184,
+        "s0_share_pct": 94.83
+      },
+      "U_TW": {
+        "exact": -0.150169088439,
+        "s0_poly": -0.139423751525,
+        "s0_accel": -0.151824569807,
+        "s0_accel_share_pct": 101.1
+      },
+      "W_TW": {
+        "exact": 0.032653149614,
+        "s0_poly": 0.034510348496,
+        "s0_share_pct": 105.69
+      }
+    },
+    "spectral_constants_sect64": {
+      "c1_exact": 0.468572932794,
+      "c2_exact": -0.084291356085,
+      "C_rho_exact": 5.5589677822,
+      "C_rho_pure_s0": 110.354668,
+      "C_rho_accel_s0": 70.71433
+    }
+  }
+}
