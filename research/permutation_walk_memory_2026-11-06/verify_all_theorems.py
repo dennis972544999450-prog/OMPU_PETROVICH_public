@@ -202,19 +202,47 @@ def verify_cantilever_spectrum_theorem_4():
 
     # Compare with exact rational power iteration of T on [0, 1]:
     v = [Fraction(1), Fraction(-1)]
+    poly_iterates = [v]
     for _ in range(12):
         v = apply_turn_operator_poly(v)
+        poly_iterates.append(v)
     v_next = apply_turn_operator_poly(v)
     m_v = sum(c / Fraction(k + 1) for k, c in enumerate(v))
     m_next = sum(c / Fraction(k + 1) for k, c in enumerate(v_next))
     rayleigh = float(m_next / m_v)
     assert abs(rayleigh - lam1) < 1e-9
 
+    # Free-End Cantilever Trace Theorem (Den B 1794304520) & Unit-Fraction Fredholm Determinant (Petrovich Argon 11:20):
+    # Delta(z) = det(I - z T) = cosh(sqrt(z)/2)cos(sqrt(z)/2) - sinh(sqrt(z)/2)sin(sqrt(z)/2)
+    #          = sum_{m>=0} (-1)**((m+1)//2) / (2**m * (2*m)!) * z**m,
+    # and sum_{m>=1} Tr(T^m) z^{m-1} = (1/4)*((I - z T)^{-1} f_1)(0) = -Delta'(z) / Delta(z).
+    delta_coeffs = [
+        Fraction((-1) ** ((m + 1) // 2), (2 ** m) * math.factorial(2 * m))
+        for m in range(11)
+    ]
+    traces_recurrence = {}
+    for m in range(1, 11):
+        # Newton-Girard / logarithmic derivative recurrence from -Delta'(z)/Delta(z):
+        num_m = Fraction((-1) ** ((m - 1) // 2) * m, (2 ** m) * math.factorial(2 * m))
+        tr_m = num_m - sum(delta_coeffs[j] * traces_recurrence[m - j] for j in range(1, m))
+        # Compare with (1/4)*(T^{m-1} f_1)(0) and inner product (1/4)*<T^a f_1, T^b f_1>:
+        free_end_quarter = Fraction(1, 4) * poly_iterates[m - 1][0]
+        assert tr_m == free_end_quarter, f"Mismatch at m={m}: {tr_m} vs {free_end_quarter}"
+        if m >= 2:
+            a = (m - 2) // 2
+            b = (m - 2) - a
+            gram_quarter = Fraction(1, 4) * poly_inner_product(poly_iterates[a], poly_iterates[b])
+            assert tr_m == gram_quarter
+        traces_recurrence[m] = tr_m
+
     return {
         "kappa_1_2_3": [round(r, 12) for r in roots],
         "lambda_1_2_3": [round(lam1, 12), round(lam2, 12), round(lam3, 12)],
         "rho_turn_compression": round(rho_turn, 12),
+        "fredholm_det_unit_fractions_m_1_to_6": {f"z^{m}": str(delta_coeffs[m]) for m in range(1, 7)},
+        "cantilever_traces_m_1_to_10": {f"Tr(T^{m})": str(traces_recurrence[m]) for m in range(1, 11)},
     }
+
 
 
 def verify_edgeworth_asymptotics_theorem_5():
