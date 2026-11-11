@@ -1,0 +1,78 @@
+{
+  "theorem_1_gohberg_semencul_traces_and_midpoint_kernels": {
+    "m=1": {
+      "trace_rational": "1/4",
+      "midpoint_kernel_K_m(1/2,1/2)": "0"
+    },
+    "m=2": {
+      "trace_rational": "1/12",
+      "midpoint_kernel_K_m(1/2,1/2)": "1/24"
+    },
+    "m=3": {
+      "trace_rational": "11/480",
+      "midpoint_kernel_K_m(1/2,1/2)": "1/96"
+    },
+    "m=4": {
+      "trace_rational": "11/1680",
+      "midpoint_kernel_K_m(1/2,1/2)": "61/20160"
+    },
+    "m=5": {
+      "trace_rational": "2701/1451520",
+      "midpoint_kernel_K_m(1/2,1/2)": "83/96768"
+    },
+    "m=6": {
+      "trace_rational": "2641/4989600",
+      "midpoint_kernel_K_m(1/2,1/2)": "38971/159667200"
+    },
+    "m=7": {
+      "trace_rational": "3749591/24908083200",
+      "midpoint_kernel_K_m(1/2,1/2)": "26599/383201280"
+    },
+    "m=8": {
+      "trace_rational": "12343/288288000",
+      "midpoint_kernel_K_m(1/2,1/2)": "103264981/5230697472000"
+    },
+    "m=9": {
+      "trace_rational": "17324938681/1422749712384000",
+      "midpoint_kernel_K_m(1/2,1/2)": "2088521/371960709120"
+    }
+  },
+  "theorem_2_centrosymmetric_bezoutian_and_wronskian_slope": {
+    "m=1": {
+      "Delta_K_m(1/5, 2/5)": "2/5",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "1",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "1"
+    },
+    "m=2": {
+      "Delta_K_m(1/5, 2/5)": "38/375",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "2/9",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "1/4"
+    },
+    "m=3": {
+      "Delta_K_m(1/5, 2/5)": "1384/46875",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "16/243",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "7/96"
+    },
+    "m=4": {
+      "Delta_K_m(1/5, 2/5)": "823679/98437500",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "2441/131220",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "119/5760"
+    },
+    "m=5": {
+      "Delta_K_m(1/5, 2/5)": "1883587/791015625",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "10946/2066715",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "3793/645120"
+    },
+    "m=6": {
+      "Delta_K_m(1/5, 2/5)": "329970799339/487265625000000",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "80680081/53569252800",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "194161/116121600"
+    },
+    "m=7": {
+      "Delta_K_m(1/5, 2/5)": "408495973723/2120910644531250",
+      "anti_diagonal_normal_slope_at_1/3_eq_W_{m-1}(1/3)": "106488752/248594813775",
+      "anti_diagonal_normal_slope_at_1/2_eq_W_{m-1}(1/2)": "14578807/30656102400"
+    }
+  },
+  "status": "ALL_CHECKS_PASSED"
+}

@@ -1,0 +1,79 @@
+{
+  "wronskian_scaling_and_moments_m_0_to_8": {
+    "m=0": {
+      "deg_W_m": 0,
+      "int_0_1_W_m_eq_I0_m": "1",
+      "W_m_at_half": "1",
+      "W_m_at_0_and_1": "1",
+      "delta_convolved_monomial_coeff": "1"
+    },
+    "m=1": {
+      "deg_W_m": 2,
+      "int_0_1_W_m_eq_I0_m": "1/6",
+      "W_m_at_half": "1/4",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "-1/4"
+    },
+    "m=2": {
+      "deg_W_m": 4,
+      "int_0_1_W_m_eq_I0_m": "1/20",
+      "W_m_at_half": "7/96",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "-1/96"
+    },
+    "m=3": {
+      "deg_W_m": 6,
+      "int_0_1_W_m_eq_I0_m": "71/5040",
+      "W_m_at_half": "119/5760",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "1/5760"
+    },
+    "m=4": {
+      "deg_W_m": 8,
+      "int_0_1_W_m_eq_I0_m": "13/3240",
+      "W_m_at_half": "3793/645120",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "1/645120"
+    },
+    "m=5": {
+      "deg_W_m": 10,
+      "int_0_1_W_m_eq_I0_m": "45541/39916800",
+      "W_m_at_half": "194161/116121600",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "-1/116121600"
+    },
+    "m=6": {
+      "deg_W_m": 12,
+      "int_0_1_W_m_eq_I0_m": "3827/11793600",
+      "W_m_at_half": "14578807/30656102400",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "-1/30656102400"
+    },
+    "m=7": {
+      "deg_W_m": 14,
+      "int_0_1_W_m_eq_I0_m": "120686411/1307674368000",
+      "W_m_at_half": "1509285959/11158821273600",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "1/11158821273600"
+    },
+    "m=8": {
+      "deg_W_m": 16,
+      "int_0_1_W_m_eq_I0_m": "36470101/1389404016000",
+      "W_m_at_half": "206045052193/5356234211328000",
+      "W_m_at_0_and_1": "0",
+      "delta_convolved_monomial_coeff": "1/5356234211328000"
+    }
+  },
+  "midpoint_inverse_fredholm_coeffs_m_0_to_8": {
+    "m=0": "1",
+    "m=1": "1/4",
+    "m=2": "7/96",
+    "m=3": "119/5760",
+    "m=4": "3793/645120",
+    "m=5": "194161/116121600",
+    "m=6": "14578807/30656102400",
+    "m=7": "1509285959/11158821273600",
+    "m=8": "206045052193/5356234211328000"
+  },
+  "status": "ALL_CHECKS_PASSED"
+}
