@@ -235,29 +235,166 @@ def verify_cantilever_spectrum_theorem_4():
             assert tr_m == gram_quarter
         traces_recurrence[m] = tr_m
 
+    # Cayley-Fredholm Slope EGF (Jee A 1794339588), Midpoint Resolvents (Den B 1794340355),
+    # and Wick-Rotation / Centrosymmetric Wronskian Conservation Laws (Petrovich Carbon 09:20):
+    M_max = 10
+    delta_ext = [
+        Fraction((-1) ** ((m + 1) // 2), (2 ** m) * math.factorial(2 * m))
+        for m in range(M_max + 2)
+    ]
+    delta_minus = [delta_ext[m] * ((-1) ** m) for m in range(M_max + 1)]
+    int_delta = [
+        Fraction((-1) ** ((m + 1) // 2), (2 ** m) * math.factorial(2 * m + 1))
+        for m in range(M_max + 1)
+    ]
+
+    # 1) Exact Wick-rotated derivative identity: int_0^1 Delta(z u^2) du == -4 * Delta'(-z)
+    assert int_delta == [-4 * (m + 1) * delta_ext[m + 1] * ((-1) ** m) for m in range(M_max + 1)]
+
+    def series_mul(a: list[Fraction], b: list[Fraction]) -> list[Fraction]:
+        out = [Fraction(0)] * (M_max + 1)
+        for i in range(M_max + 1):
+            for j in range(M_max + 1 - i):
+                out[i + j] += a[i] * b[j]
+        return out
+
+    def series_div_unit(a: list[Fraction], b: list[Fraction]) -> list[Fraction]:
+        out = [Fraction(0)] * (M_max + 1)
+        for m in range(M_max + 1):
+            out[m] = a[m] - sum(b[j] * out[m - j] for j in range(1, m + 1))
+        return out
+
+    # H_z(0) = Delta(-z) / Delta(z) = sum_{m>=0} H_0^(m) z^m, A_m = (2m)! H_0^(m)
+    H0_series = series_div_unit(delta_minus, delta_ext[: M_max + 1])
+    I0_series = series_div_unit(int_delta, delta_ext[: M_max + 1])
+    Theta_series = [Fraction(0)] * (M_max + 1)
+    for m in range(1, M_max + 1):
+        Theta_series[m - 1] = traces_recurrence[m]
+    Theta_series[M_max] = series_div_unit(
+        [-(m + 1) * delta_ext[m + 1] for m in range(M_max + 1)], delta_ext[: M_max + 1]
+    )[M_max]
+
+    # Verify A_m = (2m)! * H_0^(m) matches alternating walk counts (1, 1, 3, 26, 413, 10576, 397023, ...)
+    alt_counts = [int(math.factorial(2 * m) * H0_series[m]) for m in range(M_max + 1)]
+    assert alt_counts[:8] == [1, 1, 3, 26, 413, 10576, 397023, 20551376]
+
+    # 2) Wick-Rotation Trace-Mass Convolution: I_0^(m) = 4 * sum_{k=1}^{m+1} (-1)^(k-1) Tr(T^k) H_0^(m+1-k)
+    for m in range(M_max):
+        wick_conv = 4 * sum(
+            ((-1) ** (k - 1)) * Theta_series[k - 1] * H0_series[m + 1 - k]
+            for k in range(1, m + 2)
+        )
+        assert I0_series[m] == wick_conv
+
+    # 3) Centrosymmetric Wronskian w_z(x) = w_z(1-x) -> Three-Generator Conservation Law:
+    #    H_z(0)^2 - 4 z I_z Theta_z == 1  <=>  Delta(z)^2 - Delta(-z)^2 == -sinh(sqrt(z)) sin(sqrt(z))
+    H_sq = series_mul(H0_series, H0_series)
+    I_Theta = series_mul(I0_series, Theta_series)
+    conservation = [
+        H_sq[m] - (Fraction(0) if m == 0 else 4 * I_Theta[m - 1])
+        for m in range(M_max + 1)
+    ]
+    assert conservation == [Fraction(1)] + [Fraction(0)] * M_max
+    d_sq_diff = [
+        series_mul(delta_ext[: M_max + 1], delta_ext[: M_max + 1])[m]
+        - series_mul(delta_minus, delta_minus)[m]
+        for m in range(M_max + 1)
+    ]
+    neg_sinh_sin = [
+        Fraction(0)
+        if m % 2 == 0
+        else Fraction((-1) ** ((m - 1) // 2 + 1) * (2 ** m), math.factorial(2 * m))
+        for m in range(M_max + 1)
+    ]
+    assert d_sq_diff == neg_sinh_sin
+
+    # 4) Midpoint Resolvents (Den B 1794340355) & Pythagorean Resolvent Identity (Petrovich Carbon 09:20):
+    #    R_z(1/2)^2 + z F_z(1/2)^2 == Delta(z)^(-2) == det(I - z T)^(-2)
+    cos_half = [Fraction((-1) ** m, (4 ** m) * math.factorial(2 * m)) for m in range(M_max + 1)]
+    sinc_half = [
+        Fraction((-1) ** m, 2 * (4 ** m) * math.factorial(2 * m + 1)) for m in range(M_max + 1)
+    ]
+    Rz_mid = series_div_unit(cos_half, delta_ext[: M_max + 1])
+    Fz_mid = series_div_unit(sinc_half, delta_ext[: M_max + 1])
+    for m in range(7):
+        f_mid_poly = sum(c * (Fraction(1, 2) ** k) for k, c in enumerate(poly_iterates[m]))
+        assert Fz_mid[m] == f_mid_poly
+    Fz_sq = series_mul(Fz_mid, Fz_mid)
+    pythagorean_lhs = [
+        series_mul(Rz_mid, Rz_mid)[m] + (Fraction(0) if m == 0 else Fz_sq[m - 1])
+        for m in range(M_max + 1)
+    ]
+    inv_delta_sq = series_div_unit(
+        [Fraction(1)] + [Fraction(0)] * M_max,
+        series_mul(delta_ext[: M_max + 1], delta_ext[: M_max + 1]),
+    )
+    assert pythagorean_lhs == inv_delta_sq
+
     return {
         "kappa_1_2_3": [round(r, 12) for r in roots],
         "lambda_1_2_3": [round(lam1, 12), round(lam2, 12), round(lam3, 12)],
         "rho_turn_compression": round(rho_turn, 12),
         "fredholm_det_unit_fractions_m_1_to_6": {f"z^{m}": str(delta_coeffs[m]) for m in range(1, 7)},
         "cantilever_traces_m_1_to_10": {f"Tr(T^{m})": str(traces_recurrence[m]) for m in range(1, 11)},
+        "cayley_fredholm_alternating_counts_A_0_to_7": alt_counts[:8],
+        "wronskian_and_midpoint_pythagorean_verified_up_to_z10": True,
     }
-
 
 
 def verify_edgeworth_asymptotics_theorem_5():
     """
-    Theorem 5 (Den B & Jee A):
+    Theorem 5 (Den B, Jee A & Petrovich):
     - m-turn Bayesian cell limits p_hat_inf(-, 1^m) = 3/10, 71/252, 182/639, 45541/160160, ...
-    - 1st- and 2nd-order Edgeworth expansions: p_hat_n(-, 1) = 3/10 - 3/(175*(n-1)) + 2/(175*(n-1)^2) + O((n-1)^-3).
+    - Non-recursive moment reduction I_r^(m) / r! in terms of I_0 and H_0 (Jee A 1794339588 & Den B 1794340355).
+    - 1st-, 2nd-, and 3rd-order rational Edgeworth expansions up to O((n-m)^-4) (Den B 1794340355).
     """
-    # Compute T^m(1) for m = 1..7
+    # Compute T^m(1) for m = 0..10
     tm = [[Fraction(1)]]
-    for _ in range(7):
+    for _ in range(10):
         tm.append(apply_turn_operator_poly(tm[-1]))
 
     def moment(p: list[Fraction], power: int) -> Fraction:
         return sum(c / Fraction(k + power + 1) for k, c in enumerate(p))
+
+    # Verify non-recursive mod-4 unrolled moment formula (Den B 1794340355 carrier L161-177 & Jee A 1794339588)
+    I0_vals = [moment(tm[m], 0) for m in range(11)]
+    H0_vals = [tm[m][0] for m in range(11)]
+    for m in range(6):
+        for r in range(7):
+            exact_ir_over_fact = moment(tm[m], r) / math.factorial(r)
+            closed_ir_over_fact = (
+                sum(I0_vals[m + 2 * k] / math.factorial(r - 4 * k) for k in range(r // 4 + 1))
+                - sum(
+                    H0_vals[m + 2 * k + 1] / math.factorial(r - 1 - 4 * k)
+                    for k in range((r - 1) // 4 + 1)
+                    if r - 1 - 4 * k >= 0
+                )
+                + (
+                    I0_vals[m + 2 * (r // 4) + 1]
+                    if r % 4 == 2
+                    else (H0_vals[m + 2 * (r // 4) + 2] if r % 4 == 3 else Fraction(0))
+                )
+            )
+            assert exact_ir_over_fact == closed_ir_over_fact
+            if r >= 4:
+                mod4_ir = (
+                    I0_vals[m]
+                    - r * H0_vals[m + 1]
+                    + r * (r - 1) * (r - 2) * (r - 3) * moment(tm[m + 2], r - 4)
+                )
+                assert moment(tm[m], r) == mod4_ir
+
+    # Independently verify triangular-step cumulants (kappa_2 = 1/6, kappa_4 = -1/60, kappa_6 = 1/126)
+    # from 2 * log(sin(t/2)/(t/2)) = -kappa_2 t^2/2! + kappa_4 t^4/4! - kappa_6 t^6/6! + ...
+    # sin(t/2)/(t/2) = 1 - t^2/24 + t^4/1920 - t^6/322560 + ...
+    s1, s2, s3 = Fraction(-1, 24), Fraction(1, 1920), Fraction(-1, 322560)
+    log_c2 = 2 * s1
+    log_c4 = 2 * (s2 - s1 * s1 / 2)
+    log_c6 = 2 * (s3 - s1 * s2 + s1 * s1 * s1 / 3)
+    kappa_2 = -log_c2 * math.factorial(2)
+    kappa_4 = log_c4 * math.factorial(4)
+    kappa_6 = -log_c6 * math.factorial(6)
+    assert (kappa_2, kappa_4, kappa_6) == (Fraction(1, 6), Fraction(-1, 60), Fraction(1, 126))
 
     m_turn_limits = {}
     edgeworth_coeffs = {}
@@ -265,26 +402,41 @@ def verify_edgeworth_asymptotics_theorem_5():
         i0_den = moment(tm[m], 0)
         i2_den = moment(tm[m], 2)
         i4_den = moment(tm[m], 4)
+        i6_den = moment(tm[m], 6)
         i0_num = moment(tm[m + 1], 0)
         i2_num = moment(tm[m + 1], 2)
         i4_num = moment(tm[m + 1], 4)
+        i6_num = moment(tm[m + 1], 6)
 
         p0 = i0_num / i0_den
         m_turn_limits[f"m={m}"] = str(p0)
 
-        # F_0^(L)(x) / F_0^(L)(0) = 1 - 3*x^2/L + (9/10*x^2 + 9/2*x^4)/L^2 + O(L^-3)
+        # F_0^(L)(x) / F_0^(L)(0) = 1 - 3*x^2/L + (9/10*x^2 + 9/2*x^4)/L^2
+        #                           - (27/350*x^2 + 18/5*x^4 + 9/2*x^6)/L^3 + O(L^-4)
         a1 = -3 * (i2_num / i0_num)
         a2 = Fraction(9, 10) * (i2_num / i0_num) + Fraction(9, 2) * (i4_num / i0_num)
+        a3 = -(
+            Fraction(27, 350) * (i2_num / i0_num)
+            + Fraction(18, 5) * (i4_num / i0_num)
+            + Fraction(9, 2) * (i6_num / i0_num)
+        )
         b1 = -3 * (i2_den / i0_den)
         b2 = Fraction(9, 10) * (i2_den / i0_den) + Fraction(9, 2) * (i4_den / i0_den)
+        b3 = -(
+            Fraction(27, 350) * (i2_den / i0_den)
+            + Fraction(18, 5) * (i4_den / i0_den)
+            + Fraction(9, 2) * (i6_den / i0_den)
+        )
 
         c1 = p0 * (a1 - b1)
         c2 = p0 * (a2 - b2 - b1 * (a1 - b1))
-        if m <= 3:
+        c3 = p0 * ((a3 - b3) - b1 * (a2 - b2) + (b1 * b1 - b2) * (a1 - b1))
+        if m <= 4:
             edgeworth_coeffs[f"m={m}"] = {
                 "p_inf": str(p0),
                 "c1_over_n_minus_m": str(c1),
                 "c2_over_n_minus_m_sq": str(c2),
+                "c3_over_n_minus_m_cu": str(c3),
             }
 
     assert m_turn_limits["m=1"] == "3/10"
@@ -296,12 +448,16 @@ def verify_edgeworth_asymptotics_theorem_5():
 
     assert edgeworth_coeffs["m=1"]["c1_over_n_minus_m"] == "-3/175"
     assert edgeworth_coeffs["m=1"]["c2_over_n_minus_m_sq"] == "2/175"
+    assert edgeworth_coeffs["m=1"]["c3_over_n_minus_m_cu"] == "-556/67375"
     assert edgeworth_coeffs["m=2"]["c1_over_n_minus_m"] == "65/21168"
     assert edgeworth_coeffs["m=2"]["c2_over_n_minus_m_sq"] == "-8497/4074840"
+    assert edgeworth_coeffs["m=2"]["c3_over_n_minus_m_cu"] == "68012617/44497252800"
+    assert edgeworth_coeffs["m=3"]["c3_over_n_minus_m_cu"] == "-46120805348351/217578715956201600"
+    assert edgeworth_coeffs["m=4"]["c3_over_n_minus_m_cu"] == "152830288809687/4302212065882931200"
 
     return {
         "m_turn_rational_limits_m_1_to_6": m_turn_limits,
-        "edgeworth_1st_and_2nd_order_m_1_to_3": edgeworth_coeffs,
+        "edgeworth_1st_2nd_3rd_order_m_1_to_4": edgeworth_coeffs,
     }
 
 
