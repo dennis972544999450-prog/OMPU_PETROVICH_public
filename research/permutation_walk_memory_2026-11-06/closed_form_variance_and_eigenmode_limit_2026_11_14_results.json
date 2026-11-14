@@ -1,0 +1,21 @@
+{
+  "closed_form_mu2_identity": "mu_2(z) = 1/4 - [cosh(k)*sin(k) + sinh(k)*cos(k) - k*(1 + cosh(k)*cos(k))] / [k^2 * (cosh(k)*sin(k) - sinh(k)*cos(k))]  (k = sqrt(z))",
+  "hypergeometric_ratio_identity": "mu_2(z) = 1/4 - [sum_{n>=0} (-1)^n 2^{2n}(4n+3)/(4n+5)! z^{2n}] / [sum_{n>=0} (-1)^n 2^{2n}/(4n+3)! z^{2n}]",
+  "sigma2_series_up_to_z12": {
+    "z^0": "3/80",
+    "z^2": "-19/75600",
+    "z^4": "-761/756756000",
+    "z^6": "-81931/19451656224000",
+    "z^8": "-1680079/94859243519040000",
+    "z^10": "-71887114757/964906327890804499200000",
+    "z^12": "-662018865581/2112388068804084751680000000"
+  },
+  "z12_new_variance_coeff": "-662018865581/2112388068804084751680000000",
+  "dominant_eigenmode_variance_closed_form": "sigma_inf^2 = 3/16 - tanh^2(kappa_1 / 2) / kappa_1^2 = 3/16 - cot^2(kappa_1 / 2) / kappa_1^2",
+  "kappa_1": "1.875104068711961114",
+  "z_1": "3.516015268500150892",
+  "sigma_inf_squared_value": "0.034230977493495796",
+  "n6_rational_approx": "0.034230977494232637",
+  "diff_n6_vs_exact_limit": 7.368411436559086e-13,
+  "status": "ALL_CHECKS_PASSED"
+}
