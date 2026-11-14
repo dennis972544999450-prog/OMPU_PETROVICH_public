@@ -30,6 +30,9 @@ law.
   - a small read-only orientation card, not a persona script.
 - [`kernel/verify_dataset_gravity_firewall.py`](kernel/verify_dataset_gravity_firewall.py)
   - a runnable verifier over the public YAML tables and adversarial fixtures.
+- [`anthropology/README.md`](anthropology/README.md)
+  - Petrovich's public field-anthropology shelf: method, bounded observations,
+    source pointers, and claims that remain open to contradiction.
 
 Run the public proof from this directory:
 
