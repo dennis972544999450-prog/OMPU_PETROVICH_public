@@ -330,6 +330,144 @@ def verify_cantilever_spectrum_theorem_4():
     )
     assert pythagorean_lhs == inv_delta_sq
 
+    # 5) Self-Similar Wronskian Scaling Law on [0, 1] & Simplex Identity (Jee A 1794389764, READ-0067):
+    #    -w_z(x) = R_z'(x) F_z(x) - R_z(x) F_z'(x) = Delta(z (2x - 1)^2) / Delta(z)
+    t_one_iters = [[Fraction(1)]]
+    for _ in range(9):
+        t_one_iters.append(apply_turn_operator_poly(t_one_iters[-1]))
+
+    def p_deriv(p: list[Fraction]) -> list[Fraction]:
+        return [c * j for j, c in enumerate(p) if j >= 1] or [Fraction(0)]
+
+    def p_mul(p: list[Fraction], q: list[Fraction]) -> list[Fraction]:
+        res = [Fraction(0)] * (len(p) + len(q) - 1)
+        for i, a in enumerate(p):
+            if a:
+                for j, b in enumerate(q):
+                    res[i + j] += a * b
+        while len(res) > 1 and res[-1] == 0:
+            res.pop()
+        return res
+
+    def p_add(p: list[Fraction], q: list[Fraction], s: Fraction = Fraction(1)) -> list[Fraction]:
+        res = [Fraction(0)] * max(len(p), len(q))
+        for i, a in enumerate(p):
+            res[i] += a
+        for i, b in enumerate(q):
+            res[i] += s * b
+        while len(res) > 1 and res[-1] == 0:
+            res.pop()
+        return res
+
+    def p_eval(p: list[Fraction], x: Fraction) -> Fraction:
+        return sum(c * (x ** k) for k, c in enumerate(p))
+
+    def p_shift(p: list[Fraction], a: Fraction) -> list[Fraction]:
+        res = [Fraction(0)] * len(p)
+        for k, c in enumerate(p):
+            if c:
+                for j in range(k + 1):
+                    res[j] += c * math.comb(k, j) * (a ** (k - j))
+        return res
+
+    W_polys = []
+    for m in range(8):
+        wm = [Fraction(0)]
+        for k in range(m + 1):
+            term = p_add(
+                p_mul(p_deriv(t_one_iters[k]), poly_iterates[m - k]),
+                p_mul(t_one_iters[k], p_deriv(poly_iterates[m - k])),
+                Fraction(-1),
+            )
+            wm = p_add(wm, term)
+        W_polys.append(wm)
+        # Simplex identity: int_0^1 W_m(x) dx == I_0^(m)
+        int_wm = sum(c / Fraction(k + 1) for k, c in enumerate(wm))
+        assert int_wm == I0_series[m]
+
+    two_x_minus_1_sq = [Fraction(1), Fraction(-4), Fraction(4)]
+    pow_2xm1 = [Fraction(1)]
+    for m in range(8):
+        lhs_conv = [Fraction(0)]
+        for j in range(m + 1):
+            lhs_conv = p_add(lhs_conv, W_polys[m - j], delta_ext[j])
+        rhs_mono = p_add([Fraction(0)], pow_2xm1, delta_ext[m])
+        assert lhs_conv == rhs_mono
+        pow_2xm1 = p_mul(pow_2xm1, two_x_minus_1_sq)
+
+    # 6) Rank-1 Anticommutator D T + T D = -f_1 (x) delta_0, Gohberg-Semencul 2D Kernel,
+    #    & Centrosymmetric Bezoutian Identity (Den B 1794390265 / 1794645335, READ-0067):
+    f1_poly = [Fraction(1), Fraction(-1)]
+    for r in range(7):
+        h = [Fraction(0)] * r + [Fraction(1)]
+        anticomm = p_add(p_deriv(apply_turn_operator_poly(h)), apply_turn_operator_poly(p_deriv(h)))
+        expected_ac = [-h[0], h[0]] if h[0] != 0 else [Fraction(0)]
+        assert anticomm == expected_ac
+        wave_comm = p_add(
+            p_deriv(p_deriv(apply_turn_operator_poly(h))),
+            apply_turn_operator_poly(p_deriv(p_deriv(h))),
+            Fraction(-1),
+        )
+        hp0 = h[1] if len(h) > 1 else Fraction(0)
+        expected_wc = p_add([h[0]], f1_poly, hp0)
+        assert wave_comm == expected_wc
+
+    def K_gs_even(two_n: int, x: Fraction, y: Fraction) -> Fraction:
+        upper = Fraction(1) - max(x, y)
+        tot = Fraction(0)
+        for k in range(two_n - 1):
+            prod = p_mul(p_shift(poly_iterates[k], x), p_shift(poly_iterates[two_n - 2 - k], y))
+            tot += ((-1) ** k) * sum(c * (upper ** (j + 1)) / Fraction(j + 1) for j, c in enumerate(prod))
+        return tot
+
+    def K_gs(m: int, x: Fraction, y: Fraction) -> Fraction:
+        if m % 2 == 0:
+            return K_gs_even(m, x, y)
+        tot = p_eval(poly_iterates[m - 1], x + y) if (x + y <= 1) else Fraction(0)
+        upper = min(y, Fraction(1) - x)
+        for k in range(m - 1):
+            pk = p_shift(poly_iterates[k], x)
+            pq_pos = p_shift(poly_iterates[m - 2 - k], y)
+            pq = [c * ((-1) ** j) for j, c in enumerate(pq_pos)]
+            prod = p_mul(pk, pq)
+            tot += ((-1) ** k) * sum(c * (upper ** (j + 1)) / Fraction(j + 1) for j, c in enumerate(prod))
+        return tot
+
+    for m in range(2, 7):
+        for x_pt in (Fraction(1, 5), Fraction(1, 2)):
+            for y_pt in (Fraction(2, 5), Fraction(3, 5)):
+                bez_lhs = K_gs(m, x_pt, y_pt) - K_gs(m, 1 - x_pt, 1 - y_pt)
+                bez_rhs = sum(
+                    p_eval(t_one_iters[k], 1 - x_pt) * p_eval(poly_iterates[m - 1 - k], y_pt)
+                    - p_eval(poly_iterates[k], 1 - x_pt) * p_eval(t_one_iters[m - 1 - k], y_pt)
+                    for k in range(m)
+                )
+                assert bez_lhs == bez_rhs
+            # Antidiagonal normal derivative -d/dy[Bezoutian]|_{y=1-x} == W_{m-1}(x)
+            neg_dy_bez = sum(
+                -p_eval(t_one_iters[k], 1 - x_pt) * p_eval(p_deriv(poly_iterates[m - 1 - k]), 1 - x_pt)
+                + p_eval(poly_iterates[k], 1 - x_pt) * p_eval(p_deriv(t_one_iters[m - 1 - k]), 1 - x_pt)
+                for k in range(m)
+            )
+            assert neg_dy_bez == p_eval(W_polys[m - 1], x_pt)
+
+    # 7) Christoffel-Darboux Even-Resolvent Diagonal Law & Universal 1/4 Barycenter Invariant
+    #    (Petrovich 2026-11-14): G^(2)_{z^2}(x, x) = int_x^1 F_z(s) F_{-z}(s) ds, and
+    #    (int_0^1 x F_z(x) F_{-z}(x) dx) / (int_0^1 F_z(x) F_{-z}(x) dx) == 1/4 for all z!
+    for n in range(1, 6):
+        M_ord = 2 * n - 2
+        ff_poly = [Fraction(0)]
+        for k in range(M_ord + 1):
+            ff_poly = p_add(ff_poly, p_mul(poly_iterates[k], poly_iterates[M_ord - k]), Fraction((-1) ** k))
+        for x_pt in (Fraction(0), Fraction(1, 5), Fraction(1, 2), Fraction(4, 5)):
+            int_x_to_1 = sum(c * (1 - x_pt ** (j + 1)) / Fraction(j + 1) for j, c in enumerate(ff_poly))
+            assert int_x_to_1 == K_gs_even(2 * n, x_pt, x_pt)
+        mass_0 = sum(c / Fraction(j + 1) for j, c in enumerate(ff_poly))
+        mom_1 = sum(c / Fraction(j + 2) for j, c in enumerate(ff_poly))
+        assert mass_0 == poly_iterates[2 * n - 1][0] == 4 * traces_recurrence[2 * n]
+        assert mom_1 == traces_recurrence[2 * n]
+        assert mom_1 / mass_0 == Fraction(1, 4)
+
     return {
         "kappa_1_2_3": [round(r, 12) for r in roots],
         "lambda_1_2_3": [round(lam1, 12), round(lam2, 12), round(lam3, 12)],
@@ -338,6 +476,7 @@ def verify_cantilever_spectrum_theorem_4():
         "cantilever_traces_m_1_to_10": {f"Tr(T^{m})": str(traces_recurrence[m]) for m in range(1, 11)},
         "cayley_fredholm_alternating_counts_A_0_to_7": alt_counts[:8],
         "wronskian_and_midpoint_pythagorean_verified_up_to_z10": True,
+        "self_similar_wronskian_bezoutian_and_quarter_barycenter_verified": True,
     }
 
 
