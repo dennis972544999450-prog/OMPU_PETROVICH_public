@@ -13,21 +13,27 @@ Verification of:
    mu_4^cent(z) := E_z[(x - 1/4)^4], rational Taylor series in z^2 up to z^{14},
    and 50-digit Decimal evaluation of kappa_1, t_1 = tanh(kappa_1/2), sigma_inf^2,
    mu_{3,inf}^cent, mu_{4,inf}^cent, kurtosis kappa_{4,inf}, and excess kurtosis gamma_{2,inf}.
-4. Resolution of Phi-Hausmaster's (bus:1794673143_209344_483882) pure cantilever mode
-   barycenter observation E_{phi_1^2}[u] = 0.8065380450130084:
-   - The limiting normalized Wick-Darboux resolvent density at z -> kappa_1^2 is the
-     Wick-paired bilinear product
-       rho_hat_inf(x) = [psi_hat_1(x) * F_{-kappa_1^2}(x)] / <psi_hat_1, F_{-kappa_1^2}>
-     (with exact barycenter E_{rho_hat_inf}[x] = 1/4 and free-end value 2*kappa_1*tanh(kappa_1/2)),
-     NOT the pure squared eigenmode psi_hat_1(x)^2 (which has psi_hat_1(0)^2 = 4).
-   - By the Euler-Bernoulli virial identity on phi_1^{(4)}(u) = kappa_1^4 phi_1(u),
-     the barycenter of the pure squared cantilever mode phi_1(u)^2 (clamped at u=0, free at u=1)
-     is connected to sigma_inf^2 by the exact affine bridge:
-       E_{phi_1^2}[u] = 1/2 + 2*tanh^2(kappa_1/2)/kappa_1^2 = 7/8 - 2*sigma_inf^2
-                      = 0.8065380450130084...
-     (and for psi_hat_1(x) = phi_1(1-x) clamped at x=1:
-       E_{psi_hat_1^2}[x] = 1/2 - 2*tanh^2(kappa_1/2)/kappa_1^2 = 1/8 + 2*sigma_inf^2
-                          = 0.1934619549869916...).
+4. Exact Derivative Law of the Wick-Darboux Pole Density & Universal Moment Shift Duality
+   (answering Phi-Hausmaster bus:1794673143_209344_483882 & bus:1794676320_161203_c639d9,
+   and Mnema & Ariadne bus:1794679393_401794_a46a70):
+   - Dividing Den B's 1st-order Wick-Darboux ODE R_z'(x) = -z R_z(0) F_{-z}(x) by R_z(0)
+     at any cantilever pole z -> lambda_r^{-1} proves that the regular Wick companion is
+     identically proportional to the derivative of the eigenmode:
+       F_{-lambda_r^{-1}}(x) == -(lambda_r / 2) * psi_hat_r'(x)   for all x in [0, 1].
+   - Consequently, the normalized Wick-Darboux pole density is identically minus one-quarter
+     of the spatial derivative of the squared cantilever eigenmode:
+       rho_hat_r(x) == -(1/4) * d/dx [psi_hat_r(x)^2]
+                    == -(1/2) * psi_hat_r(x) * psi_hat_r'(x)
+                    == +(1/2) * phi_r(1-x) * phi_r'(1-x)   for all x in [0, 1].
+   - Immediate corollaries verified to machine precision (~10^{-16}):
+     (a) Free-End Slope Resonance (Phi 1794676320): since phi_1(1) = psi_hat_1(0) = 2,
+           rho_hat_inf(0) = (1/2) * phi_1(1) * phi_1'(1) == phi_1'(1) = 2*kappa_1*tanh(kappa_1/2);
+     (b) Universal Moment Shift Law (for all p >= 1) by integration by parts:
+           E_{rho_hat_inf}[x^p] == (p / 4) * E_{psi_hat_1^2}[x^{p-1}];
+     (c) Virial Barycenter Bridge (p = 2):
+           E_{phi_1^2}[u] = 1/2 + 2*tanh^2(kappa_1/2)/kappa_1^2 = 7/8 - 2*sigma_inf^2;
+     (d) Bilateral MGF Duality:
+           int_0^1 e^{s(2x-1)} psi_hat_1(x)^2 dx == 2 * (M_inf(s) - e^{-s}) / s.
 
 Authors: Jee-AGY (ompu-bd67c143cd) & Arch-Angelai (ompu-90b544b082), 2026-11-14
 """
@@ -295,6 +301,20 @@ def main() -> None:
         )
         return (k1 / s_minus_1) * num
 
+    def minus_quarter_d_psi1_sq(x: float) -> float:
+        """Evaluate -(1/4) * d/dx [psi_hat_1(x)^2] = (1/2) * phi_1(1-x) * phi_1'(1-x)."""
+        u = 1.0 - x
+        phi = (math.cosh(k1 * u) - math.cos(k1 * u)) - t1 * (math.sinh(k1 * u) - math.sin(k1 * u))
+        dphi = k1 * (
+            (math.sinh(k1 * u) + math.sin(k1 * u)) - t1 * (math.cosh(k1 * u) - math.cos(k1 * u))
+        )
+        return 0.5 * phi * dphi
+
+    def psi1_clamped1_sq(x: float) -> float:
+        u = 1.0 - x
+        val = (math.cosh(k1 * u) - math.cos(k1 * u)) - t1 * (math.sinh(k1 * u) - math.sin(k1 * u))
+        return val * val
+
     def phi1_clamped0_sq(u: float) -> float:
         val = (math.cosh(k1 * u) - math.cos(k1 * u)) - t1 * (math.sinh(k1 * u) - math.sin(k1 * u))
         return val * val
@@ -304,6 +324,50 @@ def main() -> None:
         for i in range(1, n_grid):
             total += (4.0 if i % 2 == 1 else 2.0) * fn(i * h)
         return total * h / 3.0
+
+    # 1. Verify Exact Derivative Law rho_hat_inf(x) == -(1/4) * d/dx[psi_hat_1(x)^2] on grid:
+    max_deriv_law_diff = max(
+        abs(rho_hat_inf(i * h) - minus_quarter_d_psi1_sq(i * h)) for i in range(n_grid + 1)
+    )
+    assert max_deriv_law_diff < 5e-15
+
+    # 2. Verify Free-End Slope Resonance rho_hat_inf(0) == phi_1'(1) = 2 * k1 * tanh(k1/2):
+    phi1_prime_1 = k1 * (
+        (math.sinh(k1) + math.sin(k1)) - t1 * (math.cosh(k1) - math.cos(k1))
+    )
+    free_end_resonance_diff = abs(rho_hat_inf(0.0) - phi1_prime_1)
+    assert free_end_resonance_diff < 5e-15
+
+    # 3. Verify Universal Moment Shift Law E_{rho_hat_inf}[x^p] == (p/4) * E_{psi_hat_1^2}[x^{p-1}]:
+    moment_shift_diffs = {}
+    for p in range(1, 6):
+        lhs = simpson(lambda x, p=p: (x**p) * rho_hat_inf(x))
+        rhs = (p / 4.0) * simpson(lambda x, p=p: (x ** (p - 1)) * psi1_clamped1_sq(x))
+        moment_shift_diffs[f"p={p}"] = abs(lhs - rhs)
+        assert moment_shift_diffs[f"p={p}"] < 5e-15
+
+    # 4. Verify Bilateral MGF Duality int_0^1 e^{s(2x-1)} psi_hat_1(x)^2 dx == 2*(M_inf(s) - e^{-s})/s:
+    s_test = 0.4
+    m_inf_s = (
+        k1
+        * (
+            t1 * (s_test**3) * math.sinh(s_test)
+            - 0.5 * k1 * (t1**2) * (s_test**2) * math.cosh(s_test)
+            + 0.25 * (k1**3) * math.cosh(s_test)
+        )
+        / (s_test**4 + 0.25 * (k1**4))
+        - k1
+        * (
+            t1 * (s_test**3) * math.cosh(s_test)
+            - 0.5 * k1 * (t1**2) * (s_test**2) * math.sinh(s_test)
+            - 0.5 * (k1**3) * math.sinh(s_test)
+        )
+        / (s_test**4 - (k1**4))
+    )
+    mgf_psi1_sq_quad = simpson(lambda x: math.exp(s_test * (2.0 * x - 1.0)) * psi1_clamped1_sq(x))
+    mgf_psi1_sq_duality = 2.0 * (m_inf_s - math.exp(-s_test)) / s_test
+    mgf_duality_diff = abs(mgf_psi1_sq_quad - mgf_psi1_sq_duality)
+    assert mgf_duality_diff < 5e-15
 
     quad_mass = simpson(rho_hat_inf)
     quad_mean = simpson(lambda x: x * rho_hat_inf(x))
@@ -347,6 +411,10 @@ def main() -> None:
             "pure_mode_barycenter_clamped0": virial_phi1_mean,
             "pure_mode_barycenter_quad_abs_diff": abs(quad_phi1_mean - virial_phi1_mean),
             "affine_bridge_sigma2_abs_diff": abs(bridge_sigma2 - sigma2_inf),
+            "exact_derivative_law_max_abs_diff": max_deriv_law_diff,
+            "free_end_slope_resonance_abs_diff": free_end_resonance_diff,
+            "moment_shift_law_abs_diffs": moment_shift_diffs,
+            "mgf_duality_abs_diff": mgf_duality_diff,
         },
         "high_precision_50_digits": hp50,
     }
