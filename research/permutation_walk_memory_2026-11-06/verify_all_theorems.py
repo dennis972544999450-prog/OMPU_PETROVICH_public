@@ -626,6 +626,58 @@ def verify_cantilever_spectrum_theorem_4():
         )
         assert mu4_n == mu4_cent_series[n]
 
+    # Verify Jee A's (rev 100, 1794685596) Finite-z Quadratic Antiderivative:
+    # d/dx[R_z(x)^2 - z H_z(0) F_{-z}(x)^2] = -2 z^2 I_0(z) rho_{z^2}(x)
+    # and Universal Central Moment Syzygy for all finite n >= 0:
+    # mu_{4,cent}^(2n) == 183/256 - (63/8)*sigma_{2n}^2 + 9*mu_{3,cent}^(2n) - 6 * m_0^(2n+2) / m_0^(2n)
+    for n in range(4):
+        m0_n = m0_w[n]
+        m0_next = m0_w[n + 1]
+        m2_n = ex2_num[n]
+        m3_n = ex3_num[n]
+        m4_n = ex4_num[n]
+        sig2_n = m2_n / m0_n - Fraction(1, 16)
+        mu3c_n = m3_n / m0_n - Fraction(3, 4) * (m2_n / m0_n) + Fraction(1, 32)
+        mu4c_n = m4_n / m0_n - m3_n / m0_n + Fraction(3, 8) * (m2_n / m0_n) - Fraction(3, 256)
+        syzygy_rhs = (
+            Fraction(183, 256)
+            - Fraction(63, 8) * sig2_n
+            + 9 * mu3c_n
+            - 6 * (m0_next / m0_n)
+        )
+        assert mu4c_n == syzygy_rhs
+
+    # Check pure-beam variance sigma^2(psi_hat_1^2) and kurtosis kappa_4(psi_hat_1^2)
+    # (Petrovich 1794684872 & Den B rev 100 1794685640):
+    sigma2_beam_1 = (
+        1.0 / 12.0
+        - (t1_hp ** 2) / (2.0 * (k1_hp ** 2))
+        + t1_hp / (k1_hp ** 3)
+        - 4.0 * (t1_hp ** 4) / (k1_hp ** 4)
+    )
+    mu3_beam_1 = (
+        -(t1_hp ** 2) / (k1_hp ** 2)
+        + 6.0 * t1_hp / (k1_hp ** 3)
+        - (6.0 + 3.0 * (t1_hp ** 4)) / (k1_hp ** 4)
+        + 6.0 * (t1_hp ** 3) / (k1_hp ** 5)
+        - 16.0 * (t1_hp ** 6) / (k1_hp ** 6)
+    )
+    mu4_beam_1 = (
+        1.0 / 80.0
+        - 0.25 * (t1_hp ** 2) / (k1_hp ** 2)
+        + 1.5 * t1_hp / (k1_hp ** 3)
+        - (1.5 + 10.0 * (t1_hp ** 4)) / (k1_hp ** 4)
+        + 48.0 * (t1_hp ** 3) / (k1_hp ** 5)
+        - (48.0 * (t1_hp ** 2) + 12.0 * (t1_hp ** 6)) / (k1_hp ** 6)
+        + 24.0 * (t1_hp ** 5) / (k1_hp ** 7)
+        - 48.0 * (t1_hp ** 8) / (k1_hp ** 8)
+    )
+    kurtosis_beam_1 = mu4_beam_1 / (sigma2_beam_1 ** 2)
+    assert abs(sigma2_beam_1 - 0.02407971602667635) < 1e-14
+    assert abs(mu3_beam_1 - 0.0037792483856854913) < 1e-14
+    assert abs(mu4_beam_1 - 0.0020948411783635753) < 1e-14
+    assert abs(kurtosis_beam_1 - 3.6128371027110003) < 1e-13
+
     # Compare against finite-order n=5 polynomial moments of rho^(10)(x):
     r10 = rho_even_orders[5]
     m0_10 = sum(c / Fraction(j + 1) for j, c in enumerate(r10))
