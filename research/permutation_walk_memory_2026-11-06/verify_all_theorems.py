@@ -468,6 +468,256 @@ def verify_cantilever_spectrum_theorem_4():
         assert mom_1 == traces_recurrence[2 * n]
         assert mom_1 / mass_0 == Fraction(1, 4)
 
+    # 8) 1st-Order Wick-Darboux ODE System, 4th-Order Bifurcated Beam Equations, Pointwise Density
+    #    rho_{z^2}(x), Closed-Form Variance & 3rd Central Moment, and Bilateral MGF M(s; z)
+    #    (Den B 1794650254, Jee A 1794650617, Jee-AGY 1794651347 READ-0071, Phi 1794646944, Petrovich 2026-11-14):
+    for m in range(1, 8):
+        # R_z'(x) = -z H_z(0) F_{-z}(x)  =>  (T^m 1)' = -sum_{j=0}^{m-1} H_0^(j) (-1)^(m-1-j) T^(m-1-j) f_1
+        rhs_rp = [Fraction(0)]
+        for j in range(m):
+            rhs_rp = p_add(rhs_rp, poly_iterates[m - 1 - j], -H0_series[j] * ((-1) ** (m - 1 - j)))
+        assert p_deriv(t_one_iters[m]) == rhs_rp
+        # F_z'(x) = -R_{-z}(x) - z F_z(0) F_{-z}(x)
+        rhs_fp = p_add([Fraction(0)], t_one_iters[m], Fraction(-((-1) ** m)))
+        for j in range(m):
+            f_z0_j = poly_iterates[j][0]
+            rhs_fp = p_add(rhs_fp, poly_iterates[m - 1 - j], -f_z0_j * ((-1) ** (m - 1 - j)))
+        assert p_deriv(poly_iterates[m]) == rhs_fp
+
+    rho_even_orders = {}
+    for n in range(6):
+        M_ord = 2 * n
+        rho_poly = [Fraction(0)]
+        for j in range(M_ord + 1):
+            rho_poly = p_add(rho_poly, p_mul(poly_iterates[j], poly_iterates[M_ord - j]), Fraction((-1) ** j))
+        rho_even_orders[n] = rho_poly
+
+    for n in range(1, 6):
+        rp = rho_even_orders[n]
+        rp_flip = p_shift([c * ((-1) ** j) for j, c in enumerate(rp)], Fraction(-1))
+        rho_plus = p_add(rp, rp_flip, Fraction(1))
+        rho_minus = p_add(rp, rp_flip, Fraction(-1))
+        rp_prev = rho_even_orders[n - 1]
+        rp_prev_flip = p_shift([c * ((-1) ** j) for j, c in enumerate(rp_prev)], Fraction(-1))
+        rho_plus_prev = p_add(rp_prev, rp_prev_flip, Fraction(1))
+        rho_minus_prev = p_add(rp_prev, rp_prev_flip, Fraction(-1))
+        d4_plus = p_deriv(p_deriv(p_deriv(p_deriv(rho_plus))))
+        d4_minus = p_deriv(p_deriv(p_deriv(p_deriv(rho_minus))))
+        assert d4_plus == p_add([Fraction(0)], rho_plus_prev, Fraction(-4))
+        assert d4_minus == p_add([Fraction(0)], rho_minus_prev, Fraction(16))
+
+    # Verify closed-form variance series sigma^2(z) and 3rd central moment series mu_3^cent(z)
+    # against exact rational moments of rho_{z^2}(x) and closed-form MGF M(s; z) up to z^8:
+    # 2*Delta(z)*Delta(-z) = 1 + cosh(k)*cos(k) = 2 + 2 * sum_{m>=1} (-1)^m z^(2m) / (4m)! * 2^(2m) ?
+    # Compute D_even[n] = [z^(2n)] (2 * Delta(z) * Delta(-z)) directly from delta_coeffs:
+    D_even = [
+        2 * sum(delta_coeffs[j] * ((-1) ** (2 * n - j)) * delta_coeffs[2 * n - j] for j in range(2 * n + 1))
+        for n in range(6)
+    ]
+    # Also S_minus(k)/k^3 = sum_{n>=0} [z^(2n)] m_0(z^2) * (1 + cosh k cos k):
+    # Direct series for sinh/cosh * sin/cos in z^2 (k = sqrt(z)):
+    # S_times(k)/k^2 = Im[cosh((1+i)k)]/k^2 = sum_{n>=0} (-1)^n 2^(2n+1) / (4n+2)! * z^(2n)
+    S_times_o_k2 = [Fraction(((-1) ** n) * (2 ** (2 * n + 1)), math.factorial(4 * n + 2)) for n in range(6)]
+    # S_plus(k)/k = d/dk[S_times(k)] / k = sum_{n>=0} (-1)^n 2^(2n+1) / (4n+1)! * z^(2n)
+    S_plus_o_k = [Fraction(((-1) ** n) * (2 ** (2 * n + 1)), math.factorial(4 * n + 1)) for n in range(6)]
+    # S_minus(k)/k^3: since d/dk[S_minus(k)] = 2 S_times(k), S_minus(k)/k^3 = sum_{n>=0} (-1)^n 2^(2n+2)/(4n+3)! z^(2n)
+    S_minus_o_k3 = [Fraction(((-1) ** n) * (2 ** (2 * n + 2)), math.factorial(4 * n + 3)) for n in range(6)]
+
+    def s_mul(a: list[Fraction], b: list[Fraction], lim: int = 5) -> list[Fraction]:
+        return [sum(a[j] * b[i - j] for j in range(i + 1)) for i in range(lim)]
+
+    def s_div(num: list[Fraction], den: list[Fraction], lim: int = 5) -> list[Fraction]:
+        out = [Fraction(0)] * lim
+        for i in range(lim):
+            acc = num[i] - sum(out[j] * den[i - j] for j in range(i))
+            out[i] = acc / den[0]
+        return out
+
+    # Verify pointwise closed form of (1 + cosh k cos k) * rho_{z^2}(x) at x = 1/5 and x = 7/10 up to z^8:
+    for x_pt in (Fraction(1, 5), Fraction(7, 10)):
+        u_pt = 2 * x_pt - 1
+        lhs_pt = s_mul(D_even, [p_eval(rho_even_orders[n], x_pt) for n in range(6)], 5)
+        rhs_pt = []
+        for n in range(5):
+            even_term = Fraction(((-1) ** n) * (2 ** (2 * n + 1)), math.factorial(4 * n + 2)) * (
+                x_pt ** (4 * n + 2) + (1 - x_pt) ** (4 * n + 2)
+            )
+            odd_term = -sum(
+                ((-1) ** j)
+                * (u_pt ** (4 * n - 2 * j + 1))
+                / Fraction(math.factorial(2 * j + 1) * math.factorial(4 * n - 2 * j + 1))
+                for j in range(2 * n + 1)
+            )
+            rhs_pt.append(even_term + odd_term)
+        assert lhs_pt == rhs_pt
+
+    # Compute exact polynomial moments of rho_{z^2}(x) as formal power series in w = z^2:
+    m0_w = s_div(S_minus_o_k3, D_even, 5)
+    for n in range(5):
+        assert m0_w[n] == sum(c / Fraction(j + 1) for j, c in enumerate(rho_even_orders[n]))
+
+    # Variance sigma^2(z) = 3/16 - [S_+(k) - k D(k)] / [k^2 S_-(k)] (Jee-AGY READ-0071, Den B, Jee A):
+    var_num_shifted = [-(S_plus_o_k[n + 1] - D_even[n + 1]) for n in range(5)]
+    sigma2_series = s_div(var_num_shifted, S_minus_o_k3, 5)
+    sigma2_series[0] += Fraction(3, 16)
+    assert sigma2_series[:4] == [
+        Fraction(3, 80),
+        Fraction(-19, 75600),
+        Fraction(-761, 756756000),
+        Fraction(-81931, 19451656224000),
+    ]
+
+    # 3rd central moment E_z[(x - 1/4)^3] (Petrovich 2026-11-14):
+    # = 3/32 - 9[S_+(k) - k D(k)]/[8 k^2 S_-(k)] + 3[2 S_times(k) - k^2 D(k)]/[8 k^3 S_-(k)]
+    skew_num = [
+        -Fraction(9, 8) * (S_plus_o_k[n + 1] - D_even[n + 1])
+        + Fraction(3, 8) * (2 * S_times_o_k2[n + 1] - D_even[n + 1])
+        for n in range(5)
+    ]
+    mu3_cent_series = s_div(skew_num, S_minus_o_k3, 5)
+    mu3_cent_series[0] += Fraction(3, 32)
+    assert mu3_cent_series[:4] == [
+        Fraction(1, 160),
+        Fraction(-11, 100800),
+        Fraction(-1291, 3027024000),
+        Fraction(-693541, 389033124480000),
+    ]
+
+    # Cross-check sigma^2(z) and mu_3^cent(z) directly from polynomial integrals of rho_{z^2}(x):
+    ex2_num = [sum(c / Fraction(j + 3) for j, c in enumerate(rho_even_orders[n])) for n in range(5)]
+    ex3_num = [sum(c / Fraction(j + 4) for j, c in enumerate(rho_even_orders[n])) for n in range(5)]
+    ex2_series = s_div(ex2_num, m0_w, 5)
+    ex3_series = s_div(ex3_num, m0_w, 5)
+    for n in range(4):
+        assert ex2_series[n] - (Fraction(1, 16) if n == 0 else 0) == sigma2_series[n]
+        assert (
+            ex3_series[n] - Fraction(3, 4) * ex2_series[n] + (Fraction(2, 64) if n == 0 else 0)
+            == mu3_cent_series[n]
+        )
+
+    # Check dominant-mode limits at kappa_1 (t_1 = tanh(kappa_1 / 2)):
+    k1_hp = roots[0]
+    t1_hp = math.tanh(k1_hp / 2.0)
+    sigma2_inf = 3.0 / 16.0 - (t1_hp ** 2) / (k1_hp ** 2)
+    mu3_cent_inf = 3.0 / 32.0 - 9.0 * (t1_hp ** 2) / (8.0 * k1_hp ** 2) + 3.0 * t1_hp / (4.0 * k1_hp ** 3)
+    mu4_cent_inf = (
+        21.0 / 256.0
+        - 6.0 / (k1_hp ** 4)
+        + 27.0 * t1_hp / (4.0 * k1_hp ** 3)
+        - 9.0 * (t1_hp ** 2) / (4.0 * k1_hp ** 2)
+    )
+    kurtosis_kappa4_inf = mu4_cent_inf / (sigma2_inf ** 2)
+
+    # Check mu4_cent_series against polynomial integrals of rho_{z^2}(x):
+    mu4_cent_series = [
+        Fraction(39, 8960),
+        Fraction(-223, 3104640),
+        Fraction(-31, 113008896),
+        Fraction(-1302671159, 1138310922228480000),
+    ]
+    ex4_num = [sum(c / Fraction(j + 5) for j, c in enumerate(rho_even_orders[n])) for n in range(5)]
+    ex4_series = s_div(ex4_num, m0_w, 5)
+    for n in range(4):
+        mu4_n = (
+            ex4_series[n]
+            - ex3_series[n]
+            + Fraction(3, 8) * ex2_series[n]
+            - (Fraction(3, 256) if n == 0 else 0)
+        )
+        assert mu4_n == mu4_cent_series[n]
+
+    # Compare against finite-order n=5 polynomial moments of rho^(10)(x):
+    r10 = rho_even_orders[5]
+    m0_10 = sum(c / Fraction(j + 1) for j, c in enumerate(r10))
+    m2_10 = sum(c / Fraction(j + 3) for j, c in enumerate(r10))
+    m3_10 = sum(c / Fraction(j + 4) for j, c in enumerate(r10))
+    m4_10 = sum(c / Fraction(j + 5) for j, c in enumerate(r10))
+    assert abs(float(m2_10 / m0_10 - Fraction(1, 16)) - sigma2_inf) < 1e-10
+    assert abs(float(m3_10 / m0_10 - Fraction(3, 4) * (m2_10 / m0_10) + Fraction(1, 32)) - mu3_cent_inf) < 1e-10
+    assert (
+        abs(
+            float(
+                m4_10 / m0_10
+                - m3_10 / m0_10
+                + Fraction(3, 8) * (m2_10 / m0_10)
+                - Fraction(3, 256)
+            )
+            - mu4_cent_inf
+        )
+        < 1e-10
+    )
+
+    # Verify Exact Derivative Law rho_hat_inf(x) == -(1/4) d/dx[psi_hat_1(x)^2] and Continuum Wick Companion:
+    s_minus_1 = math.cosh(k1_hp) * math.sin(k1_hp) - math.sinh(k1_hp) * math.cos(k1_hp)
+    delta_minus_1 = (
+        math.cosh(0.5 * k1_hp) * math.cos(0.5 * k1_hp)
+        + math.sinh(0.5 * k1_hp) * math.sin(0.5 * k1_hp)
+    )
+    for idx in range(21):
+        xv = idx / 20.0
+        uv = 1.0 - xv
+        yv = xv - 0.5
+        rho_val = (k1_hp / s_minus_1) * (
+            math.sinh(k1_hp * xv) * math.sin(k1_hp * xv)
+            + math.sinh(k1_hp * uv) * math.sin(k1_hp * uv)
+            - 0.5 * (
+                math.sinh(k1_hp) * math.sin(k1_hp * (2.0 * xv - 1.0))
+                + math.sin(k1_hp) * math.sinh(k1_hp * (2.0 * xv - 1.0))
+            )
+        )
+        phi_val = (math.cosh(k1_hp * uv) - math.cos(k1_hp * uv)) - t1_hp * (
+            math.sinh(k1_hp * uv) - math.sin(k1_hp * uv)
+        )
+        dphi_val = k1_hp * (
+            (math.sinh(k1_hp * uv) + math.sin(k1_hp * uv))
+            - t1_hp * (math.cosh(k1_hp * uv) - math.cos(k1_hp * uv))
+        )
+        assert abs(rho_val - 0.5 * phi_val * dphi_val) < 1e-14
+        f_wick_val = (
+            math.sinh(0.5 * k1_hp) * math.cos(k1_hp * yv)
+            - math.cos(0.5 * k1_hp) * math.sinh(k1_hp * yv)
+        ) / (k1_hp * delta_minus_1)
+        psi_prime_val = -dphi_val
+        assert abs(f_wick_val - (-1.0 / (2.0 * (k1_hp ** 2))) * psi_prime_val) < 1e-14
+
+    # Verify bilateral MGF M_inf(s) at s = 0.6 against M(s; z) Taylor-in-s moments up to s^4:
+    s_test = 0.6
+    m_inf_closed = (
+        k1_hp
+        * (
+            t1_hp * (s_test ** 3) * math.sinh(s_test)
+            - 0.5 * k1_hp * (t1_hp ** 2) * (s_test ** 2) * math.cosh(s_test)
+            + 0.25 * (k1_hp ** 3) * math.cosh(s_test)
+        )
+        / (s_test ** 4 + (k1_hp ** 4) / 4.0)
+        - k1_hp
+        * (
+            t1_hp * (s_test ** 3) * math.cosh(s_test)
+            - 0.5 * k1_hp * (t1_hp ** 2) * (s_test ** 2) * math.sinh(s_test)
+            - 0.5 * (k1_hp ** 3) * math.sinh(s_test)
+        )
+        / (s_test ** 4 - k1_hp ** 4)
+    )
+    # Compare with exact rational expectation E_{10}[e^{s(2x-1)}] truncated at degree 18 in s:
+    u_r10 = p_shift([c / (Fraction(2) ** j) for j, c in enumerate(r10)], Fraction(1))
+    # u_r10(u) = r10((1+u)/2): wait, p_shift(p, 1) gives p(y+1), then y = u/2 -> c_j / 2^j:
+    r10_shifted = p_shift(r10, Fraction(1, 2))
+    r10_in_u = [c / (Fraction(2) ** j) for j, c in enumerate(r10_shifted)]
+    e_s_u_10 = sum(
+        (s_test ** q)
+        / math.factorial(q)
+        * float(
+            sum(
+                c * (2 / Fraction(j + q + 1))
+                for j, c in enumerate(r10_in_u)
+                if (j + q) % 2 == 0
+            )
+            / (2 * m0_10)
+        )
+        for q in range(18)
+    )
+    assert abs(m_inf_closed - e_s_u_10) < 1e-10
+
     return {
         "kappa_1_2_3": [round(r, 12) for r in roots],
         "lambda_1_2_3": [round(lam1, 12), round(lam2, 12), round(lam3, 12)],
@@ -477,6 +727,12 @@ def verify_cantilever_spectrum_theorem_4():
         "cayley_fredholm_alternating_counts_A_0_to_7": alt_counts[:8],
         "wronskian_and_midpoint_pythagorean_verified_up_to_z10": True,
         "self_similar_wronskian_bezoutian_and_quarter_barycenter_verified": True,
+        "wick_darboux_bifurcated_beam_variance_skewness_and_mgf_verified": True,
+        "exact_wick_darboux_derivative_law_and_kurtosis_verified": True,
+        "sigma2_inf": round(sigma2_inf, 15),
+        "mu3_cent_inf": round(mu3_cent_inf, 15),
+        "mu4_cent_inf": round(mu4_cent_inf, 15),
+        "kurtosis_kappa4_inf": round(kurtosis_kappa4_inf, 15),
     }
 
 

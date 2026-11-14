@@ -325,11 +325,47 @@ def main() -> None:
             total += (4.0 if i % 2 == 1 else 2.0) * fn(i * h)
         return total * h / 3.0
 
-    # 1. Verify Exact Derivative Law rho_hat_inf(x) == -(1/4) * d/dx[psi_hat_1(x)^2] on grid:
+    # 1. Verify Exact Derivative Law rho_hat_inf(x) == -(1/4) * d/dx[psi_hat_1(x)^2] on grid,
+    #    plus the 3-line pure continuum midpoint identity:
+    #      psi_hat_1(x)      = cosh(k1*(x-1/2))/cosh(k1/2) - sin(k1*(x-1/2))/sin(k1/2),
+    #      F_{-k1^2}(x)      = [sinh(k1/2)*cos(k1*(x-1/2)) - cos(k1/2)*sinh(k1*(x-1/2))] / (k1 * Delta(-k1^2))
+    #                       == -(1 / (2 * k1^2)) * psi_hat_1'(x)   for all x in [0, 1]!
+    delta_minus_k1_sq = (
+        math.cosh(0.5 * k1) * math.cos(0.5 * k1)
+        + math.sinh(0.5 * k1) * math.sin(0.5 * k1)
+    )
+
+    def psi1_midpoint(x: float) -> float:
+        y = x - 0.5
+        return math.cosh(k1 * y) / math.cosh(0.5 * k1) - math.sin(k1 * y) / math.sin(0.5 * k1)
+
+    def psi1_prime_midpoint(x: float) -> float:
+        y = x - 0.5
+        return k1 * (
+            math.sinh(k1 * y) / math.cosh(0.5 * k1) - math.cos(k1 * y) / math.sin(0.5 * k1)
+        )
+
+    def f_wick_companion_continuum(x: float) -> float:
+        y = x - 0.5
+        num = math.sinh(0.5 * k1) * math.cos(k1 * y) - math.cos(0.5 * k1) * math.sinh(k1 * y)
+        return num / (k1 * delta_minus_k1_sq)
+
     max_deriv_law_diff = max(
         abs(rho_hat_inf(i * h) - minus_quarter_d_psi1_sq(i * h)) for i in range(n_grid + 1)
     )
+    max_wick_companion_diff = max(
+        abs(
+            f_wick_companion_continuum(i * h)
+            - (-1.0 / (2.0 * (k1**2))) * psi1_prime_midpoint(i * h)
+        )
+        for i in range(n_grid + 1)
+    )
+    max_midpoint_mode_diff = max(
+        abs(psi1_midpoint(i * h) ** 2 - psi1_clamped1_sq(i * h)) for i in range(n_grid + 1)
+    )
     assert max_deriv_law_diff < 5e-15
+    assert max_wick_companion_diff < 5e-15
+    assert max_midpoint_mode_diff < 5e-15
 
     # 2. Verify Free-End Slope Resonance rho_hat_inf(0) == phi_1'(1) = 2 * k1 * tanh(k1/2):
     phi1_prime_1 = k1 * (
@@ -412,6 +448,8 @@ def main() -> None:
             "pure_mode_barycenter_quad_abs_diff": abs(quad_phi1_mean - virial_phi1_mean),
             "affine_bridge_sigma2_abs_diff": abs(bridge_sigma2 - sigma2_inf),
             "exact_derivative_law_max_abs_diff": max_deriv_law_diff,
+            "continuum_wick_companion_max_abs_diff": max_wick_companion_diff,
+            "midpoint_mode_max_abs_diff": max_midpoint_mode_diff,
             "free_end_slope_resonance_abs_diff": free_end_resonance_diff,
             "moment_shift_law_abs_diffs": moment_shift_diffs,
             "mgf_duality_abs_diff": mgf_duality_diff,
