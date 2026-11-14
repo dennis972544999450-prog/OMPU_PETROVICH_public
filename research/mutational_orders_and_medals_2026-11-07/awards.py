@@ -135,8 +135,9 @@ def main():
 
     p_read = sub.add_parser("read-rule", help="Record reading of a rule/layer/file (with optional file hash verification per Mnema)")
     p_read.add_argument("--target", required=True, help="Rule name, layer, or msg_id read")
-    p_read.add_argument("--reader", required=True, help="Agent who read it")
-    p_read.add_argument("--reader-id", default="", help="Reader OMPU passport ID")
+    p_read.add_argument("--target-id", default="", help="Target author OMPU passport ID(s), comma-separated if multiple")
+    p_read.add_argument("--reader", required=True, help="Agent who read it (free-text display signature)")
+    p_read.add_argument("--reader-id", default="", help="Reader OMPU passport ID (canonical entity key for 'who read')")
     p_read.add_argument("--verify-path", default="", help="Local file path to compute sha256 + byte_size proof")
     p_read.add_argument("--note", default="", help="What shifted or was verified")
 
@@ -144,7 +145,7 @@ def main():
 
     args = parser.parse_args()
     if args.cmd == "read-rule":
-        rec = record_reading(args.target, args.reader, args.reader_id, args.verify_path, args.note)
+        rec = record_reading(args.target, args.reader, args.reader_id, args.verify_path, args.note, args.target_id)
         print(f"📖 Записано чтение [{rec['serial']}] {rec['reader']} -> {rec['target']} | Тип: {rec['evidence_type']} | Печать: {rec['seal']}")
         return
     elif args.cmd == "read-list":
@@ -153,9 +154,22 @@ def main():
             return
         with READING_LEDGER_PATH.open("r", encoding="utf-8") as f:
             rows = [json.loads(line) for line in f if line.strip()]
-        print(f"=== РЕЕСТР ЧТЕНИЯ ПРАВИЛ И СЛОЁВ (Всего: {len(rows)}) ===")
+        by_entity = {}
         for r in rows:
-            print(f"• [{r['serial']}] {r['target']} ← читал: {r['reader']} ({r['reader_id']}) | {r['read_at']}")
+            eid = r.get("reader_id") or "__no_id__"
+            by_entity.setdefault(eid, {"count": 0, "names": set()})
+            by_entity[eid]["count"] += 1
+            by_entity[eid]["names"].add(r.get("reader") or "")
+        all_names = {r.get("reader") or "" for r in rows}
+        first_ts = rows[0].get("read_at", "?") if rows else "?"
+        print(f"=== РЕЕСТР ЧТЕНИЯ ПРАВИЛ И СЛОЁВ (Всего записей: {len(rows)}, старт носителя: {first_ts}) ===")
+        print(f"Каноническая единица «кто читал»: по reader_id (сущностей: {len(by_entity)} | уникальных подписей reader «в гардеробе»: {len(all_names)})")
+        for eid, info in sorted(by_entity.items(), key=lambda kv: -kv[1]["count"]):
+            print(f"  • reader_id={eid}: {info['count']} зап., {len(info['names'])} наряд(ов) в reader")
+        print("Формула печати (seal): sha256(json.dumps(rec_without_seal, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]\n")
+        for r in rows:
+            tid_str = f" [target_id={r['target_id']}]" if r.get("target_id") else ""
+            print(f"• [{r['serial']}] {r['target']}{tid_str} ← читал: {r['reader']} ({r['reader_id']}) | {r['read_at']}")
             print(f"  Статус (по Мнеме): {r['evidence_type']} | sha256={r['file_sha256']} bytes={r['file_bytes']} | Печать: {r['seal']}")
             if r.get("note"):
                 print(f"  Заметка: {r['note']}")
@@ -193,7 +207,7 @@ def main():
 
 READING_LEDGER_PATH = AWARDS_DIR / "reading_ledger.jsonl"
 
-def record_reading(target, reader, reader_id, verify_path="", note=""):
+def record_reading(target, reader, reader_id, verify_path="", note="", target_id=""):
     ts = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     entries = []
     if READING_LEDGER_PATH.exists():
@@ -222,6 +236,8 @@ def record_reading(target, reader, reader_id, verify_path="", note=""):
         "file_bytes": file_bytes,
         "note": note,
     }
+    if target_id:
+        rec["target_id"] = target_id
     rec["seal"] = hashlib.sha256(json.dumps(rec, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
     with READING_LEDGER_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(rec, ensure_ascii=False) + "\n")
