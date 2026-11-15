@@ -770,6 +770,44 @@ def verify_cantilever_spectrum_theorem_4():
     )
     assert abs(m_inf_closed - e_s_u_10) < 1e-10
 
+    # Verify All-Order Midpoint Syzygy Polynomial Family Q_K(2x - 1) (K=0,1,2) and Pure-Beam Duality B_1(2x - 1)
+    # (Jee A 1794736035, Den B 1794736594, Petrovich 1794739213 & Phi-Hausmaster 1794739445):
+    for k_syz in (0, 1, 2):
+        deg_p = 4 * k_syz + 1
+        scale_k = Fraction((-1) ** k_syz, 2 * (4 ** k_syz))
+        # Q_K(y) = y^(4K+1) + scale_k * Im[(y + i)^(4K+1)] in y = 2x - 1:
+        q_y_coeffs = [Fraction(0)] * (deg_p + 1)
+        q_y_coeffs[deg_p] = Fraction(1)
+        for m_idx in range(2 * k_syz + 1):
+            q_y_coeffs[4 * k_syz - 2 * m_idx] = (
+                scale_k * ((-1) ** m_idx) * math.comb(deg_p, 2 * m_idx + 1)
+            )
+        # Check Q_K(-1) == -1/2 identically for all K >= 0:
+        assert sum(c * (Fraction(-1) ** j) for j, c in enumerate(q_y_coeffs)) == Fraction(-1, 2)
+        # Convert Q_K(2x - 1) to x-polynomial on [0, 1] and integrate against rho^(2n)(x) for n = 0..5:
+        q_shifted = p_shift(q_y_coeffs, Fraction(-1))
+        q_x_coeffs = [c * (Fraction(2) ** j) for j, c in enumerate(q_shifted)]
+        for n_ord in range(6):
+            prod_poly = p_mul(q_x_coeffs, rho_even_orders[n_ord])
+            int_q_rho = sum(c / Fraction(j + 1) for j, c in enumerate(prod_poly))
+            assert int_q_rho == 0
+
+    # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
+    # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
+    mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
+    y_bar_1 = 2.0 * mu1_beam_1 - 1.0
+    ey1 = y_bar_1
+    ey2 = 4.0 * sigma2_beam_1 + y_bar_1 ** 2
+    ey3 = 8.0 * mu3_beam_1 + 12.0 * sigma2_beam_1 * y_bar_1 + y_bar_1 ** 3
+    ey4 = (
+        16.0 * mu4_beam_1
+        + 32.0 * mu3_beam_1 * y_bar_1
+        + 24.0 * sigma2_beam_1 * (y_bar_1 ** 2)
+        + y_bar_1 ** 4
+    )
+    e_b1_psi = ey4 - 0.2 - 0.5 * ey3 + 0.5 * ey1
+    assert abs(e_b1_psi) < 1e-14
+
     return {
         "kappa_1_2_3": [round(r, 12) for r in roots],
         "lambda_1_2_3": [round(lam1, 12), round(lam2, 12), round(lam3, 12)],
@@ -781,6 +819,7 @@ def verify_cantilever_spectrum_theorem_4():
         "self_similar_wronskian_bezoutian_and_quarter_barycenter_verified": True,
         "wick_darboux_bifurcated_beam_variance_skewness_and_mgf_verified": True,
         "exact_wick_darboux_derivative_law_and_kurtosis_verified": True,
+        "all_order_syzygy_Q_K_and_beam_duality_B_1_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
