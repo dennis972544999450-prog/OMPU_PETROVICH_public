@@ -782,8 +782,9 @@ def verify_cantilever_spectrum_theorem_4():
             q_y_coeffs[4 * k_syz - 2 * m_idx] = (
                 scale_k * ((-1) ** m_idx) * math.comb(deg_p, 2 * m_idx + 1)
             )
-        # Check Q_K(-1) == -1/2 identically for all K >= 0:
+        # Check Q_K(-1) == -1/2 and Q_K(+1) == +3/2 identically for all K >= 0:
         assert sum(c * (Fraction(-1) ** j) for j, c in enumerate(q_y_coeffs)) == Fraction(-1, 2)
+        assert sum(q_y_coeffs) == Fraction(3, 2)
         # Convert Q_K(2x - 1) to x-polynomial on [0, 1] and integrate against rho^(2n)(x) for n = 0..5:
         q_shifted = p_shift(q_y_coeffs, Fraction(-1))
         q_x_coeffs = [c * (Fraction(2) ** j) for j, c in enumerate(q_shifted)]
@@ -791,6 +792,23 @@ def verify_cantilever_spectrum_theorem_4():
             prod_poly = p_mul(q_x_coeffs, rho_even_orders[n_ord])
             int_q_rho = sum(c / Fraction(j + 1) for j, c in enumerate(prod_poly))
             assert int_q_rho == 0
+        # For K >= 1, check Cloud Jee's chord-subtracted P_{4K+1}(x) vanishes at both x=0 and x=1:
+        if k_syz >= 1:
+            p_cj_coeffs = list(q_x_coeffs)
+            p_cj_coeffs[0] -= Fraction(-1, 2)
+            p_cj_coeffs[1] -= Fraction(2)
+            norm_cj = Fraction(1, (4 * k_syz + 1) * (2 ** (4 * k_syz - 1)))
+            p_cj_coeffs = [c * norm_cj for c in p_cj_coeffs]
+            assert p_cj_coeffs[0] == 0 and sum(p_cj_coeffs) == 0
+            if k_syz == 1:
+                assert p_cj_coeffs == [
+                    Fraction(0),
+                    Fraction(1, 5),
+                    Fraction(-5, 4),
+                    Fraction(5, 2),
+                    Fraction(-9, 4),
+                    Fraction(4, 5),
+                ]
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
@@ -820,6 +838,7 @@ def verify_cantilever_spectrum_theorem_4():
         "wick_darboux_bifurcated_beam_variance_skewness_and_mgf_verified": True,
         "exact_wick_darboux_derivative_law_and_kurtosis_verified": True,
         "all_order_syzygy_Q_K_and_beam_duality_B_1_verified": True,
+        "cloud_jee_boundary_pinned_P_4K_plus_1_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

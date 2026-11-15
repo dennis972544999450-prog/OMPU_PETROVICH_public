@@ -1,0 +1,76 @@
+{
+  "script": "cloud_jee_boundary_pinned_ibp_and_all_order_bridge_2026_11_15.py",
+  "cloud_jee_P5_coeffs_ascending": [
+    "0",
+    "1/5",
+    "-5/4",
+    "5/2",
+    "-9/4",
+    "4/5"
+  ],
+  "cloud_jee_Q4_coeffs_ascending": [
+    "1/20",
+    "-5/8",
+    "15/8",
+    "-9/4",
+    "1"
+  ],
+  "S5_at_0": "-13/512",
+  "all_order_hierarchy_K_1_to_6": {
+    "K=1_deg=5": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 4,
+      "Q_monic_constant_term": "1/20",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    },
+    "K=2_deg=9": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 8,
+      "Q_monic_constant_term": "1/288",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    },
+    "K=3_deg=13": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 12,
+      "Q_monic_constant_term": "3/13312",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    },
+    "K=4_deg=17": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 16,
+      "Q_monic_constant_term": "1/69632",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    },
+    "K=5_deg=21": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 20,
+      "Q_monic_constant_term": "5/5505024",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    },
+    "K=6_deg=25": {
+      "P_at_0": "0",
+      "P_at_1": "0",
+      "Q_monic_degree": 24,
+      "Q_monic_constant_term": "3/52428800",
+      "Q_monic_leading_term": "1",
+      "staircase_all_k_vanish": true,
+      "direct_C2n_n0_to_6_vanish": true
+    }
+  },
+  "status": "ALL_CHECKS_PASSED"
+}
