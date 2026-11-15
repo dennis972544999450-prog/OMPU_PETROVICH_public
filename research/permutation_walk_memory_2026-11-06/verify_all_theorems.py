@@ -809,6 +809,19 @@ def verify_cantilever_spectrum_theorem_4():
                     Fraction(-9, 4),
                     Fraction(4, 5),
                 ]
+        # Verify Gaussian Endpoint Barycentric Parity w(x) = x + i(1-x) = i + (1-i)x (Petrovich 1794757250 & Phi 1794757443):
+        # Since 2x - 1 + i = (1 + i)*w(x) and (1 + i)^(4K) = (-4)^K, Q_K(2x-1) == (2x-1)^(4K+1) + (1/2)*Im[(1+i)*w(x)^(4K+1)]
+        for x_test in (Fraction(0), Fraction(1, 7), Fraction(1, 4), Fraction(1, 2), Fraction(5, 6), Fraction(1)):
+            y_val = 2 * x_test - 1
+            # Compute (1 + i) * (x + i*(1-x))^(4K+1) in exact Gaussian Fractions (re, im):
+            w_re, w_im = x_test, 1 - x_test
+            p_re, p_im = Fraction(1), Fraction(0)
+            for _ in range(deg_p):
+                p_re, p_im = p_re * w_re - p_im * w_im, p_re * w_im + p_im * w_re
+            # Multiply by (1 + i): Im[(1+i)*(p_re + i*p_im)] = p_re + p_im
+            q_bary = (y_val ** deg_p) + Fraction(1, 2) * (p_re + p_im)
+            q_poly = sum(c * (x_test ** j) for j, c in enumerate(q_x_coeffs))
+            assert q_bary == q_poly
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
@@ -839,6 +852,7 @@ def verify_cantilever_spectrum_theorem_4():
         "exact_wick_darboux_derivative_law_and_kurtosis_verified": True,
         "all_order_syzygy_Q_K_and_beam_duality_B_1_verified": True,
         "cloud_jee_boundary_pinned_P_4K_plus_1_verified": True,
+        "gaussian_barycentric_parity_and_laplace_krylov_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
