@@ -823,6 +823,39 @@ def verify_cantilever_spectrum_theorem_4():
             q_poly = sum(c * (x_test ** j) for j, c in enumerate(q_x_coeffs))
             assert q_bary == q_poly
 
+        # Verify Jee A's single-term monomial coefficient formula for Q_{4K}(x) = (1/4)*P_{4K+1}'(x) (Jee A rev 102 1794772044 & Phi 1794772209):
+        if k_syz >= 1:
+            q_4k_exact = [Fraction((j + 1) * p_cj_coeffs[j + 1], 4) for j in range(4 * k_syz + 1)]
+            q_4k_single = [Fraction(k_syz, (4 * k_syz + 1) * (2 ** (4 * k_syz - 2)))]
+            # Im[(1+i)^j] in exact integer arithmetic:
+            im_p = 0
+            re_p = 1
+            for j in range(1, 4 * k_syz + 1):
+                re_p, im_p = re_p - im_p, re_p + im_p
+                q_j = (
+                    Fraction((-1) ** j * math.comb(4 * k_syz, j), 2 ** (4 * k_syz - j))
+                    * (Fraction(1) + Fraction(im_p, 2 ** (j + 1)))
+                )
+                q_4k_single.append(q_j)
+            assert q_4k_single == q_4k_exact
+
+    # Verify Petrovich's Formal Inverse Laplace-Krylov Series G(s) = 2/(1 + cosh(s)*cos(s)) = sum_{n>=0} b_n s^{4n} (1794776144):
+    # b_0 = 1, b_n = -sum_{k=1}^n ((-4)^k / (2 * (4k)!)) * b_{n-k}
+    b_inv_lk = [Fraction(1)]
+    for n_lk in range(1, 5):
+        b_n = -sum(
+            Fraction((-4) ** k_lk, 2 * math.factorial(4 * k_lk)) * b_inv_lk[n_lk - k_lk]
+            for k_lk in range(1, n_lk + 1)
+        )
+        b_inv_lk.append(b_n)
+    assert b_inv_lk == [
+        Fraction(1),
+        Fraction(1, 12),
+        Fraction(17, 2520),
+        Fraction(16337, 29937600),
+        Fraction(3607727, 81729648000),
+    ]
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -853,6 +886,7 @@ def verify_cantilever_spectrum_theorem_4():
         "all_order_syzygy_Q_K_and_beam_duality_B_1_verified": True,
         "cloud_jee_boundary_pinned_P_4K_plus_1_verified": True,
         "gaussian_barycentric_parity_and_laplace_krylov_verified": True,
+        "single_term_monomial_coeffs_and_inverse_laplace_krylov_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

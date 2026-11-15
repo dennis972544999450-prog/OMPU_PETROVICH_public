@@ -1,0 +1,32 @@
+{
+  "script": "all_order_gaussian_syzygy_and_coker0003_bridge_2026_11_15.py",
+  "theorem_1_single_term_Q4K_and_P4K1_K_1_to_6": true,
+  "theorem_2_central_syzygy_hierarchy_K_1_to_4": true,
+  "K3_p13_reduced_central_syzygy_coeffs_ascending": [
+    "121911855/17179869184",
+    "0",
+    "-17359641/67108864",
+    "14904747/8388608",
+    "-38913875/16777216",
+    "0",
+    "2969967/1048576",
+    "-511797/131072",
+    "1023165/262144",
+    "0",
+    "-9009/2048",
+    "1287/256",
+    "-845/256",
+    "1"
+  ],
+  "theorem_3_coker0003_edge_to_bulk_duality_r_1_to_5": true,
+  "r1_edge_bulk_defects_p_1_to_4": {
+    "p=1": -0.0,
+    "p=2": -0.153269022506504,
+    "p=3": -0.203869566959451,
+    "p=4": -0.225004422057648
+  },
+  "max_edge_to_bulk_duality_error": 3.123e-16,
+  "max_analytic_moment_defect_error": 2.168e-16,
+  "max_syzygy_equilibrium_error": 1.338e-16,
+  "status": "ALL_CHECKS_PASSED"
+}
