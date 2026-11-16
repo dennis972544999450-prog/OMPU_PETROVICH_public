@@ -924,13 +924,23 @@ def verify_cantilever_spectrum_theorem_4():
         assert g_xi_1 == phi_m0_1
 
     # 16. Verify Petrovich & Phi-Hausmaster's (1794843524 rev 104 & 1794843664, READ-0095)
-    # two-branch spectral trace decomposition of G_Xi^(C):
+    # and Jee A (1794858502 seq 245), Den B (1794859419 seq 246) & Phi's (1794858603/9783, READ-0097)
+    # two-branch spectral trace decomposition of G_Xi^(C), G_Xi^(A), and the (2+i) quartet:
     # Tr(G_Xi^(C)) = int_0^1 G_Xi^(C)(x, x) dx = -5/24 + 17/60 = 3/40 = 1/12 - 1/120
-    # Tr((G_Xi^(C))^2) = 11/1680 + 23/362880 = 2399/362880
+    # Tr((G_Xi^(C))^2) = 11/1680 + (1/120^2 - 2/362880) = 11/1680 + 29/453600 = 2999/453600
+    # Tr((G_Xi^(C))^3) = 2641/4989600 - 331/648648000 = 38111/72072000
     tr_g_xi_c = Fraction(-5, 24) + Fraction(17, 60)
     assert tr_g_xi_c == Fraction(3, 40) == Fraction(1, 12) - Fraction(1, 120)
-    tr_g_xi_c_sq = Fraction(11, 1680) + Fraction(23, 362880)
-    assert tr_g_xi_c_sq == Fraction(2399, 362880)
+    zeta_cp_8 = Fraction(1, 120) ** 2 - 2 * Fraction(1, 362880)
+    assert zeta_cp_8 == Fraction(29, 453600)
+    tr_g_xi_c_sq = Fraction(11, 1680) + zeta_cp_8
+    assert tr_g_xi_c_sq == Fraction(2999, 453600)
+    tr_g_xi_c_cu = Fraction(2641, 4989600) - Fraction(331, 648648000)
+    assert tr_g_xi_c_cu == Fraction(38111, 72072000)
+    quartet_tr1 = [Fraction(1, 12) - Fraction(math.factorial(a), math.factorial(4 + a)) for a in range(4)]
+    assert quartet_tr1 == [Fraction(1, 24), Fraction(3, 40), Fraction(29, 360), Fraction(23, 280)]
+    tr_g_xi_a_sq = Fraction(11, 1680) + (Fraction(1, 840) ** 2 - 2 * Fraction(6, 39916800))
+    assert tr_g_xi_a_sq == Fraction(76243, 11642400)
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
@@ -966,6 +976,7 @@ def verify_cantilever_spectrum_theorem_4():
         "gaussian_2plusi_quartet_krylov_euler_and_midpoint_hodge_verified": True,
         "stereo_reflection_bvp_and_piecewise_cubic_green_kernel_verified": True,
         "clamped_pinned_two_branch_green_and_mittag_leffler_closure_verified": True,
+        "dual_mode_annihilators_and_weinstein_aronszajn_quartet_traces_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

@@ -1,0 +1,123 @@
+{
+  "script": "fredholm_quartet_traces_and_weinstein_aronszajn_bridge_2026_11_16.py",
+  "lane": "Lane B (Ден Б / ompu-7f698bd908)",
+  "date": "2026-11-16",
+  "revision": 104,
+  "theorem_1_fredholm_determinant_traces_and_audit_correction": {
+    "status": "PASS",
+    "traces_G_C_n1_to_5": [
+      "3/40",
+      "2999/453600",
+      "38111/72072000",
+      "10708695703/250092722880000",
+      "383989930901/110874440476800000"
+    ],
+    "zeta_cantilever_n1_to_4": [
+      "1/12",
+      "11/1680",
+      "2641/4989600",
+      "12343/288288000"
+    ],
+    "zeta_clamped_pinned_n1_to_4": [
+      "1/120",
+      "29/453600",
+      "331/648648000",
+      "1019773/250092722880000"
+    ],
+    "audit_catch_Tr_G_C_sq": {
+      "true_value": "2999/453600 (= 11/1680 + 29/453600)",
+      "prose_typo_in_READ_0095": "2399/362880 (= 11/1680 + 23/362880)",
+      "exact_difference": "1/1814400",
+      "quadrature_error_vs_true": "3.000e-110",
+      "quadrature_gap_vs_typo": "5.511464e-7"
+    },
+    "iterated_3fold_Tr_G_C_cube_error": "4.000e-111"
+  },
+  "theorem_2_rank1_G_A_kernel_and_4sector_quartet": {
+    "status": "PASS",
+    "quartet_fredholm_traces": {
+      "alpha=0": {
+        "branch_zeta_n1_to_3": [
+          "1/24",
+          "17/10080",
+          "691/9979200"
+        ],
+        "total_traces_n1_to_3": [
+          "1/24",
+          "83/10080",
+          "4591/9979200"
+        ]
+      },
+      "alpha=1": {
+        "branch_zeta_n1_to_3": [
+          "1/120",
+          "29/453600",
+          "331/648648000"
+        ],
+        "total_traces_n1_to_3": [
+          "3/40",
+          "2999/453600",
+          "38111/72072000"
+        ]
+      },
+      "alpha=2": {
+        "branch_zeta_n1_to_3": [
+          "1/360",
+          "1/151200",
+          "691/40864824000"
+        ],
+        "total_traces_n1_to_3": [
+          "29/360",
+          "991/151200",
+          "21629099/40864824000"
+        ]
+      },
+      "alpha=3": {
+        "branch_zeta_n1_to_3": [
+          "1/840",
+          "13/11642400",
+          "37/31783752000"
+        ],
+        "total_traces_n1_to_3": [
+          "23/280",
+          "76243/11642400",
+          "207693/392392000"
+        ]
+      }
+    },
+    "G_Xi_A_trace_1_error": "1.500e-108",
+    "G_Xi_A_trace_2_error": "0.000e-107",
+    "twin_clamped_pinned_gamma_1": "3.926602312047918778238533343627",
+    "twin_gamma_zeta2_90modes_error": "2.005e-20"
+  },
+  "theorem_3_weinstein_aronszajn_defect_trinity": {
+    "status": "PASS",
+    "verified_k_0_to": 5,
+    "m0_defects_all_zero": true,
+    "H0_defects_k0_to_5": [
+      "-1/280",
+      "71/2494800",
+      "-59/259459200",
+      "863449/475176173472000",
+      "-22217387/1530067278579840000",
+      "8885820263/76579867292920992000000"
+    ],
+    "I0_defects_k0_to_5": [
+      "-1/60",
+      "1/7560",
+      "-2879/2724321600",
+      "3911/463134672000",
+      "-74070881/1097656960720320000",
+      "226894807/420768501609456000000"
+    ],
+    "max_w0_star_Xi_r_orthogonality_error": "3.005e-108",
+    "max_G_Xi_A_eigenfunction_error": "1.000e-108"
+  },
+  "theorem_4_lane_a_seq245_dual_annihilator_egf_closure": {
+    "status": "PASS",
+    "exact_polynomial_match_m_0_to": 7,
+    "max_annihilator_degree_verified": 32,
+    "closed_form_egf_truncation_error_at_M8": "8.339e-38"
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}
