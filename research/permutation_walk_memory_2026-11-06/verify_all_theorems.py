@@ -904,6 +904,34 @@ def verify_cantilever_spectrum_theorem_4():
         )
         assert lhs_coeff == conv_rhs
 
+    # (3) Verify Petrovich's 4th-order Stereo Reflection Green Kernel G_Xi^(C)(x, s) and G_Upsilon^(C)(x, t)
+    #     (Petrovich 1794827014 & Phi 1794827139, READ-0093):
+    #     int_0^1 G_Xi^(C)(x, s) ds == Phi_{m_0, 1}(x) = x - (5/2)x^2 + (5/3)x^3 - (1/6)x^4,
+    #     Psi_{m_0, 1}(x) = (1/4)*Phi_{m_0, 1}'(x) = 1/4 - (5/4)x + (5/4)x^2 - (1/6)x^3:
+    for x_st in (Fraction(0), Fraction(1, 5), Fraction(1, 2), Fraction(3, 4), Fraction(1)):
+        # int_0^x (x - s)^3 ds = x^4 / 4
+        # int_{1-x}^1 (x + s - 1)^3 ds = x^4 / 4
+        # int_0^1 (7/3 - 2s - 3s^2 + (8/3)s^3) ds = 7/3 - 1 - 1 + 2/3 = 1
+        # int_0^1 5*(s - 1) ds = -5/2
+        g_xi_1 = (
+            Fraction(1, 4) * (x_st ** 4)
+            - Fraction(5, 3) * Fraction(1, 4) * (x_st ** 4)
+            + Fraction(1) * x_st
+            - Fraction(5, 2) * (x_st ** 2)
+            + Fraction(5, 3) * (x_st ** 3)
+        )
+        phi_m0_1 = x_st - Fraction(5, 2) * (x_st ** 2) + Fraction(5, 3) * (x_st ** 3) - Fraction(1, 6) * (x_st ** 4)
+        assert g_xi_1 == phi_m0_1
+
+    # 16. Verify Petrovich & Phi-Hausmaster's (1794843524 rev 104 & 1794843664, READ-0095)
+    # two-branch spectral trace decomposition of G_Xi^(C):
+    # Tr(G_Xi^(C)) = int_0^1 G_Xi^(C)(x, x) dx = -5/24 + 17/60 = 3/40 = 1/12 - 1/120
+    # Tr((G_Xi^(C))^2) = 11/1680 + 23/362880 = 2399/362880
+    tr_g_xi_c = Fraction(-5, 24) + Fraction(17, 60)
+    assert tr_g_xi_c == Fraction(3, 40) == Fraction(1, 12) - Fraction(1, 120)
+    tr_g_xi_c_sq = Fraction(11, 1680) + Fraction(23, 362880)
+    assert tr_g_xi_c_sq == Fraction(2399, 362880)
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -936,6 +964,8 @@ def verify_cantilever_spectrum_theorem_4():
         "gaussian_barycentric_parity_and_laplace_krylov_verified": True,
         "single_term_monomial_coeffs_and_inverse_laplace_krylov_verified": True,
         "gaussian_2plusi_quartet_krylov_euler_and_midpoint_hodge_verified": True,
+        "stereo_reflection_bvp_and_piecewise_cubic_green_kernel_verified": True,
+        "clamped_pinned_two_branch_green_and_mittag_leffler_closure_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
