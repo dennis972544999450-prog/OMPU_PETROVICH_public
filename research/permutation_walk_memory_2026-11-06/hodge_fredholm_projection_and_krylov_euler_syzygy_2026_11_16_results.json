@@ -1,0 +1,50 @@
+{
+  "script": "hodge_fredholm_projection_and_krylov_euler_syzygy_2026_11_16.py",
+  "theorem_1_4periodic_u_v_w_and_symbolic_2plusi_determinant": true,
+  "theorem_2_midpoint_diagonalization_of_Pi_ker_up_to_deg_25": true,
+  "eta_0_to_4": [
+    "1/24",
+    "-1/53760",
+    "71/7664025600",
+    "-59/12752938598400",
+    "863449/373693748455931904000"
+  ],
+  "theorem_3_binomial_toeplitz_and_krylov_euler_inversion": true,
+  "tau_r0_0_to_4": [
+    "1",
+    "15/16",
+    "-123/256",
+    "19539/4096",
+    "-26729797/196608"
+  ],
+  "tau_r1_0_to_4": [
+    "1",
+    "13/16",
+    "-295/256",
+    "176431/12288",
+    "-34510671/65536"
+  ],
+  "tau_r2_0_to_4": [
+    "1",
+    "9/16",
+    "-1069/768",
+    "94905/4096",
+    "-211641821/196608"
+  ],
+  "tau_r3_0_to_4": [
+    "1",
+    "1/8",
+    "3/256",
+    "1/1024",
+    "5/65536"
+  ],
+  "krylov_euler_integers_eps_0_to_5": [
+    1,
+    -1,
+    69,
+    -33661,
+    60376809,
+    -288294050521
+  ],
+  "status": "ALL_CHECKS_PASSED"
+}

@@ -1,0 +1,84 @@
+{
+  "script": "gaussian_2plusi_quartet_and_cantilever_mode_duals_2026_11_16.py",
+  "lane": "Lane B (Ден Б / ompu-7f698bd908)",
+  "date": "2026-11-16",
+  "revision": 103,
+  "theorem_1_master_2plusi_quartet_and_horizontal_rayleigh": {
+    "status": "PASS",
+    "max_s_degree_verified": 51,
+    "quartet_samples_m_0_to_4": {
+      "alpha=0": [
+        "1",
+        "-1/24",
+        "-131/40320",
+        "2939/479001600",
+        "841/426995712000"
+      ],
+      "alpha=1": [
+        "1",
+        "-3/40",
+        "-179/362880",
+        "313/230630400",
+        "-6119/355687428096000"
+      ],
+      "alpha=2": [
+        "1/2",
+        "-29/720",
+        "-59/3628800",
+        "19111/87178291200",
+        "-230519/6402373705728000"
+      ],
+      "alpha=3": [
+        "1/6",
+        "-23/1680",
+        "661/39916800",
+        "3799/145297152000",
+        "-891479/121645100408832000"
+      ]
+    },
+    "horizontal_rayleigh_and_midpoint_parity_j_0_to_5": true,
+    "max_e0_inv_dirichlet_zeta_error": "8.100e-104"
+  },
+  "theorem_2_e0_removable_singularity_and_pole_spectrum": {
+    "status": "PASS",
+    "max_e0_removable_singularity_residual": "2.100e-99",
+    "cantilever_nearest_pole_kappa1_pow4": 12.362363368326191,
+    "e0_removable_root_pi4_over_4": 24.35227275850061,
+    "clamped_pinned_second_pole_4_beta1_pow4": 125.14097543510815,
+    "beta_1_clamped_pinned": "2.365020372431352013012024050417"
+  },
+  "theorems_3_and_4_biorthogonal_cantilever_duals_and_functional_ml": {
+    "status": "PASS",
+    "max_rank1_secular_identity_error": "2.000e-91",
+    "max_boundary_pinning_error": "0.000e+3",
+    "max_kronecker_biorthogonality_error_5x5": "1.524e-69",
+    "functional_mittag_leffler_errors_60_modes": {
+      "k=1": "1.055e-18",
+      "k=2": "8.244e-28",
+      "k=3": "6.412e-37"
+    },
+    "darboux_k8_errors_at_midpoint": {
+      "m0_vs_Xi1": "5.282e-16",
+      "H0_vs_t1_Xi1": "1.465e-9",
+      "I0_vs_t1sq_Xi1": "3.631e-9"
+    }
+  },
+  "theorem_5_lane_a_seq243_seam_closure": {
+    "status": "PASS",
+    "krylov_euler_integers_0_to_5": [
+      1,
+      -1,
+      69,
+      -33661,
+      60376809,
+      -288294050521
+    ],
+    "krylov_duplication_tau_verified_r012_up_to_d": 5,
+    "clamped_pinned_eta_zeta_errors_55_modes": {
+      "d=2": "1.563e-28",
+      "d=3": "1.919e-39",
+      "d=4": "2.565e-50"
+    }
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}

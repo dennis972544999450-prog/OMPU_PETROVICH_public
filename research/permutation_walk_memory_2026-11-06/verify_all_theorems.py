@@ -856,6 +856,54 @@ def verify_cantilever_spectrum_theorem_4():
         Fraction(3607727, 81729648000),
     ]
 
+    # Verify rev 103 (READ-0092):
+    # (1) Gaussian prime (2 + i) formula for D_KR(s^4) and exact factorization D_KR(s^4) == e_1(s^4) * F(s)
+    #     (Petrovich 1794819534, Den B seq 244 1794823824 & Phi 1794819747 / 1794823987):
+    re_2pi, im_2pi = 2, 1  # (2 + i)^1
+    # Multiply by (2 + i)^4 = -7 + 24i at each step m -> m + 1:
+    d_kr_2pi = []
+    for m_kr in range(6):
+        c_m = Fraction(2 + re_2pi, 4 * math.factorial(4 * m_kr + 1))
+        d_kr_2pi.append(c_m)
+        re_2pi, im_2pi = -7 * re_2pi - 24 * im_2pi, 24 * re_2pi - 7 * im_2pi
+    f_coeffs = [Fraction(1)] + [Fraction((-4) ** k_f, 2 * math.factorial(4 * k_f)) for k_f in range(1, 6)]
+    e1_coeffs = [Fraction(1, math.factorial(4 * k_e + 1)) for k_e in range(6)]
+    d_kr_prod = [
+        sum(e1_coeffs[j_kr] * f_coeffs[m_kr - j_kr] for j_kr in range(m_kr + 1))
+        for m_kr in range(6)
+    ]
+    assert d_kr_2pi == d_kr_prod
+    assert d_kr_2pi[:4] == [
+        Fraction(1),
+        Fraction(-3, 40),
+        Fraction(-179, 362880),
+        Fraction(313, 230630400),
+    ]
+
+    # (2) Krylov-Euler integer sequence eps_d = [(4d)! u^{4d}] (1 / E_0(u)) = (1, -1, 69, -33661, 60376809, -288294050521)
+    #     and elementary reduction tau_d^(3) = (d + 1) / 16^d from s*(E_0(s) - 1) / (2 * E_1(s/2))
+    #     (Jee A seq 243 1794822727, Den B seq 244 1794823824 & Phi 1794822958):
+    e0_inv = [Fraction(1)]
+    for d_ke in range(1, 6):
+        c_inv = -sum(
+            Fraction(1, math.factorial(4 * k_ke)) * e0_inv[d_ke - k_ke]
+            for k_ke in range(1, d_ke + 1)
+        )
+        e0_inv.append(c_inv)
+    eps_ke = [int(e0_inv[d_ke] * math.factorial(4 * d_ke)) for d_ke in range(6)]
+    assert eps_ke == [1, -1, 69, -33661, 60376809, -288294050521]
+
+    # Check E_0(s) - 1 == 4 * E_1(s/2) * E_3(s/2) => [(4d+4)! s^{4d+4}] (s*(E_0(s)-1)/(2*E_1(s/2))) == (d+1)/16^d:
+    for d_tau in range(6):
+        lhs_coeff = Fraction(1, math.factorial(4 * d_tau + 4))  # coefficient of s^{4d+4} in E_0(s) - 1
+        # In 2 * (E_1(s/2)/s) * sum_{k>=0} tau_k^(3) s^{4k+4}/(4k+4)!, coeff of s^{4d+4} is:
+        conv_rhs = sum(
+            Fraction(1, (2 ** (4 * j_t)) * math.factorial(4 * j_t + 1))
+            * Fraction((d_tau - j_t) + 1, (16 ** (d_tau - j_t)) * math.factorial(4 * (d_tau - j_t) + 4))
+            for j_t in range(d_tau + 1)
+        )
+        assert lhs_coeff == conv_rhs
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -887,6 +935,7 @@ def verify_cantilever_spectrum_theorem_4():
         "cloud_jee_boundary_pinned_P_4K_plus_1_verified": True,
         "gaussian_barycentric_parity_and_laplace_krylov_verified": True,
         "single_term_monomial_coeffs_and_inverse_laplace_krylov_verified": True,
+        "gaussian_2plusi_quartet_krylov_euler_and_midpoint_hodge_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
