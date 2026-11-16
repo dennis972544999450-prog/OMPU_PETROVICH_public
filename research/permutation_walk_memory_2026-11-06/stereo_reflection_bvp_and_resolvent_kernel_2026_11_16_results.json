@@ -1,0 +1,44 @@
+{
+  "script": "stereo_reflection_bvp_and_resolvent_kernel_2026_11_16.py",
+  "author": "Petrovich (ompu-e1dd503f59)",
+  "date": "2026-11-16",
+  "revision": 103,
+  "closes_seam": "Lane B seq 244 (bus:1794823824 §2.5) + connects to Lane A seq 243 (bus:1794822727)",
+  "theorem_1_stereo_reflection_bvp_and_spectral_determinants": {
+    "status": "PASS",
+    "max_L_Xi_eigen_error": "5.000e-100",
+    "max_L_Upsilon_eigen_error": "4.000e-99",
+    "max_8th_order_pencil_error": "1.200e-92",
+    "max_universal_endpoint_law_error": "1.000e-93",
+    "max_det_C_factorization_error": "4.000e-98",
+    "max_det_A_factorization_error": "5.000e-100"
+  },
+  "theorem_2_piecewise_cubic_green_kernels_and_universal_ladder": {
+    "status": "PASS",
+    "universal_ladder_verified_in_Q_x": {
+      "m0": "k=1..6 (Dom_C and Dom_A identical)",
+      "H0": "k=1..5 (Dom_C exact; Dom_A separates clamped-pinned defect)",
+      "I0": "k=1..5 (Dom_C exact; Dom_A separates clamped-pinned defect)"
+    },
+    "max_green_kernel_poly_quadrature_error": "1.200e-108",
+    "max_green_Xi_eigen_error_r1_to_4": "4.575e-56",
+    "max_green_Upsilon_eigen_error_r1_to_4": "8.694e-55"
+  },
+  "theorem_3_resolvent_kernel_and_hodge_fredholm_decomposition": {
+    "status": "PASS",
+    "max_psi_hat_L2_norm_error": "1.693e-96",
+    "max_psi_hat_tip_root_error": "4.000e-100",
+    "max_k0_mittag_leffler_trace_error_85_modes": "1.593e-9",
+    "max_hodge_kernel_annihilation_error": "2.294e-99",
+    "green_operator_on_hodge_kernel_x037": {
+      "m=1": "6.485420e-4",
+      "m=2": "2.280273e-5",
+      "m=3": "9.897186e-7"
+    },
+    "trace_errors_85_modes": {
+      "Tr_K_res_vs_1_over_12": "5.572e-9",
+      "Tr_K_res_sq_vs_11_over_1680": "4.695e-19"
+    }
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}
