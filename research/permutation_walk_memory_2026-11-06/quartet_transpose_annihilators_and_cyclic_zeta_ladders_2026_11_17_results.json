@@ -1,0 +1,114 @@
+{
+  "module": "quartet_transpose_annihilators_and_cyclic_zeta_ladders_2026_11_17.py",
+  "revision": 106,
+  "theorem_1_universal_star_and_pole_exchange": {
+    "master_green_lagrange_coefficients": [
+      "3/2",
+      "3/4",
+      "3/16",
+      "1/32"
+    ],
+    "universal_star_eta_couplings": {
+      "alpha=0": "2/3",
+      "alpha=1": "0",
+      "alpha=2": "-1/3",
+      "alpha=3": "-2"
+    },
+    "max_pointwise_star_G_Xi_diff": {
+      "alpha=0": "1.000e-107",
+      "alpha=1": "0.000e+3",
+      "alpha=2": "1.000e-107",
+      "alpha=3": "8.900e-108"
+    },
+    "max_pointwise_star_G_Upsilon_diff": {
+      "alpha=0": "2.000e-109",
+      "alpha=1": "0.000e+3",
+      "alpha=2": "3.200e-109",
+      "alpha=3": "5.000e-109"
+    },
+    "exact_pole_exchange_convolution_verified_up_to_k": 6
+  },
+  "theorem_2_single_branch_dual_ml_and_4x4_cauchy_second_hand": {
+    "max_positive_branch_orth_error_Q12_P12": {
+      "alpha=0": "4.093e-106",
+      "alpha=1": "9.292e-108",
+      "alpha=2": "4.457e-108",
+      "alpha=3": "8.536e-108"
+    },
+    "max_closed_form_c_m_star_projection_error": {
+      "alpha=0": "5.416e-98",
+      "alpha=1": "3.320e-94",
+      "alpha=2": "1.784e-85",
+      "alpha=3": "1.639e-87"
+    },
+    "single_branch_ml_k4_90modes_errors": {
+      "alpha=0": {
+        "max_Q16_error_90modes": "2.343e-41",
+        "max_P16_error_90modes": "1.069e-43"
+      },
+      "alpha=1": {
+        "max_Q16_error_90modes": "7.562e-39",
+        "max_P16_error_90modes": "3.629e-40"
+      },
+      "alpha=2": {
+        "max_Q16_error_90modes": "9.501e-37",
+        "max_P16_error_90modes": "1.051e-37"
+      },
+      "alpha=3": {
+        "max_Q16_error_90modes": "8.408e-35",
+        "max_P16_error_90modes": "1.088e-35"
+      }
+    },
+    "adjoint_4x4_cauchy_residue_max_Q_diff": {
+      "alpha=0": "2.415e-61",
+      "alpha=1": "2.479e-61",
+      "alpha=2": "2.854e-61",
+      "alpha=3": "1.705e-60"
+    },
+    "adjoint_4x4_cauchy_residue_max_P_diff": {
+      "alpha=0": "5.274e-61",
+      "alpha=1": "5.152e-61",
+      "alpha=2": "4.611e-61",
+      "alpha=3": "7.980e-61"
+    }
+  },
+  "theorem_3_cyclic_root_free_spectral_zetas_k1_to_7": {
+    "alpha=0": [
+      "1/24",
+      "17/10080",
+      "691/9979200",
+      "929569/326918592000",
+      "221930581/1900704693888000",
+      "56963745931/11880522398384640000",
+      "2093660879252671/10633661572674172032000000"
+    ],
+    "alpha=1": [
+      "1/120",
+      "29/453600",
+      "331/648648000",
+      "1019773/250092722880000",
+      "10838147/332623321430400000",
+      "92292065417/354455385755805734400000",
+      "3208145713607/1541880928037754944640000000"
+    ],
+    "alpha=2": [
+      "1/360",
+      "1/151200",
+      "691/40864824000",
+      "3617/83364240960000",
+      "174611/1568081372457600000",
+      "236364091/827062566763546713600000",
+      "3392780147/4625642784113264833920000000"
+    ],
+    "alpha=3": [
+      "1/840",
+      "13/11642400",
+      "37/31783752000",
+      "1044353/853733191671360000",
+      "408029/317194716597897600000",
+      "603061321/445786723485551678630400000",
+      "1795989379021/1262401132902559521129498240000000"
+    ]
+  },
+  "status": "ALL_CHECKS_PASSED"
+}

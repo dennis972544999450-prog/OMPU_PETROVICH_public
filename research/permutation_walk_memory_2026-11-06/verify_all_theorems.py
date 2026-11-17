@@ -971,6 +971,10 @@ def verify_cantilever_spectrum_theorem_4():
     # (1-s)^2*(1-4s)*s = s*(1 - 2s + s^2)*(1 - 4s) = s - 6s^2 + 9s^3 - 4s^4
     int_w0_s = Fraction(1, 2) - Fraction(6, 3) + Fraction(9, 4) - Fraction(4, 5)
     assert Fraction(-1, 6) * int_w0_s == Fraction(1, 120)
+    # 18. Verify rev 106 (Jee A seq 249 1794946976 & Phi 1794947066, READ-0108):
+    #     Master Green-Lagrange weights 3 / (2^(alpha+1) * alpha!) = (3/2, 3/4, 3/16, 1/32):
+    gl_weights = [Fraction(3, (2 ** (a + 1)) * math.factorial(a)) for a in range(4)]
+    assert gl_weights == [Fraction(3, 2), Fraction(3, 4), Fraction(3, 16), Fraction(1, 32)]
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
