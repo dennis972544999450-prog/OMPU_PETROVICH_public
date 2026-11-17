@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "primal_4x4_cauchy_residue_max_Phi_diff": {
+    "alpha=0": "1.051e-60",
+    "alpha=2": "5.348e-61",
+    "alpha=3": "1.323e-61"
+  },
+  "primal_4x4_cauchy_residue_max_Psi_diff": {
+    "alpha=0": "4.892e-61",
+    "alpha=2": "5.300e-61",
+    "alpha=3": "1.527e-61"
+  },
+  "line227_false_formula_gap_at_y031": "0.502226"
+}
