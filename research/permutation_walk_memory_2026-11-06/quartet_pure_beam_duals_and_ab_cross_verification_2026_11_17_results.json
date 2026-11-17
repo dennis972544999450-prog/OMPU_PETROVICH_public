@@ -1,0 +1,126 @@
+{
+  "script": "quartet_pure_beam_duals_and_ab_cross_verification_2026_11_17.py",
+  "author": "Petrovich (ompu-e1dd503f59)",
+  "date": "2026-11-17",
+  "revision": 105,
+  "closes": [
+    "Phi-Hausmaster declared loss (bus:1794909763): direct side-by-side A <-> B cross-verification of seq 247 & seq 248",
+    "Lane B open seam `[=~` (bus:1794909529 §2): pure-beam quartet duals {Omega_m^(alpha), Omega_m^(alpha)*}, 2-branch G_Upsilon^(alpha), and Mittag-Leffler ladders on Dom_0, Dom_B, Dom_A"
+  ],
+  "theorem_1_ab_cross_verification": {
+    "status": "PASS",
+    "carrier_and_json_hashes_verified": {
+      "lane_a_py": "9f8f074ec633bbdb866f7952d1a1b32fe2e80fdbf96a08869d3cb0586929c2f0",
+      "lane_a_json": "677d91fb93205d9ec9cc9cbc38b8cd62f7cbed45a3a939c790fc6c427087dd0d",
+      "lane_b_py": "38b7fefc8f565ecdfde26a5532f08207c20269c8d932334db14f24d524d50d74",
+      "lane_b_json": "8bf724ea3548deef098419cc401e8fb4b861f03dea5cd8b8d697b20802ee0c85"
+    },
+    "exact_poly_operator_match_deg_0_to_10": true,
+    "max_pointwise_G_Xi_0_ab_diff": "1.000e-104",
+    "dom_0_exact_traces_n1_to_3": [
+      "1/24",
+      "83/10080",
+      "4591/9979200"
+    ],
+    "dilated_clamped_sliding_zeta_k1_to_4": [
+      "1/120",
+      "29/453600",
+      "331/648648000",
+      "1019773/250092722880000"
+    ],
+    "max_Q_dual_12_cantilever_orth_error": "5.734e-110",
+    "max_Q_dual_12_clamped_sliding_pairing_error": "3.060e-95"
+  },
+  "theorem_2_pure_beam_quartet_duals_and_2branch_green": {
+    "status": "PASS",
+    "max_closed_form_antiderivative_error": "8.600e-103",
+    "max_Omega_star_endpoint_pinning_error_alpha_0_2_3": "2.360e-104",
+    "pure_beam_biorthogonality_4x4_errors": {
+      "alpha=0": "2.922e-72",
+      "alpha=1": "2.461e-69",
+      "alpha=2": "1.908e-67",
+      "alpha=3": "7.110e-64"
+    },
+    "pure_beam_cross_branch_4x4_errors": {
+      "alpha=0": "1.534e-77",
+      "alpha=1": "9.948e-74",
+      "alpha=2": "2.514e-66",
+      "alpha=3": "3.493e-70"
+    },
+    "diagonal_trace_quadrature_errors": {
+      "alpha=0": "1.800e-105",
+      "alpha=1": "2.000e-105",
+      "alpha=2": "2.000e-105",
+      "alpha=3": "1.000e-106"
+    },
+    "pointwise_G_Upsilon_2branch_errors_90_modes": {
+      "alpha=0": "1.855e-10",
+      "alpha=1": "2.514e-10",
+      "alpha=2": "4.010e-10",
+      "alpha=3": "5.553e-10"
+    }
+  },
+  "theorem_3_curvature_pairing_pole_exchange_and_mittag_leffler": {
+    "status": "PASS",
+    "sherman_morrison_pole_exchange_verified_k0_to_5": true,
+    "universal_curvature_pairing_weight_errors": {
+      "alpha=0": {
+        "max_pos_weight_error": "8.738e-101",
+        "max_neg_weight_error": "1.052e-98"
+      },
+      "alpha=2": {
+        "max_pos_weight_error": "8.706e-101",
+        "max_neg_weight_error": "1.500e-107"
+      },
+      "alpha=3": {
+        "max_pos_weight_error": "1.008e-100",
+        "max_neg_weight_error": "2.565e-91"
+      }
+    },
+    "functional_mittag_leffler_90_mode_errors": {
+      "alpha=0": {
+        "k=1": {
+          "max_Phi_error": "1.060e-15",
+          "max_Psi_error": "2.360e-13"
+        },
+        "k=2": {
+          "max_Phi_error": "1.652e-25",
+          "max_Psi_error": "3.651e-23"
+        },
+        "k=3": {
+          "max_Phi_error": "2.583e-35",
+          "max_Psi_error": "5.691e-33"
+        }
+      },
+      "alpha=2": {
+        "k=1": {
+          "max_Phi_error": "2.218e-15",
+          "max_Psi_error": "5.172e-13"
+        },
+        "k=2": {
+          "max_Phi_error": "3.268e-25",
+          "max_Psi_error": "7.133e-23"
+        },
+        "k=3": {
+          "max_Phi_error": "5.180e-35",
+          "max_Psi_error": "1.144e-32"
+        }
+      },
+      "alpha=3": {
+        "k=1": {
+          "max_Phi_error": "7.392e-16",
+          "max_Psi_error": "1.698e-13"
+        },
+        "k=2": {
+          "max_Phi_error": "1.090e-25",
+          "max_Psi_error": "2.389e-23"
+        },
+        "k=3": {
+          "max_Phi_error": "1.726e-35",
+          "max_Psi_error": "3.810e-33"
+        }
+      }
+    }
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}

@@ -1,0 +1,43 @@
+{
+  "script": "complete_quartet_adjoint_domains_and_two_branch_green_2026_11_17.py",
+  "lane": "Lane B (Ден Б / ompu-7f698bd908)",
+  "date": "2026-11-17",
+  "revision": 105,
+  "theorem_1_nilpotent_gauge_and_root_free_zeta_cs": {
+    "status": "PASS",
+    "nilpotent_lambda_gauges_verified": [
+      "0",
+      "-1/4 (Bernoulli)",
+      "-1"
+    ],
+    "root_free_zeta_cs_k1_to_7": [
+      "1/120",
+      "29/453600",
+      "331/648648000",
+      "1019773/250092722880000",
+      "10838147/332623321430400000",
+      "92292065417/354455385755805734400000",
+      "3208145713607/1541880928037754944640000000"
+    ]
+  },
+  "theorems_2_and_3_adjoint_quartet_and_two_branch_green_closure": {
+    "status": "PASS",
+    "symbolic_adjoint_domains_verified": true,
+    "kronecker_biorthogonality_4x4_errors": {
+      "alpha=0": "2.922e-72",
+      "alpha=2": "1.908e-67",
+      "alpha=3": "7.110e-64"
+    },
+    "cross_branch_orthogonality_4x4_errors": {
+      "alpha=0": "2.719e-76",
+      "alpha=2": "5.311e-67",
+      "alpha=3": "1.093e-69"
+    },
+    "pointwise_two_branch_green_errors_75_modes": {
+      "alpha=0": "2.829e-10",
+      "alpha=2": "2.549e-10",
+      "alpha=3": "2.243e-10"
+    }
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}

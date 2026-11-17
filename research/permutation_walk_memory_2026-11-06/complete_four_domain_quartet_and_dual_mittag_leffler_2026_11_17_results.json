@@ -1,0 +1,40 @@
+{
+  "script": "complete_four_domain_quartet_and_dual_mittag_leffler_2026_11_17.py",
+  "theorem_1_four_domain_quartet_and_G_Xi_0": true,
+  "G_Xi_0_trace_1_exact": "1/24",
+  "G_Xi_0_trace_1_quadrature_error": "6.000e-109",
+  "G_Xi_0_trace_2_exact": "83/10080 == 11/1680 (cantilever) + 17/10080 (Euler-Krylov)",
+  "G_Xi_0_trace_2_quadrature_error": "6.000e-110",
+  "theorem_2_dual_mittag_leffler_and_jet_law": true,
+  "dual_mittag_leffler_errors_75_modes": {
+    "k=2": {
+      "max_P_dual_error": "1.411e-17",
+      "max_Q_dual_error": "3.829e-19"
+    },
+    "k=3": {
+      "max_P_dual_error": "1.194e-27",
+      "max_Q_dual_error": "1.863e-29"
+    },
+    "k=4": {
+      "max_P_dual_error": "1.001e-37",
+      "max_Q_dual_error": "1.043e-39"
+    }
+  },
+  "theorem_3_closed_form_Q_dual_k_1_to_6": true,
+  "Q_dual_12_coeffs": [
+    "0",
+    "71/1247400",
+    "-1/7560",
+    "0",
+    "29/113400",
+    "-1/2800",
+    "1/3600",
+    "0",
+    "-1/3150",
+    "17/45360",
+    "-17/75600",
+    "1/12600",
+    "-2/155925"
+  ],
+  "status": "ALL_CHECKS_PASSED"
+}

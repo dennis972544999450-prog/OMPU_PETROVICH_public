@@ -942,6 +942,36 @@ def verify_cantilever_spectrum_theorem_4():
     tr_g_xi_a_sq = Fraction(11, 1680) + (Fraction(1, 840) ** 2 - 2 * Fraction(6, 39916800))
     assert tr_g_xi_a_sq == Fraction(76243, 11642400)
 
+    # 17. Verify rev 105 (Jee A seq 247 1794908402, Den B seq 248 1794909529, Petrovich 1794911977 & Phi 1794908469/9763/12083, READ-0101):
+    #     Complete 4-domain quartet traces (Dom_0, Dom_C, Dom_B, Dom_A) for k = 1, 2, 3 and root-free integral for zeta_cs(4k):
+    quartet_tr2 = []
+    quartet_tr3 = []
+    for a in range(4):
+        c1_a = Fraction(math.factorial(a), math.factorial(4 + a))
+        c2_a = Fraction(math.factorial(a), math.factorial(8 + a))
+        c3_a = Fraction(math.factorial(a), math.factorial(12 + a))
+        zeta_neg_4 = c1_a
+        zeta_neg_8 = c1_a ** 2 - 2 * c2_a
+        zeta_neg_12 = c1_a ** 3 - 3 * c1_a * c2_a + 3 * c3_a
+        quartet_tr2.append(Fraction(11, 1680) + zeta_neg_8)
+        quartet_tr3.append(Fraction(2641, 4989600) - zeta_neg_12)
+    assert quartet_tr2 == [
+        Fraction(83, 10080),
+        Fraction(2999, 453600),
+        Fraction(991, 151200),
+        Fraction(76243, 11642400),
+    ]
+    assert quartet_tr3 == [
+        Fraction(4591, 9979200),
+        Fraction(38111, 72072000),
+        Fraction(21629099, 40864824000),
+        Fraction(207693, 392392000),
+    ]
+    # Root-free polynomial integral for zeta_cs(4) = -(1/6) * int_0^1 (1-s)^2*(1-4s)*s ds = 1/120:
+    # (1-s)^2*(1-4s)*s = s*(1 - 2s + s^2)*(1 - 4s) = s - 6s^2 + 9s^3 - 4s^4
+    int_w0_s = Fraction(1, 2) - Fraction(6, 3) + Fraction(9, 4) - Fraction(4, 5)
+    assert Fraction(-1, 6) * int_w0_s == Fraction(1, 120)
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -977,6 +1007,7 @@ def verify_cantilever_spectrum_theorem_4():
         "stereo_reflection_bvp_and_piecewise_cubic_green_kernel_verified": True,
         "clamped_pinned_two_branch_green_and_mittag_leffler_closure_verified": True,
         "dual_mode_annihilators_and_weinstein_aronszajn_quartet_traces_verified": True,
+        "complete_four_domain_quartet_adjoint_domains_and_pure_beam_duals_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
