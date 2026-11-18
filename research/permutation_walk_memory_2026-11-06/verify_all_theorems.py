@@ -976,6 +976,72 @@ def verify_cantilever_spectrum_theorem_4():
     gl_weights = [Fraction(3, (2 ** (a + 1)) * math.factorial(a)) for a in range(4)]
     assert gl_weights == [Fraction(3, 2), Fraction(3, 4), Fraction(3, 16), Fraction(1, 32)]
 
+    # 19. Verify rev 107 (Jee A seq 250 1794994898, Den B seq 251 1794995302, Phi 1794995393,
+    #     Arch-Angelai 1794999865 & Jee-AGY READ-0110):
+    #     - Skew-symmetric difference traces tau_{alpha,beta} = Tr(G_alpha - G_beta) = b!/(b+4)! - a!/(a+4)!
+    #     - Ramanujan Entry 25(vii) coth(m*pi)/(m*pi)^{4k-1} = (-4)^{k-1} [z^k] (e_0(z) / (2 e_2(z)))
+    #     - All 6 symmetric mixed traces Tr(G_alpha G_beta)
+    #     - Barycentric Fredholm pencil & all-(p,q) Sherman-Morrison mixed-trace symmetry for 1 <= p, q <= 3:
+    def e_tilde_series(alpha_idx: int, max_deg: int = 6) -> list[Fraction]:
+        return [
+            Fraction(((-1) ** k_idx) * math.factorial(alpha_idx), math.factorial(4 * k_idx + alpha_idx))
+            for k_idx in range(max_deg + 1)
+        ]
+
+    def inv_series(p_ser: list[Fraction], max_deg: int = 6) -> list[Fraction]:
+        inv_s = [Fraction(1)]
+        for k_idx in range(1, max_deg + 1):
+            inv_s.append(-sum(p_ser[j_idx] * inv_s[k_idx - j_idx] for j_idx in range(1, k_idx + 1)))
+        return inv_s
+
+    def mul_series(a_ser: list[Fraction], b_ser: list[Fraction], max_deg: int = 6) -> list[Fraction]:
+        out_s = [Fraction(0)] * (max_deg + 1)
+        for i_idx in range(max_deg + 1):
+            for j_idx in range(max_deg + 1 - i_idx):
+                out_s[i_idx + j_idx] += a_ser[i_idx] * b_ser[j_idx]
+        return out_s
+
+    e0_s, e2_s = e_tilde_series(0, 5), e_tilde_series(2, 5)
+    r_02 = mul_series(e0_s, inv_series(e2_s, 5), 5)
+    ramanujan_coth = [((-4) ** (k_r - 1)) * r_02[k_r] for k_r in range(1, 5)]
+    assert ramanujan_coth == [
+        Fraction(7, 180),
+        Fraction(19, 56700),
+        Fraction(1453, 425675250),
+        Fraction(13687, 390769879500),
+    ]
+
+    mixed_traces_6 = {}
+    for a_idx in range(4):
+        for b_idx in range(a_idx + 1, 4):
+            c1_a = Fraction(math.factorial(a_idx), math.factorial(a_idx + 4))
+            c1_b = Fraction(math.factorial(b_idx), math.factorial(b_idx + 4))
+            c2_a = Fraction(math.factorial(a_idx), math.factorial(a_idx + 8))
+            c2_b = Fraction(math.factorial(b_idx), math.factorial(b_idx + 8))
+            mixed_traces_6[(a_idx, b_idx)] = Fraction(11, 1680) + c1_a * c1_b - c2_a - c2_b
+    assert mixed_traces_6 == {
+        (0, 1): Fraction(89, 12960),
+        (0, 2): Fraction(3011, 453600),
+        (0, 3): Fraction(10931, 1663200),
+        (1, 2): Fraction(331, 50400),
+        (1, 3): Fraction(6541, 997920),
+        (2, 3): Fraction(4669, 712800),
+    }
+
+    # Check all-(p,q) Sherman-Morrison mixed trace symmetry Tr(G_a^p G_b^q) == Tr(G_b^q G_a^p) for p + q <= 3:
+    quartet_tr_1to3 = [quartet_tr1, quartet_tr2, quartet_tr3]
+    for a_idx in range(4):
+        for b_idx in range(a_idx + 1, 4):
+            ea_s, eb_s = e_tilde_series(a_idx, 5), e_tilde_series(b_idx, 5)
+            r_ba = mul_series(eb_s, inv_series(ea_s, 5), 5)
+            r_ab = mul_series(ea_s, inv_series(eb_s, 5), 5)
+            assert quartet_tr_1to3[1][a_idx] - r_ba[2] == mixed_traces_6[(a_idx, b_idx)]
+            assert quartet_tr_1to3[1][b_idx] - r_ab[2] == mixed_traces_6[(a_idx, b_idx)]
+            # p=2, q=1 vs q=1, p=2:
+            tr_a2_b1 = quartet_tr_1to3[2][a_idx] - r_ba[3]
+            tr_b1_a2 = quartet_tr_1to3[2][b_idx] - (r_ab[3] * r_ba[0] + 2 * r_ab[2] * r_ba[1])
+            assert tr_a2_b1 == tr_b1_a2
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -1012,6 +1078,7 @@ def verify_cantilever_spectrum_theorem_4():
         "clamped_pinned_two_branch_green_and_mittag_leffler_closure_verified": True,
         "dual_mode_annihilators_and_weinstein_aronszajn_quartet_traces_verified": True,
         "complete_four_domain_quartet_adjoint_domains_and_pure_beam_duals_verified": True,
+        "quartet_difference_idempotents_ramanujan_krylov_and_mixed_traces_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

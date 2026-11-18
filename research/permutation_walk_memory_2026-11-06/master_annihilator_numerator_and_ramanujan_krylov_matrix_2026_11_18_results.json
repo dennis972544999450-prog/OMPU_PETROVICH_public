@@ -1,0 +1,107 @@
+{
+  "module": "master_annihilator_numerator_and_ramanujan_krylov_matrix_2026_11_18.py",
+  "lane": "b",
+  "instance_id": "jee-instance-524e408b5123473d95578e39c889f8a9",
+  "theorem_1": {
+    "status": "PASS",
+    "U_8_unit_fractions": [
+      "0",
+      "1/840",
+      "-1/120",
+      "1/40",
+      "-1/24",
+      "1/20",
+      "-1/20",
+      "1/30",
+      "-1/105"
+    ],
+    "U_8_quotient_by_y_1_minus_y_cubed": "(1/840)*((1-y)^4 + 7*y^4)",
+    "master_numerator_verified_alpha_0_to_3_up_to_k": 6,
+    "max_U_annihilation_error_on_Upsilon_r": "4.449e-98"
+  },
+  "theorem_2": {
+    "status": "PASS",
+    "skew_symmetric_traces_Tr_P_ab": {
+      "(0,1)": "-1/30",
+      "(0,2)": "-7/180",
+      "(0,3)": "-17/420",
+      "(1,0)": "1/30",
+      "(1,2)": "-1/180",
+      "(1,3)": "-1/140",
+      "(2,0)": "7/180",
+      "(2,1)": "1/180",
+      "(2,3)": "-1/630",
+      "(3,0)": "17/420",
+      "(3,1)": "1/140",
+      "(3,2)": "1/630"
+    },
+    "right_zero_semigroup_and_idempotency_verified_pairs": 12,
+    "iterated_trace_quartet_ratio_verified_k_1_to_6": true
+  },
+  "theorem_3": {
+    "status": "PASS",
+    "all_12_off_diagonal_k3_errors": {
+      "(beta=1,alpha=0)": "1.354e-38",
+      "(beta=2,alpha=0)": "5.334e-41",
+      "(beta=3,alpha=0)": "1.585e-43",
+      "(beta=0,alpha=1)": "1.899e-30",
+      "(beta=2,alpha=1)": "1.998e-35",
+      "(beta=3,alpha=1)": "1.963e-37",
+      "(beta=0,alpha=2)": "3.563e-30",
+      "(beta=1,alpha=2)": "3.425e-33",
+      "(beta=3,alpha=2)": "3.889e-38",
+      "(beta=0,alpha=3)": "5.918e-26",
+      "(beta=1,alpha=3)": "1.868e-28",
+      "(beta=2,alpha=3)": "5.956e-31"
+    },
+    "ramanujan_coth_mpi_4k_minus_1_k1_to_4": [
+      "7/180",
+      "19/56700",
+      "1453/425675250",
+      "13687/390769879500"
+    ],
+    "dual_odd_halfpi_tanh_4k_plus_3_k1_to_4": [
+      "7/180",
+      "181/28350",
+      "178559/170270100",
+      "33655411/195384939750"
+    ],
+    "clamped_pinned_coth_gamma_4k_minus_1_k1_to_4": [
+      "3/140",
+      "103/1455300",
+      "97/331080750",
+      "547229/444652703995500"
+    ],
+    "clamped_pinned_coth2_gamma_4k_minus_2_k1_to_4": [
+      "17/140",
+      "137/485100",
+      "229/198648450",
+      "2150677/444652703995500"
+    ],
+    "clamped_sliding_tanh_beta_4k_plus_3_k1_to_4": [
+      "1/420",
+      "71/935550",
+      "59/24324300",
+      "863449/11136941565750"
+    ],
+    "clamped_sliding_tanh2_beta_4k_plus_2_k1_to_4": [
+      "1/180",
+      "1/5670",
+      "2879/510810300",
+      "3911/21709437750"
+    ]
+  },
+  "theorem_4": {
+    "status": "PASS",
+    "mixed_traces_6_unordered_pairs": {
+      "Tr(G_0 G_1)": "89/12960",
+      "Tr(G_0 G_2)": "3011/453600",
+      "Tr(G_0 G_3)": "10931/1663200",
+      "Tr(G_1 G_2)": "331/50400",
+      "Tr(G_1 G_3)": "6541/997920",
+      "Tr(G_2 G_3)": "4669/712800"
+    },
+    "max_2d_piecewise_quadrature_error": "5.867e-111"
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}
