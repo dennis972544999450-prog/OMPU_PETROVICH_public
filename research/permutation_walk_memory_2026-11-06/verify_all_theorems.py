@@ -1029,19 +1029,19 @@ def verify_cantilever_spectrum_theorem_4():
     }
 
     # Check all-(p,q) Sherman-Morrison mixed trace symmetry Tr(G_a^p G_b^q) == Tr(G_b^q G_a^p) for p + q <= 3:
-    # With e_neg(z) = e_pos(-z), tau_k^(a,b) = [z^{k+1}](e_neg_b(z)/e_neg_a(z)) = (-1)^{k+1} r_ba[k+1]:
+    # Since negative-branch eigenvalues are -1/(4*beta_m^4) < 0, det(I - z G_neg^(alpha)) = alpha! e_alpha(z)
+    # has positive coefficients alpha! / (4k + alpha)!, and tau_k^(a,b) = [z^{k+1}]((b! e_b(z)) / (a! e_a(z))):
     quartet_tr_1to3 = [quartet_tr1, quartet_tr2, quartet_tr3]
     for a_idx in range(4):
         for b_idx in range(a_idx + 1, 4):
-            ea_s = [((-1) ** k_i) * c_i for k_i, c_i in enumerate(e_pos_series(a_idx, 5))]
-            eb_s = [((-1) ** k_i) * c_i for k_i, c_i in enumerate(e_pos_series(b_idx, 5))]
+            ea_s, eb_s = e_pos_series(a_idx, 5), e_pos_series(b_idx, 5)
             r_ba = mul_series(eb_s, inv_series(ea_s, 5), 5)
             r_ab = mul_series(ea_s, inv_series(eb_s, 5), 5)
             assert quartet_tr_1to3[1][a_idx] - r_ba[2] == mixed_traces_6[(a_idx, b_idx)]
             assert quartet_tr_1to3[1][b_idx] - r_ab[2] == mixed_traces_6[(a_idx, b_idx)]
             # p=2, q=1 vs q=1, p=2:
             tr_a2_b1 = quartet_tr_1to3[2][a_idx] - r_ba[3]
-            tr_b1_a2 = quartet_tr_1to3[2][b_idx] - (r_ab[3] * r_ba[0] + 2 * r_ab[2] * r_ba[1])
+            tr_b1_a2 = quartet_tr_1to3[2][b_idx] - (r_ab[2] * r_ba[1] + 2 * r_ab[3] * r_ba[0])
             assert tr_a2_b1 == tr_b1_a2
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
