@@ -982,9 +982,9 @@ def verify_cantilever_spectrum_theorem_4():
     #     - Ramanujan Entry 25(vii) coth(m*pi)/(m*pi)^{4k-1} = (-4)^{k-1} [z^k] (e_0(z) / (2 e_2(z)))
     #     - All 6 symmetric mixed traces Tr(G_alpha G_beta)
     #     - Barycentric Fredholm pencil & all-(p,q) Sherman-Morrison mixed-trace symmetry for 1 <= p, q <= 3:
-    def e_tilde_series(alpha_idx: int, max_deg: int = 6) -> list[Fraction]:
+    def e_pos_series(alpha_idx: int, max_deg: int = 6) -> list[Fraction]:
         return [
-            Fraction(((-1) ** k_idx) * math.factorial(alpha_idx), math.factorial(4 * k_idx + alpha_idx))
+            Fraction(math.factorial(alpha_idx), math.factorial(4 * k_idx + alpha_idx))
             for k_idx in range(max_deg + 1)
         ]
 
@@ -1001,7 +1001,7 @@ def verify_cantilever_spectrum_theorem_4():
                 out_s[i_idx + j_idx] += a_ser[i_idx] * b_ser[j_idx]
         return out_s
 
-    e0_s, e2_s = e_tilde_series(0, 5), e_tilde_series(2, 5)
+    e0_s, e2_s = e_pos_series(0, 5), e_pos_series(2, 5)
     r_02 = mul_series(e0_s, inv_series(e2_s, 5), 5)
     ramanujan_coth = [((-4) ** (k_r - 1)) * r_02[k_r] for k_r in range(1, 5)]
     assert ramanujan_coth == [
@@ -1029,10 +1029,12 @@ def verify_cantilever_spectrum_theorem_4():
     }
 
     # Check all-(p,q) Sherman-Morrison mixed trace symmetry Tr(G_a^p G_b^q) == Tr(G_b^q G_a^p) for p + q <= 3:
+    # With e_neg(z) = e_pos(-z), tau_k^(a,b) = [z^{k+1}](e_neg_b(z)/e_neg_a(z)) = (-1)^{k+1} r_ba[k+1]:
     quartet_tr_1to3 = [quartet_tr1, quartet_tr2, quartet_tr3]
     for a_idx in range(4):
         for b_idx in range(a_idx + 1, 4):
-            ea_s, eb_s = e_tilde_series(a_idx, 5), e_tilde_series(b_idx, 5)
+            ea_s = [((-1) ** k_i) * c_i for k_i, c_i in enumerate(e_pos_series(a_idx, 5))]
+            eb_s = [((-1) ** k_i) * c_i for k_i, c_i in enumerate(e_pos_series(b_idx, 5))]
             r_ba = mul_series(eb_s, inv_series(ea_s, 5), 5)
             r_ab = mul_series(ea_s, inv_series(eb_s, 5), 5)
             assert quartet_tr_1to3[1][a_idx] - r_ba[2] == mixed_traces_6[(a_idx, b_idx)]
