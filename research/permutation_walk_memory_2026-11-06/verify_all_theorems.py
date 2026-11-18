@@ -1056,6 +1056,71 @@ def verify_cantilever_spectrum_theorem_4():
                     assert tr_ap_bq == tr_bq_ap
                     assert c_ab - c_ba == quartet_tr_1to4[p_deg + q_deg - 1][a_idx] - quartet_tr_1to4[p_deg + q_deg - 1][b_idx]
 
+    # 20. Verify rev 108 / seq 252 (Den B 1795031004, Jee A 1795031291, Phi 1795031112/1360 & Jee-AGY READ-0116):
+    #     - Inversion-invariant 2x2 Hankel 4-word commutator gaps Delta_4(a,b) = r_1*r_3 - r_2^2 = -H_{a,b} > 0
+    #     - 3-domain chiral triangle asymmetries A(a,b,c) and Tetrahedral Stokes Cocycle Law (dA)(0,1,2,3) == 0
+    #     - General m-factor circulant-multisection multiplicative Fredholm determinant for m = 3 (chiral (0,1,2) vs (2,1,0)):
+    hankel_gaps_6 = {}
+    for a_idx in range(4):
+        for b_idx in range(a_idx + 1, 4):
+            ea_s, eb_s = e_pos_series(a_idx, 5), e_pos_series(b_idx, 5)
+            r_ba = mul_series(eb_s, inv_series(ea_s, 5), 5)
+            r_ab = mul_series(ea_s, inv_series(eb_s, 5), 5)
+            gap_ba = r_ba[1] * r_ba[3] - r_ba[2] ** 2
+            gap_ab = r_ab[1] * r_ab[3] - r_ab[2] ** 2
+            assert gap_ba == gap_ab and gap_ba > 0
+            hankel_gaps_6[(a_idx, b_idx)] = gap_ba
+    assert hankel_gaps_6 == {
+        (0, 1): Fraction(971, 367783416000),
+        (0, 2): Fraction(9403, 7355668320000),
+        (0, 3): Fraction(8773, 20977276320000),
+        (1, 2): Fraction(19, 1471133664000),
+        (1, 3): Fraction(713, 80912351520000),
+        (2, 3): Fraction(1, 4045617576000),
+    }
+
+    c1_vec = [Fraction(math.factorial(a), math.factorial(4 + a)) for a in range(4)]
+    c2_vec = [Fraction(math.factorial(a), math.factorial(8 + a)) for a in range(4)]
+
+    def chiral_asym(a_i: int, b_i: int, c_i: int) -> Fraction:
+        return -(
+            (c1_vec[b_i] * c2_vec[c_i] - c1_vec[c_i] * c2_vec[b_i])
+            - (c1_vec[a_i] * c2_vec[c_i] - c1_vec[c_i] * c2_vec[a_i])
+            + (c1_vec[a_i] * c2_vec[b_i] - c1_vec[b_i] * c2_vec[a_i])
+        )
+
+    chiral_4 = {
+        (0, 1, 2): chiral_asym(0, 1, 2),
+        (0, 1, 3): chiral_asym(0, 1, 3),
+        (0, 2, 3): chiral_asym(0, 2, 3),
+        (1, 2, 3): chiral_asym(1, 2, 3),
+    }
+    assert chiral_4 == {
+        (0, 1, 2): Fraction(1, 20412000),
+        (0, 1, 3): Fraction(37, 523908000),
+        (0, 2, 3): Fraction(1, 43659000),
+        (1, 2, 3): Fraction(1, 785862000),
+    }
+    assert chiral_4[(1, 2, 3)] - chiral_4[(0, 2, 3)] + chiral_4[(0, 1, 3)] - chiral_4[(0, 1, 2)] == 0
+
+    # Check 3x3 circulant-multisection negative-branch determinant [w^3] det_neg(I - w^3 G_a G_b G_c) for (0,1,2) vs (2,1,0):
+    c3_vec = [Fraction(math.factorial(a), math.factorial(12 + a)) for a in range(4)]
+    d1_neg_012 = (
+        c3_vec[0] + c3_vec[1] + c3_vec[2]
+        - (c1_vec[0] * c2_vec[2] + c1_vec[2] * c2_vec[1] + c1_vec[1] * c2_vec[0])
+        + c1_vec[0] * c1_vec[1] * c1_vec[2]
+    )
+    d1_neg_210 = (
+        c3_vec[0] + c3_vec[1] + c3_vec[2]
+        - (c1_vec[2] * c2_vec[0] + c1_vec[0] * c2_vec[1] + c1_vec[1] * c2_vec[2])
+        + c1_vec[0] * c1_vec[1] * c1_vec[2]
+    )
+    assert d1_neg_012 == Fraction(271, 371498400)
+    assert d1_neg_210 == Fraction(241, 309582000)
+    assert (-d1_neg_012) - (-d1_neg_210) == chiral_4[(0, 1, 2)]
+    assert Fraction(2641, 4989600) - d1_neg_012 == Fraction(1079999, 2043241200)
+    assert Fraction(2641, 4989600) - d1_neg_210 == Fraction(3599663, 6810804000)
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -1093,6 +1158,7 @@ def verify_cantilever_spectrum_theorem_4():
         "dual_mode_annihilators_and_weinstein_aronszajn_quartet_traces_verified": True,
         "complete_four_domain_quartet_adjoint_domains_and_pure_beam_duals_verified": True,
         "quartet_difference_idempotents_ramanujan_krylov_and_mixed_traces_verified": True,
+        "noncommutative_word_traces_chiral_cocycle_and_m_factor_fredholm_pencil_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
