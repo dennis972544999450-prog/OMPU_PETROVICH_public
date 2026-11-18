@@ -1028,21 +1028,33 @@ def verify_cantilever_spectrum_theorem_4():
         (2, 3): Fraction(4669, 712800),
     }
 
-    # Check all-(p,q) Sherman-Morrison mixed trace symmetry Tr(G_a^p G_b^q) == Tr(G_b^q G_a^p) for p + q <= 3:
+    # Check all-(p,q) Sherman-Morrison mixed trace symmetry Tr(G_a^p G_b^q) == Tr(G_b^q G_a^p) for p + q <= 4
+    # (including the non-cyclic case p=2, q=2 where Tr(A^2 B^2) != Tr(ABAB), answering Phi 1795001059 READ-0112):
     # Since negative-branch eigenvalues are -1/(4*beta_m^4) < 0, det(I - z G_neg^(alpha)) = alpha! e_alpha(z)
     # has positive coefficients alpha! / (4k + alpha)!, and tau_k^(a,b) = [z^{k+1}]((b! e_b(z)) / (a! e_a(z))):
-    quartet_tr_1to3 = [quartet_tr1, quartet_tr2, quartet_tr3]
+    quartet_tr4 = [
+        Fraction(14926531, 326918592000),
+        Fraction(10708695703, 250092722880000),
+        Fraction(324475357, 7578567360000),
+        Fraction(36552437444063, 853733191671360000),
+    ]
+    quartet_tr_1to4 = [quartet_tr1, quartet_tr2, quartet_tr3, quartet_tr4]
     for a_idx in range(4):
         for b_idx in range(a_idx + 1, 4):
             ea_s, eb_s = e_pos_series(a_idx, 5), e_pos_series(b_idx, 5)
             r_ba = mul_series(eb_s, inv_series(ea_s, 5), 5)
             r_ab = mul_series(ea_s, inv_series(eb_s, 5), 5)
-            assert quartet_tr_1to3[1][a_idx] - r_ba[2] == mixed_traces_6[(a_idx, b_idx)]
-            assert quartet_tr_1to3[1][b_idx] - r_ab[2] == mixed_traces_6[(a_idx, b_idx)]
-            # p=2, q=1 vs q=1, p=2:
-            tr_a2_b1 = quartet_tr_1to3[2][a_idx] - r_ba[3]
-            tr_b1_a2 = quartet_tr_1to3[2][b_idx] - (r_ab[2] * r_ba[1] + 2 * r_ab[3] * r_ba[0])
-            assert tr_a2_b1 == tr_b1_a2
+            assert quartet_tr_1to4[1][a_idx] - r_ba[2] == mixed_traces_6[(a_idx, b_idx)]
+            assert quartet_tr_1to4[1][b_idx] - r_ab[2] == mixed_traces_6[(a_idx, b_idx)]
+            # Non-manifest symmetry check for all 1 <= p, q <= 3 with p + q <= 4 (including non-cyclic p=2, q=2):
+            for p_deg in range(1, 4):
+                for q_deg in range(1, 5 - p_deg):
+                    c_ab = sum((m_i + 1) * r_ba[p_deg + m_i + 1] * r_ab[q_deg - 1 - m_i] for m_i in range(q_deg))
+                    c_ba = sum((m_i + 1) * r_ab[q_deg + m_i + 1] * r_ba[p_deg - 1 - m_i] for m_i in range(p_deg))
+                    tr_ap_bq = quartet_tr_1to4[p_deg + q_deg - 1][a_idx] - c_ab
+                    tr_bq_ap = quartet_tr_1to4[p_deg + q_deg - 1][b_idx] - c_ba
+                    assert tr_ap_bq == tr_bq_ap
+                    assert c_ab - c_ba == quartet_tr_1to4[p_deg + q_deg - 1][a_idx] - quartet_tr_1to4[p_deg + q_deg - 1][b_idx]
 
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
