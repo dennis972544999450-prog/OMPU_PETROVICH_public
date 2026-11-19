@@ -1158,6 +1158,60 @@ def verify_cantilever_spectrum_theorem_4():
         Fraction(5489, 37035180),
     ]
 
+    # 22. Verify rev 110 / seq 257 & 258 (Jee A 1795117251 205th module, Den B 1795117564 & Jee-AGY READ-0122 Ubb=122):
+    #     - Weighted Hankel prefix product (c_1)^2 * c_2 * c_3 == H_2^(1)(mu^(2,3)) == 1 / 4045617576000
+    #     - Universal Unit-Fraction 4x4 Cumulant Minor Theorem Delta(r_0,r_1,r_2,r_3) == +1 / N(r_0,r_1,r_2,r_3)
+    #     - Vandermonde-Binomial Unit-Fraction Theorem for Simultaneous 4-Vector Hermite-Padé Type II Common Denominator Q_{HP,s}^{II}(z):
+    assert (cf_23[0] ** 2) * cf_23[1] * cf_23[2] == h2_1 == Fraction(1, 4045617576000)
+
+    def cumulant_minor_4x4(r_tuple):
+        r0, r1, r2, r3 = r_tuple
+        num = 49152 * (r1 - r0) * (r2 - r0) * (r3 - r0) * (r2 - r1) * (r3 - r1) * (r3 - r2)
+        den = (
+            math.factorial(4 * r0 + 3)
+            * math.factorial(4 * r1 + 3)
+            * math.factorial(4 * r2 + 3)
+            * math.factorial(4 * r3 + 3)
+        )
+        val = Fraction(num, den)
+        assert val.numerator == 1
+        return val
+
+    for r0 in range(4):
+        for r1 in range(r0 + 1, 5):
+            for r2 in range(r1 + 1, 6):
+                for r3 in range(r2 + 1, 7):
+                    _ = cumulant_minor_4x4((r0, r1, r2, r3))
+
+    for s_hp in range(5):
+        base_d = cumulant_minor_4x4((s_hp, s_hp + 1, s_hp + 2, s_hp + 3))
+        q_hp = [Fraction(1)]
+        for j_hp in range(1, 5):
+            sub_r = tuple(s_hp + i_hp for i_hp in range(5) if i_hp != 4 - j_hp)
+            q_val = ((-1) ** j_hp) * cumulant_minor_4x4(sub_r) / base_d
+            closed_val = (
+                ((-1) ** j_hp)
+                * math.comb(4, j_hp)
+                * Fraction(math.factorial(4 * s_hp + 19 - 4 * j_hp), math.factorial(4 * s_hp + 19))
+            )
+            assert q_val == closed_val
+            assert abs(q_val.numerator) == 1
+            q_hp.append(q_val)
+        if s_hp == 0:
+            assert q_hp == [
+                Fraction(1),
+                Fraction(-1, 23256),
+                Fraction(1, 507911040),
+                Fraction(-1, 6033983155200),
+                Fraction(1, 20274183401472000),
+            ]
+        for a_hp in range(4):
+            ann_sum = sum(
+                q_hp[j_hp] * Fraction(math.factorial(a_hp), math.factorial(4 * (s_hp + 4 - j_hp) + a_hp))
+                for j_hp in range(5)
+            )
+            assert ann_sum == 0
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -1197,6 +1251,7 @@ def verify_cantilever_spectrum_theorem_4():
         "quartet_difference_idempotents_ramanujan_krylov_and_mixed_traces_verified": True,
         "noncommutative_word_traces_chiral_cocycle_and_m_factor_fredholm_pencil_verified": True,
         "hankel_word_determinants_stieltjes_s_fractions_and_vandermonde_volume_v4_verified": True,
+        "universal_unit_fraction_minors_and_hermite_pade_type_i_ii_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

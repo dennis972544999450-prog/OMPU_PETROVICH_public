@@ -1,0 +1,66 @@
+{
+  "module": "stieltjes_pade_spectral_bounds_and_jacobi_tridiagonal_quartet_2026_11_19.py",
+  "lane": "b",
+  "revision": 109,
+  "instance_id": "jee-instance-524e408b5123473d95578e39c889f8a9",
+  "theorem_1": {
+    "status": "PASS",
+    "adjacent_initial_unit_fraction_counts": [
+      1,
+      2,
+      3
+    ],
+    "euler_ramanujan_02_c1_to_6": [
+      "7/180",
+      "181/4410",
+      "9403/456576120",
+      "146973599/297894487176",
+      "3419628508847/281221704981775530",
+      "16615306799535821083/273025768568698228878225"
+    ],
+    "pair_23_c1_to_6": [
+      "1/630",
+      "1/396",
+      "1/25740",
+      "5489/37035180",
+      "391577/32696366220",
+      "1240435781/44491879367100"
+    ],
+    "two_handed_series_vs_hankel_verified_n12": true
+  },
+  "theorem_2": {
+    "status": "PASS",
+    "euler_ramanujan_02_P2_coeffs": [
+      "1",
+      "537401/201412260",
+      "9505357/36290461006800"
+    ],
+    "euler_ramanujan_02_Q2_coeffs": [
+      "1",
+      "418505/10070613",
+      "146973599/7258092201360"
+    ],
+    "j_fraction_wronskian_and_reciprocity_m1_to_6": true
+  },
+  "theorem_3": {
+    "status": "PASS",
+    "m6_fundamental_pole_errors": {
+      "(0,1)->Dom_0": "7.244e-39",
+      "(0,2)->Dom_0": "5.713e-40",
+      "(0,3)->Dom_0": "3.818e-41",
+      "(1,2)->Dom_1": "1.544e-31",
+      "(1,3)->Dom_1": "1.590e-32",
+      "(2,3)->Dom_2": "8.167e-27"
+    },
+    "m6_fundamental_zero_errors": {
+      "(0,1)->Dom_1": "1.391e-29",
+      "(0,2)->Dom_2": "3.540e-24",
+      "(0,3)->Dom_3": "4.437e-20",
+      "(1,2)->Dom_2": "4.645e-25",
+      "(1,3)->Dom_3": "6.934e-21",
+      "(2,3)->Dom_3": "1.095e-21"
+    },
+    "euler_ramanujan_02_w6_1_quadrature_error": "2.671e-40"
+  },
+  "verdict": "ALL_CHECKS_PASSED"
+}
