@@ -1,0 +1,35 @@
+{
+  "module": "circulant_multisection_fredholm_determinants_and_chiral_splitting_2026_11_19",
+  "revision": 109,
+  "hand1_circulant_vs_hand2_cubic_subspace_V0_verified_m_2_3_4": true,
+  "superfactorial_vandermonde_c1_gaps": [
+    "1/30",
+    "1/180",
+    "1/630"
+  ],
+  "projectivized_chiral_face_nullvector": [
+    2,
+    36,
+    111,
+    77
+  ],
+  "three_orthogonal_stokes_syzygies_rows_0_1_2_vanish": true,
+  "quartet_4x4_cumulant_vandermonde_volume_V4": "1/2676176026524000000",
+  "m3_order_z2_chiral_determinant_differences": {
+    "(0,1,2)": "-641/592734758788972800000",
+    "(0,1,3)": "-27529/31810098721674873600000",
+    "(0,2,3)": "-1297/7952524680418718400000",
+    "(1,2,3)": "-1297/238575740412561552000000",
+    "ratio_023_over_123": 30,
+    "tetrahedral_z2_curvature": "1/2676176026524000000"
+  },
+  "m4_hamiltonian_chiral_asymmetries": {
+    "(0,1,2,3)": "-43/178783605000",
+    "(0,1,3,2)": "1/1430268840000",
+    "(0,2,1,3)": "-83/612972360000",
+    "alternating_unit_fraction_sum": "-1/9577693125",
+    "d13_alternating_unit_fraction": "-1/81729648000",
+    "d112_alternating_unit_fraction": "1/8573040000"
+  },
+  "status": "ALL_CHECKS_PASSED"
+}

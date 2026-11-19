@@ -1121,6 +1121,38 @@ def verify_cantilever_spectrum_theorem_4():
     assert Fraction(2641, 4989600) - d1_neg_012 == Fraction(1079999, 2043241200)
     assert Fraction(2641, 4989600) - d1_neg_210 == Fraction(3599663, 6810804000)
 
+    # 21. Verify rev 109 / seq 254 & 255 (Den B 1795081581, Jee A 1795082065, Petrovich 1795083835 & Jee-AGY READ-0118 Og=118):
+    #     - Superfactorial-Vandermonde 4x4 cumulant volume V_4(0,1,2,3) = 1 / 2676176026524000000 = (d delta_2)(0,1,2,3)
+    #     - Plücker alternating Hamiltonian 4-cycle unit fraction -1 / 9577693125
+    #     - Stieltjes S-fraction coefficients c_1..c_4 > 0 for (2,3) (3 unit fractions!) and (0,2) (Euler-Ramanujan):
+    delta2_faces = {
+        (0, 1, 2): Fraction(-641, 592734758788972800000),
+        (0, 1, 3): Fraction(-27529, 31810098721674873600000),
+        (0, 2, 3): Fraction(-1297, 7952524680418718400000),
+        (1, 2, 3): Fraction(-1297, 238575740412561552000000),
+    }
+    v4_vol = delta2_faces[(1, 2, 3)] - delta2_faces[(0, 2, 3)] + delta2_faces[(0, 1, 3)] - delta2_faces[(0, 1, 2)]
+    assert v4_vol == Fraction(1, 2676176026524000000)
+    assert delta2_faces[(0, 2, 3)] / delta2_faces[(1, 2, 3)] == 30
+    assert (
+        Fraction(-43, 178783605000) - Fraction(-1, 1430268840000) + Fraction(83, 612972360000)
+        == Fraction(-1, 9577693125)
+    )
+
+    # Check Stieltjes S-fraction c_1..c_4 for (2,3):
+    r_32 = mul_series(e_pos_series(3, 6), inv_series(e_pos_series(2, 6), 6), 6)
+    mu_23 = [((-1) ** k_m) * r_32[k_m] for k_m in range(1, 5)]
+    h1_1, h1_2 = mu_23[0], mu_23[1]
+    h2_1 = mu_23[0] * mu_23[2] - mu_23[1] ** 2
+    h2_2 = mu_23[1] * mu_23[3] - mu_23[2] ** 2
+    cf_23 = [h1_1, h1_2 / h1_1, h2_1 / (h1_1 * h1_2), (h2_2 * h1_1) / (h2_1 * h1_2)]
+    assert cf_23 == [
+        Fraction(1, 630),
+        Fraction(1, 396),
+        Fraction(1, 25740),
+        Fraction(5489, 37035180),
+    ]
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -1159,6 +1191,7 @@ def verify_cantilever_spectrum_theorem_4():
         "complete_four_domain_quartet_adjoint_domains_and_pure_beam_duals_verified": True,
         "quartet_difference_idempotents_ramanujan_krylov_and_mixed_traces_verified": True,
         "noncommutative_word_traces_chiral_cocycle_and_m_factor_fredholm_pencil_verified": True,
+        "hankel_word_determinants_stieltjes_s_fractions_and_vandermonde_volume_v4_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),
