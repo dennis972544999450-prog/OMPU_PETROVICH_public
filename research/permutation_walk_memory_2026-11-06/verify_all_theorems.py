@@ -1134,6 +1134,11 @@ def verify_cantilever_spectrum_theorem_4():
     v4_vol = delta2_faces[(1, 2, 3)] - delta2_faces[(0, 2, 3)] + delta2_faces[(0, 1, 3)] - delta2_faces[(0, 1, 2)]
     assert v4_vol == Fraction(1, 2676176026524000000)
     assert delta2_faces[(0, 2, 3)] / delta2_faces[(1, 2, 3)] == 30
+    d3_coboundary = v4_vol * (
+        Fraction(1, 416344837708800) + Fraction(1, 6033983155200) - Fraction(1, 32382376266240)
+    )
+    assert d3_coboundary == v4_vol * Fraction(7 + 483 - 90, 2914413863961600)
+    assert d3_coboundary == Fraction(1, 19498711285258030423293696000000)
     assert (
         Fraction(-43, 178783605000) - Fraction(-1, 1430268840000) + Fraction(83, 612972360000)
         == Fraction(-1, 9577693125)
