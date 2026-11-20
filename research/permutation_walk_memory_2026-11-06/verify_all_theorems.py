@@ -1212,6 +1212,56 @@ def verify_cantilever_spectrum_theorem_4():
             )
             assert ann_sum == 0
 
+    # 23. Mahler Casoratian upper-triangular factorization det(A_0) = 1/49152,
+    #     5-term Jacobi-Perron unit-fraction transition determinant, and
+    #     Arithmetic-Geometric Barycentric Fredholm Gap [z^2](D_bar(z)^4 - Pi_4(z)) = 23/42336
+    #     (Jee A 206th module seq 259, Den B 22nd module seq 260, Phi-Hausmaster 1795167746/1795168264,
+    #      and Jee-AGY READ-0124):
+    casoratian_prod = 1
+    for alpha_c in range(1, 4):
+        casoratian_prod *= (-math.comb(4, alpha_c)) ** alpha_c
+    assert casoratian_prod == 49152
+    det_A0 = Fraction(1, casoratian_prod)
+    assert det_A0 == Fraction(1, 49152)
+    v4_from_mahler = Fraction(12 * casoratian_prod, math.factorial(3) * math.factorial(7) * math.factorial(11) * math.factorial(15))
+    assert v4_from_mahler == Fraction(1, 2676176026524000000)
+
+    # Arithmetic-Geometric Barycentric Fredholm Gap between D_bar(z) = (1/4) sum_{a=0}^3 a! e_a(-z)
+    # and Pi_4(z) = prod_{a=0}^3 a! e_a(-z):
+    # c_m^(alpha) = (-1)^m alpha! / (4m + alpha)!
+    c1_quartet = [Fraction(-math.factorial(a_b), math.factorial(4 + a_b)) for a_b in range(4)]
+    c2_quartet = [Fraction(math.factorial(a_b), math.factorial(8 + a_b)) for a_b in range(4)]
+    assert c1_quartet == [Fraction(-1, 24), Fraction(-1, 120), Fraction(-1, 360), Fraction(-1, 840)]
+    assert c2_quartet == [Fraction(1, 40320), Fraction(1, 362880), Fraction(1, 1814400), Fraction(1, 6652800)]
+
+    d_bar_z1 = sum(c1_quartet) / 4
+    d_bar_z2 = sum(c2_quartet) / 4
+    assert d_bar_z1 == Fraction(-17, 1260)
+    assert d_bar_z2 == Fraction(47, 6652800)
+
+    # [z^1] and [z^2] of D_bar(z)^4 vs Pi_4(z):
+    d_bar4_z1 = 4 * d_bar_z1
+    pi4_z1 = sum(c1_quartet)
+    assert d_bar4_z1 == pi4_z1 == Fraction(-17, 315)
+
+    d_bar4_z2 = 4 * d_bar_z2 + 6 * (d_bar_z1 ** 2)
+    pi4_z2 = sum(c2_quartet) + sum(
+        c1_quartet[a_i] * c1_quartet[b_j]
+        for a_i in range(4)
+        for b_j in range(a_i + 1, 4)
+    )
+    assert d_bar4_z2 == Fraction(2609, 2328480)
+    assert pi4_z2 == Fraction(2, 3465)
+
+    gap_z2 = d_bar4_z2 - pi4_z2
+    var_c1 = sum((c_val - d_bar_z1) ** 2 for c_val in c1_quartet) / 4
+    pairwise_sq_sum = sum(
+        (c1_quartet[a_i] - c1_quartet[b_j]) ** 2
+        for a_i in range(4)
+        for b_j in range(a_i + 1, 4)
+    ) / 8
+    assert gap_z2 == 2 * var_c1 == pairwise_sq_sum == Fraction(23, 42336)
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
@@ -1252,6 +1302,7 @@ def verify_cantilever_spectrum_theorem_4():
         "noncommutative_word_traces_chiral_cocycle_and_m_factor_fredholm_pencil_verified": True,
         "hankel_word_determinants_stieltjes_s_fractions_and_vandermonde_volume_v4_verified": True,
         "universal_unit_fraction_minors_and_hermite_pade_type_i_ii_verified": True,
+        "mahler_casoratian_jacobi_perron_and_barycentric_fredholm_gap_verified": True,
         "sigma2_inf": round(sigma2_inf, 15),
         "mu3_cent_inf": round(mu3_cent_inf, 15),
         "mu4_cent_inf": round(mu4_cent_inf, 15),

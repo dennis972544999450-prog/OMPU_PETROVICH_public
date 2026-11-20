@@ -1,0 +1,77 @@
+{
+  "module": "hermite_pade_mahler_duality_and_jacobi_perron_quartet_2026_11_20.py",
+  "verdict": "ALL_CHECKS_PASSED",
+  "theorem_1_mahler_determinants_unit_fractions": {
+    "0": "1/49152",
+    "1": "-1/301989888",
+    "2": "1/9277129359360",
+    "3": "-1/854980241758617600",
+    "4": "1/183854951187773128704000",
+    "5": "-1/79072337406837467193016320000",
+    "6": "1/61213375569478784202670426030080000",
+    "7": "-1/78979945694764306529653490481050419200000",
+    "8": "1/160133419495048526775003045020139345936384000000",
+    "9": "-1/487010566041901183510281260758849390009405931520000000"
+  },
+  "theorem_1_jee_a_constant_from_inv_det_A0": 49152,
+  "theorem_1_V4_vandermonde_volume": "1/2676176026524000000",
+  "theorem_2_jacobi_perron_5term_type1_and_dual_type2_verified_up_to_M": 20,
+  "theorem_3_type2_strict_positivity_M_1_to_20": true,
+  "theorem_3_s_fraction_bridge": {
+    "2!*B_2^{(1)}(z)": [
+      "1",
+      "1/630"
+    ],
+    "2!*B_2^{(2)}(z)": [
+      "1",
+      "1/396"
+    ]
+  },
+  "theorem_3_simultaneous_z1_max_ratio_error": {
+    "4": "2.203e-19",
+    "8": "1.253e-42",
+    "12": "5.278e-69",
+    "16": "1.605e-97"
+  },
+  "theorem_4_exact_sturm_100pct_real_positive_roots_M_1_to_12": {
+    "polynomials_checked": 48,
+    "total_simple_positive_roots_certified": 234
+  },
+  "theorem_4_exact_rational_4_sector_cyclic_interlacing": {
+    "4": {
+      "degree_per_sector": 3,
+      "strict_4_sector_chain_length": 12,
+      "certified_rational_separation": true
+    },
+    "8": {
+      "degree_per_sector": 6,
+      "strict_4_sector_chain_length": 24,
+      "certified_rational_separation": true
+    },
+    "12": {
+      "degree_per_sector": 9,
+      "strict_4_sector_chain_length": 36,
+      "certified_rational_separation": true
+    }
+  },
+  "theorem_4_simultaneous_fundamental_eigenvalue_rel_errors": {
+    "8": {
+      "alpha_0": "7.513e-30",
+      "alpha_1": "9.102e-24",
+      "alpha_2": "1.319e-19",
+      "alpha_3": "2.290e-16"
+    },
+    "12": {
+      "alpha_0": "1.189e-50",
+      "alpha_1": "1.093e-41",
+      "alpha_2": "1.590e-35",
+      "alpha_3": "1.032e-30"
+    },
+    "16": {
+      "alpha_0": "1.331e-73",
+      "alpha_1": "9.017e-62",
+      "alpha_2": "1.288e-53",
+      "alpha_3": "3.070e-47"
+    }
+  }
+}
