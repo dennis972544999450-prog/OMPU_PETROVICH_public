@@ -1262,6 +1262,42 @@ def verify_cantilever_spectrum_theorem_4():
     ) / 8
     assert gap_z2 == 2 * var_c1 == pairwise_sq_sum == Fraction(23, 42336)
 
+    # Trace-matched rescaled additive gap [z^2](Pi_4(z) - D_bar(4z)) == 193/415800
+    # and universal rank-1 Riesz dyad omega_Lambda(x) = -32(1-x)^2(4x-1) = 32 - 192x + 288x^2 - 128x^3
+    # + dual Jacobi-Perron positive unit fractions gamma_2(M) = 1/N_2(M), gamma_3(M) = 1/N_3(M)
+    # (Arch-Angelai 1795173111):
+    rescaled_gap_z2 = pi4_z2 - 16 * d_bar_z2
+    assert rescaled_gap_z2 == Fraction(193, 415800)
+
+    omega_coeffs = [Fraction(32), Fraction(-192), Fraction(288), Fraction(-128)]
+    for m_om in range(12):
+        l2_inner_xm = sum(omega_coeffs[k_om] / (m_om + k_om + 1) for k_om in range(4))
+        expected_pentatope = Fraction(-8 * m_om, math.comb(m_om + 4, 4))
+        assert l2_inner_xm == expected_pentatope
+
+    # phi_1 = -1/48 x, phi_2 = -1/96 x(1-x), phi_3 = -1/48 x(1-x)(3-4x)
+    m1_om = Fraction(-8 * 1, math.comb(5, 4))
+    m2_om = Fraction(-8 * 2, math.comb(6, 4))
+    m3_om = Fraction(-8 * 3, math.comb(7, 4))
+    assert (
+        Fraction(-1, 48) * m1_om,
+        Fraction(-1, 96) * (m1_om - m2_om),
+        Fraction(-1, 48) * (3 * m1_om - 7 * m2_om + 4 * m3_om),
+    ) == (Fraction(1, 30), Fraction(1, 180), Fraction(1, 630))
+
+    for m_jp in range(3, 26):
+        denom_g2 = 1
+        for k_g2 in (-3, -2, -1, 1, 3, 5, 6, 7):
+            denom_g2 *= 4 * m_jp + k_g2
+        gamma_2_m = Fraction(3, denom_g2)
+        assert gamma_2_m.numerator == 1 and gamma_2_m > 0
+        denom_g3 = 1
+        for k_g3 in range(-7, 8):
+            if k_g3 not in (-4, 0, 4):
+                denom_g3 *= 4 * m_jp + k_g3
+        gamma_3_m = Fraction(1, denom_g3)
+        assert gamma_3_m.numerator == 1 and gamma_3_m > 0
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
