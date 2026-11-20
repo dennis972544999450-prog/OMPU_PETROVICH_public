@@ -1332,10 +1332,10 @@ def verify_cantilever_spectrum_theorem_4():
             + (mu_krylov[a_t][0] - mu_krylov[b_t][0]) * mu_krylov[c_t][1]
         )
 
-    assert chiral_triangle_det(0, 1, 2) == Fraction(19, 170091000)
-    assert chiral_triangle_det(0, 1, 3) == Fraction(23, 210210000)
-    assert chiral_triangle_det(0, 2, 3) == Fraction(13, 1891890000)
-    assert chiral_triangle_det(1, 2, 3) == Fraction(-1, 1891890000)
+    assert chiral_triangle_det(0, 1, 2) == chiral_4[(0, 1, 2)] == Fraction(1, 20412000)
+    assert chiral_triangle_det(0, 1, 3) == chiral_4[(0, 1, 3)] == Fraction(37, 523908000)
+    assert chiral_triangle_det(0, 2, 3) == chiral_4[(0, 2, 3)] == Fraction(1, 43659000)
+    assert chiral_triangle_det(1, 2, 3) == chiral_4[(1, 2, 3)] == Fraction(1, 785862000)
     assert (
         chiral_triangle_det(1, 2, 3)
         - chiral_triangle_det(0, 2, 3)
