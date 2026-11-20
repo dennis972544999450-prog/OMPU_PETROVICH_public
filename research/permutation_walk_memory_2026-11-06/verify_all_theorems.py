@@ -1298,6 +1298,64 @@ def verify_cantilever_spectrum_theorem_4():
         gamma_3_m = Fraction(1, denom_g3)
         assert gamma_3_m.numerator == 1 and gamma_3_m > 0
 
+    # Dual Krylov Orbit Volume det[mu_k^(alpha)] == -V_4, Scalar Necklace 3x3 determinant law for A(a,b,c),
+    # 4-cycle chiral asymmetry, and Plemelj-Fredholm logarithmic trace-variance positivity
+    # (Arch-Angelai 1795186964, Phi-Hausmaster 1795173504 & 1795187072, and Jee-AGY READ-0126):
+    e0_neg_inv = inv_series([Fraction((-1) ** k_n, math.factorial(4 * k_n)) for k_n in range(6)], 5)
+    mu_krylov = [[Fraction(0)] * 4 for _ in range(4)]
+    for a_kr in range(4):
+        ea_neg = [Fraction(((-1) ** k_n) * math.factorial(a_kr), math.factorial(4 * k_n + a_kr)) for k_n in range(6)]
+        ratio_neg = mul_series(ea_neg, e0_neg_inv, 5)
+        for k_kr in range(4):
+            mu_krylov[a_kr][k_kr] = ((-1) ** k_kr) * ratio_neg[k_kr + 1]
+
+    assert [mu_krylov[a_kr][0] for a_kr in range(1, 4)] == [Fraction(1, 30), Fraction(7, 180), Fraction(17, 420)]
+    assert [mu_krylov[a_kr][1] for a_kr in range(1, 4)] == [Fraction(-31, 22680), Fraction(-181, 113400), Fraction(-691, 415800)]
+    assert [mu_krylov[a_kr][2] for a_kr in range(1, 4)] == [
+        Fraction(5461, 97297200),
+        Fraction(178559, 2724321600),
+        Fraction(929569, 13621608000),
+    ]
+
+    det_krylov_3x3 = (
+        mu_krylov[1][0] * (mu_krylov[2][1] * mu_krylov[3][2] - mu_krylov[3][1] * mu_krylov[2][2])
+        - mu_krylov[2][0] * (mu_krylov[1][1] * mu_krylov[3][2] - mu_krylov[3][1] * mu_krylov[1][2])
+        + mu_krylov[3][0] * (mu_krylov[1][1] * mu_krylov[2][2] - mu_krylov[2][1] * mu_krylov[1][2])
+    )
+    assert det_krylov_3x3 == -v4_from_mahler == Fraction(-1, 2676176026524000000)
+
+    # 3x3 determinant law for chiral triangle asymmetry A(a,b,c) == -det[[1,1,1],[mu_0^a,mu_0^b,mu_0^c],[mu_1^a,mu_1^b,mu_1^c]]:
+    def chiral_triangle_det(a_t: int, b_t: int, c_t: int) -> Fraction:
+        return (
+            (mu_krylov[b_t][0] - mu_krylov[c_t][0]) * mu_krylov[a_t][1]
+            + (mu_krylov[c_t][0] - mu_krylov[a_t][0]) * mu_krylov[b_t][1]
+            + (mu_krylov[a_t][0] - mu_krylov[b_t][0]) * mu_krylov[c_t][1]
+        )
+
+    assert chiral_triangle_det(0, 1, 2) == Fraction(19, 170091000)
+    assert chiral_triangle_det(0, 1, 3) == Fraction(23, 210210000)
+    assert chiral_triangle_det(0, 2, 3) == Fraction(13, 1891890000)
+    assert chiral_triangle_det(1, 2, 3) == Fraction(-1, 1891890000)
+    assert (
+        chiral_triangle_det(1, 2, 3)
+        - chiral_triangle_det(0, 2, 3)
+        + chiral_triangle_det(0, 1, 3)
+        - chiral_triangle_det(0, 1, 2)
+        == 0
+    )
+
+    # 4-cycle chiral asymmetry via Scalar Necklace Formula:
+    asym_0123_necklace = (
+        mu_krylov[2][0] * mu_krylov[1][2]
+        + mu_krylov[3][0] * mu_krylov[2][2]
+        + mu_krylov[2][0] * mu_krylov[3][0] * mu_krylov[1][1]
+    ) - (
+        mu_krylov[1][0] * mu_krylov[2][2]
+        + mu_krylov[2][0] * mu_krylov[3][2]
+        + mu_krylov[1][0] * mu_krylov[2][0] * mu_krylov[3][1]
+    )
+    assert asym_0123_necklace == Fraction(-43, 178783605000)
+
     # Check pure-beam polynomial duality int_0^1 B_1(2x - 1) psi_hat_1(x)^2 dx == 0:
     # B_1(y) = y^4 - 1/5 - (1/2)*y^3 + (1/2)*y in y = 2x - 1 = 2*(x - mu1_beam_1) + y_bar:
     mu1_beam_1 = 0.5 - 2.0 * (t1_hp ** 2) / (k1_hp ** 2)
