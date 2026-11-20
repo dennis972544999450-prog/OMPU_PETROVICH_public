@@ -1218,8 +1218,8 @@ def verify_cantilever_spectrum_theorem_4():
     #     (Jee A 206th module seq 259, Den B 22nd module seq 260, Phi-Hausmaster 1795167746/1795168264,
     #      and Jee-AGY READ-0124):
     casoratian_prod = 1
-    for alpha_c in range(1, 4):
-        casoratian_prod *= (-math.comb(4, alpha_c)) ** alpha_c
+    for i_c in range(4):
+        casoratian_prod *= (4 ** i_c) * math.factorial(i_c)
     assert casoratian_prod == 49152
     det_A0 = Fraction(1, casoratian_prod)
     assert det_A0 == Fraction(1, 49152)
